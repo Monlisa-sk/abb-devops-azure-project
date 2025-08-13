@@ -1,6 +1,9 @@
 # Test Pipeline
 trigger:
-  branches: [ main, 'feature/*' ]
+  branches:
+    include:
+      - main
+      - feature/*
 
 pool:
   vmImage: ubuntu-latest
@@ -8,4 +11,3 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
