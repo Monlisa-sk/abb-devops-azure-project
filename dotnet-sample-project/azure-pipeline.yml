@@ -6,7 +6,7 @@ trigger:
       - feature/*
 
 pool:
-  vmImage: ubuntu-latest
+  name: cicd-vm
 
 steps:
 - script: echo Hello, world!
