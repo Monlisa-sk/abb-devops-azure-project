@@ -28,3 +28,19 @@ stages:
         command: 'build'
         Dockerfile: 'dotnet-sample-project/Dockerfile'
         tags: '$(tag)'
+
+- stage: Push
+  displayName: 'Push image to ACR'
+  jobs:
+  - job: docker_push
+    displayName: 'Push image'
+    steps:
+    - task: Docker@2
+      displayName: 'Push image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
+        tags: |
+          $(tag)
+          latest
