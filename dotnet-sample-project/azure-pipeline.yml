@@ -8,6 +8,23 @@ trigger:
 pool:
   name: AzureVM
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  dockerRegistryServiceConnection: 'devops-service-connection'
+  imageRepository: 'dotnet-sample-project'
+  tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: 'Docker Build'
+  jobs:
+  - job: docker_build
+    displayName: 'Build image'
+    steps:
+    - task: Docker@2
+      displayName: 'Build image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: 'dotnet-sample-project/Dockerfile'
+        tags: '$(tag)'
