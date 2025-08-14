@@ -42,7 +42,7 @@ stages:
             fi
             for proj in $TEST_PROJECTS; do
               echo "Running tests for $proj"
-              dotnet test "$proj" --configuration Release --no-build
+              dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage"  --logger trx
               echo "Completed tests for $proj"
             done
           displayName: 'Run all tests with coverage and logs'
