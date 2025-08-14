@@ -9,8 +9,7 @@ pool:
   name: AzureVM
 
 variables:
-  BUILD_SRC_DIR: 'dotnet-sample-project/source'
-  TEST_SRC_DIR: 'dotnet-sample-project/tests/Sample.Tests'
+  SRC_DIR: 'dotnet-sample-project'
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
@@ -27,14 +26,26 @@ stages:
             packageType: 'sdk'
             version: '9.0.x'
 
-        - script: dotnet restore '$(BUILD_SRC_DIR)'
+        - script: dotnet restore '$(SRC_DIR)/source'
           displayName: 'Restore NuGet packages'
 
-        - script: dotnet build '$(BUILD_SRC_DIR)' --configuration Release --no-restore
+        - script: dotnet build '$(SRC_DIR)/source' --configuration Release --no-restore
           displayName: 'Build solution'
 
-        - script: dotnet test '$(TEST_SRC_DIR)' --configuration Release --no-build --collect:"XPlat Code Coverage"
-          displayName: 'Run tests with coverage'
+        - script: |
+            echo "Discovering test projects in $(SRC_DIR)..."
+            set -e
+            TEST_PROJECTS=$(find "$(SRC_DIR)/tests" -type f -name "*Tests.csproj" -o -name "*.Tests.csproj" || true)
+            if [ -z "$TEST_PROJECTS" ]; then
+              echo "No test projects found."
+              exit 0
+            fi
+            for proj in $TEST_PROJECTS; do
+              echo "Running tests for $proj"
+              dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage" --logger trx
+              echo "Completed tests for $proj"
+            done
+          displayName: 'Run all tests with coverage and logs'
 
 - stage: Build
   displayName: 'Docker Build'
