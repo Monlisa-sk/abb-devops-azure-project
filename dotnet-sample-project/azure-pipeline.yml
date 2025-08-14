@@ -33,7 +33,7 @@ stages:
         - script: dotnet build '$(BUILD_SRC_DIR)' --configuration Release --no-restore
           displayName: 'Build solution'
 
-        - script: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage"
+        - script: dotnet test '$(TEST_SRC_DIR)' --configuration Release --no-build --collect:"XPlat Code Coverage"
           displayName: 'Run tests with coverage'
 
 - stage: Build
