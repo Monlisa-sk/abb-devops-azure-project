@@ -9,6 +9,7 @@ pool:
   name: AzureVM
 
 variables:
+  SRC_DIR: 'dotnet-sample-project/source'
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
@@ -25,7 +26,7 @@ stages:
             packageType: 'sdk'
             version: '9.0.x'
 
-        - script: dotnet restore
+        - script: dotnet restore "$(SRC_DIR)"
           displayName: 'Restore NuGet packages'
 
         - script: dotnet build --configuration Release --no-restore
