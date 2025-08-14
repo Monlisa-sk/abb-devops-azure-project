@@ -42,7 +42,7 @@ stages:
             fi
             for proj in $TEST_PROJECTS; do
               echo "Running tests for $proj"
-              dotnet test "$proj" 
+              dotnet test "$proj" --no-build
               echo "Completed tests for $proj"
             done
           displayName: 'Run all tests with coverage and logs'
