@@ -14,6 +14,26 @@ variables:
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
 
 stages:
+- stage: BuildAndTest
+  displayName: 'Build & Test'
+  jobs:
+    - job: build_and_test
+      displayName: 'Build and Test'
+      steps:
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '9.0.x'
+
+        - script: dotnet restore
+          displayName: 'Restore NuGet packages'
+
+        - script: dotnet build --configuration Release --no-restore
+          displayName: 'Build solution'
+
+        - script: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage"
+          displayName: 'Run tests with coverage'
+
 - stage: Build
   displayName: 'Docker Build'
   jobs:
