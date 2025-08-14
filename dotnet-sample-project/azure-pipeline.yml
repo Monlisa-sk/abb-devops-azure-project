@@ -9,7 +9,8 @@ pool:
   name: AzureVM
 
 variables:
-  SRC_DIR: 'dotnet-sample-project/source'
+  BUILD_SRC_DIR: 'dotnet-sample-project/source'
+  TEST_SRC_DIR: 'dotnet-sample-project/tests/Sample.Tests'
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
@@ -26,10 +27,10 @@ stages:
             packageType: 'sdk'
             version: '9.0.x'
 
-        - script: dotnet restore "$(SRC_DIR)"
+        - script: dotnet restore '$(BUILD_SRC_DIR)'
           displayName: 'Restore NuGet packages'
 
-        - script: dotnet build --configuration Release --no-restore
+        - script: dotnet build '$(BUILD_SRC_DIR)' --configuration Release --no-restore
           displayName: 'Build solution'
 
         - script: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage"
