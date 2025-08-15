@@ -21,12 +21,6 @@ stages:
     - job: build_and_test
       displayName: 'Build and Test'
       steps:
-        - task: SonarQubePrepare@7
-          inputs:
-            SonarQube: 'sonarqube-project'
-            scannerMode: 'dotnet'
-            projectKey: 'sonarqube-project'
-
         - task: UseDotNet@2
           inputs:
             packageType: 'sdk'
@@ -53,15 +47,27 @@ stages:
             done
           displayName: 'Run all tests with coverage and logs'
 
-        # Run Code Analysis task
-        - task: SonarQubeAnalyze@7
+- stage: CodeAnalysis
+  displayName: 'SonarQube Build Scan'
+  jobs:
+  - job: sonarqube
+    displayName: SonarQube
+    steps:
+    - task: SonarQubePrepare@7
+      inputs:
+        SonarQube: 'sonarqube-project'
+        scannerMode: 'dotnet'
+        projectKey: 'sonarqube-project'
 
-        # Publish Quality Gate Result task
-        - task: SonarQubePublish@7
-          inputs:
-            pollingTimeoutSec: '300'
+    - script: dotnet build '$(SRC_DIR)/source'
 
-- stage: Build
+    - task: SonarQubeAnalyze@7
+
+    - task: SonarQubePublish@7
+      inputs:
+        pollingTimeoutSec: '300'
+
+- stage: DockerBuild
   displayName: 'Docker Build'
   jobs:
   - job: docker_build
