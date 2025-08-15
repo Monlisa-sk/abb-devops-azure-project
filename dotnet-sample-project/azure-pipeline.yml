@@ -71,7 +71,7 @@ stages:
           sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
           sonar.exclusions=**/*.md
 
-    - script: dotnet build '$(SRC_DIR)/source' -c Release --no-restore
+    - script: dotnet build '$(SRC_DIR)/source' 
       displayName: 'Build for analysis'
 
     - task: SonarQubeAnalyze@7
