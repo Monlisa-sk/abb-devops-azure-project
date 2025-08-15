@@ -15,39 +15,40 @@ variables:
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
 
 stages:
-# - stage: BuildAndTest
-#   displayName: 'Build & Test'
-#   jobs:
-#     - job: build_and_test
-#       displayName: 'Build and Test'
-#       steps:
-#         - task: UseDotNet@2
-#           inputs:
-#             packageType: 'sdk'
-#             version: '9.0.x'
+- stage: BuildAndTest
+  displayName: 'Build & Test'
+  jobs:
+    - job: build_and_test
+      displayName: 'Build and Test'
+      steps:
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '9.0.x'
 
-#         - script: dotnet restore '$(SRC_DIR)/source'
-#           displayName: 'Restore NuGet packages'
+        - script: dotnet restore '$(SRC_DIR)/source'
+          displayName: 'Restore NuGet packages'
 
-#         - script: dotnet build '$(SRC_DIR)/source' --configuration Release --no-restore
-#           displayName: 'Build solution'
+        - script: dotnet build '$(SRC_DIR)/source' --configuration Release --no-restore
+          displayName: 'Build solution'
 
-#         - script: |
-#             echo "Discovering test projects in $(SRC_DIR)..."
-#             set -e
-#             TEST_PROJECTS=$(find "$(SRC_DIR)/tests" -type f -name "*Tests.csproj" -o -name "*.Tests.csproj" || true)
-#             if [ -z "$TEST_PROJECTS" ]; then
-#               echo "No test projects found."
-#               exit 0
-#             fi
-#             for proj in $TEST_PROJECTS; do
-#               echo "Running tests for $proj"
-#               dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage"  --logger trx
-#               echo "Completed tests for $proj"
-#             done
-#           displayName: 'Run all tests with coverage and logs'
+        - script: |
+            echo "Discovering test projects in $(SRC_DIR)..."
+            set -e
+            TEST_PROJECTS=$(find "$(SRC_DIR)/tests" -type f -name "*Tests.csproj" -o -name "*.Tests.csproj" || true)
+            if [ -z "$TEST_PROJECTS" ]; then
+              echo "No test projects found."
+              exit 0
+            fi
+            for proj in $TEST_PROJECTS; do
+              echo "Running tests for $proj"
+              dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage"  --logger trx
+              echo "Completed tests for $proj"
+            done
+          displayName: 'Run all tests with coverage and logs'
 
 - stage: CodeAnalysis
+  condition: eq(variables['Build.SourceBranchName'], 'main')
   displayName: 'SonarQube Build Scan'
   jobs:
   - job: sonarqube
