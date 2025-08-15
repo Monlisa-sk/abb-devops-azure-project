@@ -21,6 +21,12 @@ stages:
     - job: build_and_test
       displayName: 'Build and Test'
       steps:
+        - task: SonarQubePrepare@7
+          inputs:
+            SonarQube: 'sonarqube-project'
+            scannerMode: 'dotnet'
+            projectKey: 'sonarqube-project'
+
         - task: UseDotNet@2
           inputs:
             packageType: 'sdk'
@@ -46,6 +52,14 @@ stages:
               echo "Completed tests for $proj"
             done
           displayName: 'Run all tests with coverage and logs'
+
+        # Run Code Analysis task
+        - task: SonarQubeAnalyze@7
+
+        # Publish Quality Gate Result task
+        - task: SonarQubePublish@7
+          inputs:
+            pollingTimeoutSec: '300'
 
 - stage: Build
   displayName: 'Docker Build'
