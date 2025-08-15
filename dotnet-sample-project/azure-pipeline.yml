@@ -48,7 +48,6 @@ stages:
           displayName: 'Run all tests with coverage and logs'
 
 - stage: CodeAnalysis
-  condition: eq(variables['Build.SourceBranchName'], 'main')
   displayName: 'SonarQube Build Scan'
   jobs:
   - job: sonarqube
@@ -63,7 +62,8 @@ stages:
     - task: SonarQubePrepare@7
       inputs:
         SonarQube: 'sonarqube-project'
-        scannerMode: 'dotnet'
+        scannerMode: 'CLI'
+        configMode: 'manual'
         projectKey: 'sonarqube-project'
 
     - script: dotnet build '$(SRC_DIR)/source'
