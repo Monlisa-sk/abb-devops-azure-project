@@ -58,6 +58,8 @@ stages:
         SonarQube: 'sonarqube-project'
         scannerMode: 'dotnet'
         projectKey: 'sonarqube-project'
+        extraProperties: |
+          sonar.branch.name=$(Build.SourceBranchName)
 
     - script: dotnet build '$(SRC_DIR)/source'
 
