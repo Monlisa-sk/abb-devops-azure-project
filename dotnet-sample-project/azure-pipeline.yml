@@ -125,39 +125,8 @@ stages:
   displayName: Deploy to AKS
   jobs:
   - job: Deploy
-    displayName: Attach ACR & Helm deploy
-    container: mcr.microsoft.com/azure-cli:2.62.0  
+    displayName: Helm deploy 
     steps:
-    - script: az version
-      displayName: Check az in container
-      #Ensure AKS can pull from ACR (idempotent)
-    - task: AzureCLI@2
-      displayName: Attach ACR to AKS (idempotent)
+    - task: HelmInstaller@1
       inputs:
-        azureSubscription: '$(azureSubscription)'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          set -euo pipefail
-          echo "Checking AKS↔ACR link..."
-          if az aks check-acr -g '$(aksResourceGroup)' -n '$(aksName)' --acr '$(acrName)' --query accessLevel -o tsv | grep -qi acrpull; then
-            echo "Already attached."
-          else
-            echo "Attaching ACR to AKS..."
-            az aks update -g '$(aksResourceGroup)' -n '$(aksName)' --attach-acr '$(acrName)'
-          fi
-          
-    - task: AzureCLI@2
-      displayName: Get AKS credentials
-      inputs:
-        azureSubscription: '$(azureSubscription)'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          set -euo pipefail
-          az aks get-credentials -g '$(aksResourceGroup)' -n '$(aksName)' --overwrite-existing
-          kubectl get nodes
-
-    - script: |
-        kubectl get ns $(namespace) || kubectl create namespace $(namespace)
-      displayName: Ensure namespace
+        helmVersionToInstall: 'latest'
