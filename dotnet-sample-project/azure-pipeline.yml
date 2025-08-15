@@ -63,9 +63,7 @@ stages:
       inputs:
         SonarQube: 'sonarqube-project'
         scannerMode: 'dotnet'
-        projectKey: 'abb-devops-assessment'
-        extraProperties: |
-          sonar.branch.name=$(Build.SourceBranchName)
+        projectKey: 'sonarqube-project'
 
     - script: dotnet build '$(SRC_DIR)/source'
 
