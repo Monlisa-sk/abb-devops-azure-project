@@ -21,7 +21,7 @@ variables:
   acrName: 'devopscontainerreg'
   namespace: 'dev'
   releaseName: 'myapp'
-  chartPath: './helmchart'
+  helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
   imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
   imageTag: 'ci-pipeline-45'
 
@@ -128,5 +128,25 @@ stages:
     displayName: Helm deploy 
     steps:
     - task: HelmInstaller@1
+      displayName: Install Helm
       inputs:
         helmVersionToInstall: 'latest'
+    - task: Kubernetes@1
+      displayName: Connect to AKS Cluster
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'AKS-Conn'
+        command: 'login'
+
+    - script: |
+        set -euo pipefail
+        echo "Chart path: $(helmChartPath)"
+        ls -la "$(helmChartPath)"
+        helm upgrade --install myapp-dev "$(helmChartPath)" \
+          --namespace dev --create-namespace \
+          --set image.repository=$(imageRepositoryCD) \
+          --set image.tag=$(imageTag) \
+          --atomic --wait --timeout 5m
+      displayName: Helm upgrade --install
+  
+
