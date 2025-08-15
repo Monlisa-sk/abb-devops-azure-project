@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "helmchart.fullname" . }}
+  labels:
+    {{- include "helmchart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type | default "ClusterIP" }}
+  ports:
+    - port: {{ .Values.service.port }}          # service (cluster) port
+      targetPort: {{ .Values.container.port }}  # container's listening port
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "helmchart.selectorLabels" . | nindent 4 }}
