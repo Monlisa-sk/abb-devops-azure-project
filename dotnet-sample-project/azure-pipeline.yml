@@ -9,10 +9,21 @@ pool:
   name: AzureVM
 
 variables:
+  # CI vars
   SRC_DIR: 'dotnet-sample-project'
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
+  # CD vars
+  azureSubscription: 'ARM-Service-Connection'
+  aksResourceGroup: 'abb-devops'
+  aksName: 'abb-aks-cluster'
+  acrName: 'devopscontainerreg'
+  namespace: 'dev'
+  releaseName: 'myapp'
+  chartPath: './helmchart'
+  imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
+  imageTag: 'ci-pipeline-45'
 
 stages:
 - stage: BuildAndTest
@@ -109,3 +120,41 @@ stages:
         repository: '$(imageRepository)'
         command: 'push'
         tags: '$(tag)'
+
+- stage: CD
+  displayName: Deploy to AKS
+  jobs:
+  - job: Deploy
+    displayName: Attach ACR & Helm deploy
+    steps:
+    #Ensure AKS can pull from ACR (idempotent)
+    - task: AzureCLI@2
+      displayName: Attach ACR to AKS (idempotent)
+      inputs:
+        azureSubscription: '$(azureSubscription)'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          set -euo pipefail
+          echo "Checking AKS↔ACR link..."
+          if az aks check-acr -g '$(aksResourceGroup)' -n '$(aksName)' --acr '$(acrName)' --query accessLevel -o tsv | grep -qi acrpull; then
+            echo "Already attached."
+          else
+            echo "Attaching ACR to AKS..."
+            az aks update -g '$(aksResourceGroup)' -n '$(aksName)' --attach-acr '$(acrName)'
+          fi
+          
+    - task: AzureCLI@2
+      displayName: Get AKS credentials
+      inputs:
+        azureSubscription: '$(azureSubscription)'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          set -euo pipefail
+          az aks get-credentials -g '$(aksResourceGroup)' -n '$(aksName)' --overwrite-existing
+          kubectl get nodes
+
+    - script: |
+        kubectl get ns $(namespace) || kubectl create namespace $(namespace)
+      displayName: Ensure namespace
