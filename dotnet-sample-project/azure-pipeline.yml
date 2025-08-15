@@ -53,11 +53,17 @@ stages:
   - job: sonarqube
     displayName: SonarQube
     steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
+        installationPath: $(Agent.ToolsDirectory)/dotnet
     - task: SonarQubePrepare@7
       inputs:
         SonarQube: 'sonarqube-project'
         scannerMode: 'dotnet'
-        projectKey: 'abb-devops-assessment_abb-devops-assessment_0364a9bb-a840-4f22-8758-5f3e4957f800'
+        projectKey: 'abb-devops-assessment'
         extraProperties: |
           sonar.branch.name=$(Build.SourceBranchName)
 
