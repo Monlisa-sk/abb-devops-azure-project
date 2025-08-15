@@ -126,8 +126,11 @@ stages:
   jobs:
   - job: Deploy
     displayName: Attach ACR & Helm deploy
+    container: mcr.microsoft.com/azure-cli:2.62.0  
     steps:
-    #Ensure AKS can pull from ACR (idempotent)
+    - script: az version
+      displayName: Check az in container
+      #Ensure AKS can pull from ACR (idempotent)
     - task: AzureCLI@2
       displayName: Attach ACR to AKS (idempotent)
       inputs:
