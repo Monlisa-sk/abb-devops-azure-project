@@ -74,25 +74,19 @@ stages:
         version: '9.0.x'
 
     - script: |
-        echo "Installing dotnet-sonarscanner locally..."
         dotnet tool install --global dotnet-sonarscanner
-
-        echo "Starting SonarQube analysis..."
         dotnet sonarscanner begin \
           /k:"sonarqube-project" \
           /n:"My Project" \
           /v:"1.0" \
           /d:sonar.host.url="http://<your-sonarqube-server>" \
-          /d:sonar.login="$(SONAR_TOKEN)" \
+          /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
           /d:sonar.sources="$(SRC_DIR)/source" \
           /d:sonar.sourceEncoding="UTF-8"
 
-        echo "Building the project..."
         dotnet build "$(SRC_DIR)/source" --no-incremental
 
-        echo "Finishing SonarQube analysis..."
-        dotnet sonarscanner end /d:sonar.login="$(SONAR_TOKEN)"
-      displayName: 'Run SonarQube Analysis CLI'
+        dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
       env:
         PATH: $(PATH):~/.dotnet/tools
 
