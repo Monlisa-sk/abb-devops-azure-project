@@ -171,8 +171,11 @@ stages:
       inputs:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'AKS-Conn'
+        namespace: 'helm-install'
         command: 'upgrade'
         chartType: 'FilePath'
         chartPath: '$(helmChartPath)'
+        releaseName: 'myapp'
+        install: true 
         arguments: >
           --set dotnetSampleApp.image.tag=$(tag)
