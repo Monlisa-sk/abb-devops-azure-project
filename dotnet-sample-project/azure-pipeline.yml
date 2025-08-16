@@ -75,27 +75,18 @@ stages:
 
     - script: |
         dotnet tool install --global dotnet-sonarscanner
-      displayName: 'Install SonarScanner'
-      env:
-        PATH: $(PATH):~/.dotnet/tools
-
-    - script: |
-        echo "Starting SonarQube analysis..."
         dotnet sonarscanner begin \
           /k:"sonarqube-project" \
           /n:"My Project" \
           /v:"1.0" \
-          /d:sonar.host.url="http://<your-sonarqube-server>" \
+          /d:sonar.host.url="http://20.55.232.207:9000" \
           /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
           /d:sonar.sources="$(SRC_DIR)/source" \
           /d:sonar.sourceEncoding="UTF-8"
 
-        echo "Building..."
         dotnet build "$(SRC_DIR)/source" --no-incremental
 
-        echo "Finishing SonarQube analysis..."
         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
-      displayName: 'Run SonarQube Analysis'
       env:
         PATH: $(PATH):~/.dotnet/tools
 
@@ -167,7 +158,7 @@ stages:
 
 
 - stage: Deployment
-  displayName: Deploy to AKS (Helm + pull secret)
+  displayName: Deploy to AKS (using Helm)
   jobs:
   - job: HelmDeploy
     displayName: Helm upgrade/install
