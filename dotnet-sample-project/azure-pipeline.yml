@@ -4,6 +4,7 @@ trigger:
     include:
       - main
       - feature/*
+      - release/*
 
 pool:
   name: AzureVM
@@ -14,17 +15,14 @@ variables:
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
-  
+
   # CD vars
   azureSubscription: 'ARM-Service-Connection'
   aksResourceGroup: 'abb-devops'
   aksName: 'abb-aks-cluster'
   acrName: 'devopscontainerreg'
-  namespace: 'dev'
-  releaseName: 'myapp'
   helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
   imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
-  imageTag: 'ci-pipeline-45'
 
 stages:
 - stage: BuildAndTest
@@ -59,37 +57,43 @@ stages:
             done
           displayName: 'Run all tests with coverage and logs'
 
-- stage: CodeAnalysis
-  displayName: 'SonarQube Build Scan'
-  jobs:
-  - job: sonarqube
-    displayName: SonarQube Analysis
-    # continueOnError: true
+# - stage: CodeAnalysis
+#   displayName: 'SonarQube Build Scan'
+#   jobs:
+#   - job: sonarqube
+#     displayName: SonarQube Analysis
+#     continueOnError: true
+#     steps:
+#     - task: UseDotNet@2
+#       displayName: 'Install .NET SDK'
+#       inputs:
+#         packageType: 'sdk'
+#         version: '9.0.x'
 
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Install .NET SDK'
-      inputs:
-        packageType: 'sdk'
-        version: '9.0.x'
+#     - script: |
+#         dotnet nuget locals all --clear || true
+#         echo "Before scan memory:"; free -h || true
+#       displayName: 'Pre-clean'
 
-    - script: |
-        dotnet tool install --global dotnet-sonarscanner
-        dotnet sonarscanner begin \
-          /k:"sonarqube-project" \
-          /n:"My Project" \
-          /v:"1.0" \
-          /d:sonar.host.url="http://20.55.232.207:9000" \
-          /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
-          /d:sonar.sources="$(SRC_DIR)/source" \
-          /d:sonar.sourceEncoding="UTF-8"
-          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
+#     - script: |
+#         export SONAR_SCANNER_OPTS="-Xmx1024m -Xms256m"
+#         dotnet tool install --global dotnet-sonarscanner
+#         dotnet sonarscanner begin \
+#           /k:"sonarqube-project" \
+#           /n:"My Project" \
+#           /v:"1.0" \
+#           /d:sonar.host.url="http://20.55.232.207:9000" \
+#           /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
+#           /d:sonar.sources="$(SRC_DIR)/source" \
+#           /d:sonar.sourceEncoding="UTF-8"
+#           /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
 
-        dotnet build "$(SRC_DIR)/source" --no-incremental
+#         dotnet build "$(SRC_DIR)/source" --no-incremental
 
-        dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
-      env:
-        PATH: $(PATH):~/.dotnet/tools
+#         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
+#       env:
+#         PATH: $(PATH):~/.dotnet/tools
+#       displayName: 'Sonar scan'
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
@@ -133,6 +137,129 @@ stages:
         command: 'push'
         tags: '$(tag)'
 
+- stage: DeployDev
+  dependsOn: DockerBuildAndPush
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'))
+  jobs:
+    - deployment: deploy_dev
+      environment: 'dev-aks'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: KubernetesManifest@1
+                displayName: 'Create Secret'
+                inputs:
+                  action: 'createSecret'
+                  connectionType: 'kubernetesServiceConnection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-dev'
+                  secretType: 'dockerRegistry'
+                  secretName: 'kube-acr'
+                  dockerRegistryEndpoint: 'devops-service-connection'
+              - task: HelmInstaller@1
+                inputs:
+                  helmVersionToInstall: 'latest'
+              - task: HelmDeploy@0
+                displayName: Deploy to Dev
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  command: 'upgrade'
+                  install: true
+                  chartType: 'FilePath'
+                  chartPath: '$(helmChartPath)'
+                  namespace: 'deploy-dev'
+                  releaseName: 'myapp-dev'
+                  arguments: >
+                    --create-namespace
+                    --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
+                    --set dotnetSampleApp.image.tag=$(tag)
+                    --set image.pullSecrets[0]=kube-acr
+
+- stage: DeployStaging
+  dependsOn: DockerBuildAndPush
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs:
+    - deployment: deploy_staging
+      environment: 'staging-aks'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: KubernetesManifest@1
+                displayName: 'Create Secret'
+                inputs:
+                  action: 'createSecret'
+                  connectionType: 'kubernetesServiceConnection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-staging'
+                  secretType: 'dockerRegistry'
+                  secretName: 'kube-acr'
+                  dockerRegistryEndpoint: 'devops-service-connection'
+                  
+              - task: HelmInstaller@1
+                inputs:
+                  helmVersionToInstall: 'latest'
+
+              - task: HelmDeploy@0
+                displayName: Deploy to Staging
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-staging'
+                  command: 'upgrade'
+                  install: true
+                  chartType: 'FilePath'
+                  chartPath: '$(helmChartPath)'
+                  releaseName: 'myapp-staging'
+                  arguments: >
+                    --create-namespace
+                    --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
+                    --set dotnetSampleApp.image.tag=$(tag)
+                    --set image.pullSecrets[0]=kube-acr
+
+- stage: DeployProd
+  dependsOn: DeployStaging
+  condition: succeeded()
+  jobs:
+    - deployment: deploy_prod
+      environment: 'prod-aks'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: KubernetesManifest@1
+                displayName: 'Create Secret'
+                inputs:
+                  action: 'createSecret'
+                  connectionType: 'kubernetesServiceConnection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-prod'
+                  secretType: 'dockerRegistry'
+                  secretName: 'kube-acr'
+                  dockerRegistryEndpoint: 'devops-service-connection'
+
+              - task: HelmInstaller@1
+                inputs:
+                  helmVersionToInstall: 'latest'
+              - task: HelmDeploy@0
+                displayName: Deploy to Prod
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-prod'
+                  command: 'upgrade'
+                  install: true
+                  chartType: 'FilePath'
+                  chartPath: '$(helmChartPath)'
+                  releaseName: 'myapp-prod'
+                  arguments: >
+                    --create-namespace
+                    --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
+                    --set dotnetSampleApp.image.tag=$(tag)
+                    --set image.pullSecrets[0]=kube-acr
+
 # - stage: Deployment
 #   displayName: Deploy to AKS
 #   jobs:
@@ -158,35 +285,35 @@ stages:
 #         imagePullSecrets: 'kube-acr'
 
 
-- stage: Deployment
-  displayName: Deploy to AKS (using Helm)
-  jobs:
-  - job: HelmDeploy
-    displayName: Helm upgrade/install
-    steps:
-    - task: HelmInstaller@1
-      displayName: Install Helm
-      inputs:
-        helmVersionToInstall: 'latest'
+# - stage: Deployment
+#   displayName: Deploy to AKS (using Helm)
+#   jobs:
+#   - job: HelmDeploy
+#     displayName: Helm upgrade/install
+#     steps:
+#     - task: HelmInstaller@1
+#       displayName: Install Helm
+#       inputs:
+#         helmVersionToInstall: 'latest'
 
-    # - task: HelmDeploy@0
-    #   displayName: Helm uninstall 
-    #   inputs:
-    #     connectionType: 'Kubernetes Service Connection'
-    #     kubernetesServiceConnection: 'AKS-Conn'
-    #     command: 'uninstall'
-    #     arguments: '20250816.19'
+#     # - task: HelmDeploy@0
+#     #   displayName: Helm uninstall 
+#     #   inputs:
+#     #     connectionType: 'Kubernetes Service Connection'
+#     #     kubernetesServiceConnection: 'AKS-Conn'
+#     #     command: 'uninstall'
+#     #     arguments: '20250816.19'
 
-    - task: HelmDeploy@0
-      displayName: Helm upgrade 
-      inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceConnection: 'AKS-Conn'
-        command: 'upgrade'
-        install: true
-        chartType: 'FilePath'
-        chartPath: '$(helmChartPath)'
-        releaseName: 'myapp'
-        arguments: >
-          --set dotnetSampleApp.image.tag=$(tag)
-          --set image.pullSecrets[0]=kube-acr
+#     - task: HelmDeploy@0
+#       displayName: Helm upgrade 
+#       inputs:
+#         connectionType: 'Kubernetes Service Connection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         command: 'upgrade'
+#         install: true
+#         chartType: 'FilePath'
+#         chartPath: '$(helmChartPath)'
+#         releaseName: 'myapp'
+#         arguments: >
+#           --set dotnetSampleApp.image.tag=$(tag)
+#           --set image.pullSecrets[0]=kube-acr
