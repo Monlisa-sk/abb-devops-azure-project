@@ -194,7 +194,6 @@ stages:
       inputs:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'AKS-Conn'
-        # namespace: 'helm-install'
         command: 'upgrade'
         install: true
         chartType: 'FilePath'
@@ -202,3 +201,4 @@ stages:
         releaseName: 'myapp'
         arguments: >
           --set dotnetSampleApp.image.tag=$(tag)
+          --set image.pullSecrets[0]=kube-acr
