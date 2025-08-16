@@ -140,6 +140,15 @@ stages:
 
     - task: KubernetesManifest@1
       inputs:
+        action: 'createSecret'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'AKS-Conn'
+        secretType: 'dockerRegistry'
+        secretName: 'kube_acr'
+        dockerRegistryEndpoint: 'devops-service-connection'
+
+    - task: KubernetesManifest@1
+      inputs:
         action: 'deploy'
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'AKS-Conn'
