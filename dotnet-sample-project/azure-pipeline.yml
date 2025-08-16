@@ -64,7 +64,7 @@ stages:
   jobs:
   - job: sonarqube
     displayName: SonarQube Analysis
-    continueOnError: true
+    # continueOnError: true
 
     steps:
     - task: UseDotNet@2
