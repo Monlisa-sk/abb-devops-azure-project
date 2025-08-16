@@ -1,31 +1,10 @@
-image:
-  repository: devopscontainerreg.azurecr.io/dotnet-sample-project
-  tag: "ci-pipeline-45"
-  pullPolicy: IfNotPresent
-
-container:
-  port: 8080
-
-service:
-  type: ClusterIP
-  port: 80
-
-serviceAccount:
-  create: false   
-  name: ""        
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-  hosts: []
-  tls: []
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 3
- 
-# Only needed if your AKS cluster is NOT attached to ACR
-# imagePullSecrets:
-#   - name: acr-pull
+replicaCount: 1
+dotnetSampleApp:
+  image:
+    repository: devopscontainerreg.azurecr.io/dotnet-sample-project
+    tag: ci-pipeline-66
+  containerPort: 80
+  
+mssql:
+  image: mcr.microsoft.com/mssql/server:2022-latest
+  containerPort: 1433
