@@ -127,10 +127,10 @@ stages:
   - job: Deploy
     displayName: Helm deploy 
     steps:
-    - task: HelmInstaller@1
-      displayName: Install Helm
-      inputs:
-        helmVersionToInstall: 'latest'
+    # - task: HelmInstaller@1
+    #   displayName: Install Helm
+    #   inputs:
+    #     helmVersionToInstall: 'latest'
     - task: Kubernetes@1
       displayName: Connect to AKS Cluster
       inputs:
@@ -138,49 +138,9 @@ stages:
         kubernetesServiceEndpoint: 'AKS-Conn'
         command: 'login'
 
-    - script: |
-        set -euo pipefail
-        helm upgrade --install "$(releaseName)" "$(helmChartPath)" \
-          --namespace "$(namespace)" --create-namespace \
-          --set image.repository=$(imageRepositoryCD) \
-          --set image.tag=$(imageTag) \
-          --debug --wait --timeout 15m
-      displayName: Helm upgrade --install
-
-      # quick always-on view
-    - task: Kubernetes@1
-      displayName: pods (quick view)
-      condition: always()
+    - task: KubernetesManifest@1
       inputs:
-       connectionType: 'Kubernetes Service Connection'
-       kubernetesServiceEndpoint: 'AKS-Conn'
-       namespace: '$(namespace)'
-       command: 'get'
-       arguments: 'pods -o wide'
-
-      # runs only if Helm failed)
-    - script: |
-        set -euo pipefail
-        ns="$(namespace)"
-        rel="$(releaseName)"
-
-        echo "== rollout status (by label app.kubernetes.io/instance) =="
-         # This avoids hardcoding the deployment name:
-        kubectl rollout status deploy -n "$ns" -l app.kubernetes.io/instance="$rel" --timeout=60s || true
-
-         echo "== pods =="
-         kubectl get pods -n "$ns" -l app.kubernetes.io/instance="$rel" -o wide || true
-
-        echo "== first non-Ready pod: describe + logs =="
-          # Pick the first pod whose READY column isn't N/N 
-        P=$(kubectl get pods -n "$ns" -l app.kubernetes.io/instance="$rel" --no-headers 2>/dev/null | awk '$2 !~ /^([0-9]+)\/\1$/ {print $1; exit}')
-        if [ -n "${P:-}" ]; then
-          echo "--- describe $P ---"
-          kubectl describe pod -n "$ns" "$P" || true
-          echo "--- logs $P (last 200 lines) ---"
-          kubectl logs -n "$ns" "$P" --tail=200 --prefix || true
-        else
-          echo "No non-Ready pods found."
-        fi
-      displayName: quick triage (on failure)
-      condition: failed()
+        action: 'deploy'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'AKS-Conn'
+        manifests: '$(build.sourcesdirectory)/dotnet-sample-project/aks-files/**'
