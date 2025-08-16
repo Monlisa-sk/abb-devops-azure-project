@@ -83,7 +83,7 @@ stages:
           /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
           /d:sonar.sources="$(SRC_DIR)/source" \
           /d:sonar.sourceEncoding="UTF-8"
-          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
+          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts,**/*.js,**/*.ts"
 
         dotnet build "$(SRC_DIR)/source" --no-incremental
 
