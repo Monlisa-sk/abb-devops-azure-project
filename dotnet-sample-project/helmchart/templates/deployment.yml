@@ -13,6 +13,8 @@ spec:
       labels:
         app: dotnet-sample-app
     spec:
+      imagePullSecrets:
+          - name: {{ index .Values.image.pullSecrets 0 }}
       containers:
         - name: dotnet-sample-app
           image: "{{ .Values.dotnetSampleApp.image.repository }}:{{ .Values.dotnetSampleApp.image.tag }}"
