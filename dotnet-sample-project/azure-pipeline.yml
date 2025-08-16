@@ -187,7 +187,7 @@ stages:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'AKS-Conn'
         command: 'uninstall'
-        releaseName: '20250816.19'
+        arguments: '20250816.19'
 
     - task: HelmDeploy@0
       displayName: Helm upgrade 
