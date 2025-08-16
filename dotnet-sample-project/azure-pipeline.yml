@@ -153,6 +153,7 @@ stages:
                   action: 'createSecret'
                   connectionType: 'kubernetesServiceConnection'
                   kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-dev'
                   secretType: 'dockerRegistry'
                   secretName: 'kube-acr'
                   dockerRegistryEndpoint: 'devops-service-connection'
