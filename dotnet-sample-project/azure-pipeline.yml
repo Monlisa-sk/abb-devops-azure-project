@@ -162,6 +162,7 @@ stages:
                   namespace: 'deploy-dev'
                   releaseName: 'myapp-dev'
                   arguments: >
+                    --create-namespace
                     --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
                     --set dotnetSampleApp.image.tag=$(tag)
                     --set image.pullSecrets[0]=kube-acr
