@@ -181,6 +181,8 @@ stages:
       inputs:
         helmVersionToInstall: 'latest'
 
+    - script: helm uninstall 20250816.19 -n default
+
     - task: HelmDeploy@0
       displayName: Helm upgrade 
       inputs:
@@ -188,6 +190,7 @@ stages:
         kubernetesServiceConnection: 'AKS-Conn'
         # namespace: 'helm-install'
         command: 'upgrade'
+        install: true
         chartType: 'FilePath'
         chartPath: '$(helmChartPath)'
         releaseName: 'myapp'
