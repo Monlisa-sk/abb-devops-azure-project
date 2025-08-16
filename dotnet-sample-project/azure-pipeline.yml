@@ -166,15 +166,15 @@ stages:
   - job: HelmDeploy
     displayName: Helm upgrade/install
     steps:
-    - task: KubernetesManifest@1
-      displayName: 'Create Secret'
-      inputs:
-        action: 'createSecret'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'AKS-Conn'
-        secretType: 'dockerRegistry'
-        secretName: 'kube-acr'
-        dockerRegistryEndpoint: 'devops-service-connection'
+    # - task: KubernetesManifest@1
+    #   displayName: 'Create Secret'
+    #   inputs:
+    #     action: 'createSecret'
+    #     connectionType: 'kubernetesServiceConnection'
+    #     kubernetesServiceConnection: 'AKS-Conn'
+    #     secretType: 'dockerRegistry'
+    #     secretName: 'kube-acr'
+    #     dockerRegistryEndpoint: 'devops-service-connection'
 
     - task: HelmInstaller@1
       displayName: Install Helm
