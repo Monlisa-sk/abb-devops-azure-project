@@ -4,6 +4,7 @@ trigger:
     include:
       - main
       - feature/*
+      - release/*
 
 pool:
   name: AzureVM
@@ -14,17 +15,14 @@ variables:
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
-  
+
   # CD vars
   azureSubscription: 'ARM-Service-Connection'
   aksResourceGroup: 'abb-devops'
   aksName: 'abb-aks-cluster'
   acrName: 'devopscontainerreg'
-  namespace: 'dev'
-  releaseName: 'myapp'
   helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
   imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
-  imageTag: 'ci-pipeline-45'
 
 stages:
 - stage: BuildAndTest
@@ -64,14 +62,18 @@ stages:
   jobs:
   - job: sonarqube
     displayName: SonarQube Analysis
-    # continueOnError: true
-
+    continueOnError: true
     steps:
     - task: UseDotNet@2
       displayName: 'Install .NET SDK'
       inputs:
         packageType: 'sdk'
         version: '9.0.x'
+
+    - script: |
+        dotnet nuget locals all --clear || true
+        echo "Before scan memory:"; free -h || true
+      displayName: 'Pre-clean'
 
     - script: |
         dotnet tool install --global dotnet-sonarscanner
@@ -89,6 +91,7 @@ stages:
 
         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
       env:
+        SONAR_SCANNER_OPTS: "-Xmx1024m -Xms256m"
         PATH: $(PATH):~/.dotnet/tools
 
 - stage: DockerBuildAndPush
