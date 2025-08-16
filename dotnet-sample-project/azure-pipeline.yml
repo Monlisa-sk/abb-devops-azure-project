@@ -95,8 +95,8 @@ stages:
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
   jobs:
-  - job: docker_build
-    displayName: 'Build image'
+  - job: docker_build_push
+    displayName: 'Build image and Push'
     steps:
     - task: Docker@2
       displayName: 'Build image'
@@ -107,9 +107,6 @@ stages:
         Dockerfile: 'dotnet-sample-project/Dockerfile'
         tags: '$(tag)'
 
-  - job: docker_push
-    displayName: 'Push image'
-    steps:
     - task: Docker@2
       displayName: 'Push image'
       inputs:
@@ -137,7 +134,7 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'AKS-Conn'
         secretType: 'dockerRegistry'
-        secretName: 'kube_acr'
+        secretName: 'kube-acr'
         dockerRegistryEndpoint: 'devops-service-connection'
 
     - task: KubernetesManifest@1
