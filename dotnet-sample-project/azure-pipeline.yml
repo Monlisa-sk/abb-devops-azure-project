@@ -63,35 +63,33 @@ stages:
   displayName: 'SonarQube Build Scan'
   jobs:
   - job: sonarqube
-    displayName: SonarQube
-    continueOnError: true
+    displayName: SonarQube Analysis
+    # continueOnError: true
+
     steps:
     - task: UseDotNet@2
       displayName: 'Install .NET SDK'
       inputs:
         packageType: 'sdk'
         version: '9.0.x'
-    - task: SonarQubePrepare@7
-      inputs:
-        SonarQube: 'sonarqube-project'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'sonarqube-project'
-        cliProjectName: 'dotnet-sample-project'
-        cliProjectVersion: '$(Build.BuildNumber)'
-        extraProperties: |
-          sonar.sources=$(SRC_DIR)/source
-          sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
-          sonar.exclusions=**/*.md
 
-    - script: dotnet build '$(SRC_DIR)/source' 
-      displayName: 'Build for analysis'
+    - script: |
+        dotnet tool install --global dotnet-sonarscanner
+        dotnet sonarscanner begin \
+          /k:"sonarqube-project" \
+          /n:"My Project" \
+          /v:"1.0" \
+          /d:sonar.host.url="http://20.55.232.207:9000" \
+          /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
+          /d:sonar.sources="$(SRC_DIR)/source" \
+          /d:sonar.sourceEncoding="UTF-8"
+          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
 
-    - task: SonarQubeAnalyze@7
+        dotnet build "$(SRC_DIR)/source" --no-incremental
 
-    - task: SonarQubePublish@7
-      inputs:
-        pollingTimeoutSec: '300'
+        dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
+      env:
+        PATH: $(PATH):~/.dotnet/tools
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
@@ -161,7 +159,7 @@ stages:
 
 
 - stage: Deployment
-  displayName: Deploy to AKS (Helm + pull secret)
+  displayName: Deploy to AKS (using Helm)
   jobs:
   - job: HelmDeploy
     displayName: Helm upgrade/install
