@@ -177,6 +177,47 @@ stages:
                     --set dotnetSampleApp.image.tag=$(tag)
                     --set image.pullSecrets[0]=kube-acr
 
+- stage: DeployStaging
+  dependsOn: DockerBuildAndPush
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs:
+    - deployment: deploy_staging
+      environment: 'staging-aks'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: KubernetesManifest@1
+                displayName: 'Create Secret'
+                inputs:
+                  action: 'createSecret'
+                  connectionType: 'kubernetesServiceConnection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-staging'
+                  secretType: 'dockerRegistry'
+                  secretName: 'kube-acr'
+                  dockerRegistryEndpoint: 'devops-service-connection'
+                  
+              - task: HelmInstaller@1
+                inputs:
+                  helmVersionToInstall: 'latest'
+
+              - task: HelmDeploy@0
+                displayName: Deploy to Staging
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  namespace: 'deploy-staging'
+                  command: 'upgrade'
+                  install: true
+                  chartType: 'FilePath'
+                  chartPath: '$(helmChartPath)'
+                  releaseName: 'myapp-staging'
+                  arguments: >
+                    --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
+                    --set dotnetSampleApp.image.tag=$(tag)
+                    --set image.pullSecrets[0]=kube-acr
+
 # - stage: Deployment
 #   displayName: Deploy to AKS
 #   jobs:
