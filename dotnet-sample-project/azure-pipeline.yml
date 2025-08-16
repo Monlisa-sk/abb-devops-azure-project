@@ -59,7 +59,6 @@ stages:
 
 - stage: CodeAnalysis
   displayName: 'SonarQube Build Scan'
-  trigger: manual
   jobs:
   - job: sonarqube
     displayName: SonarQube Analysis
