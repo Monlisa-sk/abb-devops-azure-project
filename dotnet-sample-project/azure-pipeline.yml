@@ -71,17 +71,20 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '9.0.x'
+
+    - script: |
+        echo "Cleaning sonar.branch.name from SONARQUBE_SCANNER_PARAMS..."
+        CLEANED=$(echo "$SONARQUBE_SCANNER_PARAMS" | sed 's/"sonar.branch.name":"[^"]*",\?//g')
+        echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$CLEANED"
+      displayName: 'Remove sonar.branch.name (Linux)'
+
     - task: SonarQubePrepare@7
       inputs:
         SonarQube: 'sonarqube-project'
-        scannerMode: 'cli'
-        configMode: 'manual'
-        cliProjectKey: 'sonarqube-project'
-        cliSources: '.'
+        scannerMode: 'dotnet'
+        projectKey: 'sonarqube-project'
         extraProperties: |
           sonar.sources=$(SRC_DIR)/source
-          sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
-          sonar.exclusions=**/*.md
 
     - script: dotnet build '$(SRC_DIR)/source' 
       displayName: 'Build for analysis'
