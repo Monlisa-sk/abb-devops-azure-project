@@ -34,5 +34,4 @@ spec:
 
       volumes:
         - name: database-storage
-          persistentVolumeClaim:
-            claimName: database-pvc
+          emptyDir: {}
