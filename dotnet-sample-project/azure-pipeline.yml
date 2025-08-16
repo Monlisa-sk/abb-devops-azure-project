@@ -181,7 +181,13 @@ stages:
       inputs:
         helmVersionToInstall: 'latest'
 
-    - script: helm uninstall 20250816.19 -n default
+    - task: HelmDeploy@0
+      displayName: Helm uninstall 
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: 'AKS-Conn'
+        command: 'uninstall'
+        releaseName: '20250816.19'
 
     - task: HelmDeploy@0
       displayName: Helm upgrade 
