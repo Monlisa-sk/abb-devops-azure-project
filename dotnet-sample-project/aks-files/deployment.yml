@@ -22,7 +22,7 @@ spec:
             - name: SigningKey
               value: 58a97cd766d741e8a21b8d3c4279652469801dc8da844fa5bf80afeea85aa472
             - name: ConnectionStrings__Context
-              value: Server=localhost:1433;Database=Database;User Id=sa;Password=P4ssW0rd!;TrustServerCertificate=true;
+              value: Server=localhost,1433;Database=Database;User Id=sa;Password=P4ssW0rd!;TrustServerCertificate=true;
             - name: Serilog__WriteTo__1__Args__path
               value: /app/logs/
 
