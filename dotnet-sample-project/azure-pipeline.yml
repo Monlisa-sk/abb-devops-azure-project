@@ -136,6 +136,34 @@ stages:
         command: 'push'
         tags: '$(tag)'
 
+- stage: DeployDev
+  dependsOn: DockerBuildAndPush
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'))
+  jobs:
+    - deployment: deploy_dev
+      environment: 'dev-aks'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: HelmInstaller@1
+                inputs:
+                  helmVersionToInstall: 'latest'
+              - task: HelmDeploy@0
+                displayName: Deploy to Dev
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  kubernetesServiceConnection: 'AKS-Conn'
+                  command: 'upgrade'
+                  install: true
+                  chartType: 'FilePath'
+                  chartPath: '$(helmChartPath)'
+                  releaseName: 'myapp-dev'
+                  arguments: >
+                    --set dotnetSampleApp.image.repository=$(imageRepositoryCD)
+                    --set dotnetSampleApp.image.tag=$(tag)
+                    --set image.pullSecrets[0]=kube-acr
+
 # - stage: Deployment
 #   displayName: Deploy to AKS
 #   jobs:
@@ -161,35 +189,35 @@ stages:
 #         imagePullSecrets: 'kube-acr'
 
 
-- stage: Deployment
-  displayName: Deploy to AKS (using Helm)
-  jobs:
-  - job: HelmDeploy
-    displayName: Helm upgrade/install
-    steps:
-    - task: HelmInstaller@1
-      displayName: Install Helm
-      inputs:
-        helmVersionToInstall: 'latest'
+# - stage: Deployment
+#   displayName: Deploy to AKS (using Helm)
+#   jobs:
+#   - job: HelmDeploy
+#     displayName: Helm upgrade/install
+#     steps:
+#     - task: HelmInstaller@1
+#       displayName: Install Helm
+#       inputs:
+#         helmVersionToInstall: 'latest'
 
-    # - task: HelmDeploy@0
-    #   displayName: Helm uninstall 
-    #   inputs:
-    #     connectionType: 'Kubernetes Service Connection'
-    #     kubernetesServiceConnection: 'AKS-Conn'
-    #     command: 'uninstall'
-    #     arguments: '20250816.19'
+#     # - task: HelmDeploy@0
+#     #   displayName: Helm uninstall 
+#     #   inputs:
+#     #     connectionType: 'Kubernetes Service Connection'
+#     #     kubernetesServiceConnection: 'AKS-Conn'
+#     #     command: 'uninstall'
+#     #     arguments: '20250816.19'
 
-    - task: HelmDeploy@0
-      displayName: Helm upgrade 
-      inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceConnection: 'AKS-Conn'
-        command: 'upgrade'
-        install: true
-        chartType: 'FilePath'
-        chartPath: '$(helmChartPath)'
-        releaseName: 'myapp'
-        arguments: >
-          --set dotnetSampleApp.image.tag=$(tag)
-          --set image.pullSecrets[0]=kube-acr
+#     - task: HelmDeploy@0
+#       displayName: Helm upgrade 
+#       inputs:
+#         connectionType: 'Kubernetes Service Connection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         command: 'upgrade'
+#         install: true
+#         chartType: 'FilePath'
+#         chartPath: '$(helmChartPath)'
+#         releaseName: 'myapp'
+#         arguments: >
+#           --set dotnetSampleApp.image.tag=$(tag)
+#           --set image.pullSecrets[0]=kube-acr
