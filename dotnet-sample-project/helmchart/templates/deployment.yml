@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helmchart.fullname" . }}
+  name: helm-deploy
   
 spec:
   replicas: {{ .Values.replicaCount }}
