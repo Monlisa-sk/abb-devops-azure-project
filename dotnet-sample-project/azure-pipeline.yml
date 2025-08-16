@@ -120,11 +120,36 @@ stages:
         command: 'push'
         tags: '$(tag)'
 
+# - stage: Deployment
+#   displayName: Deploy to AKS
+#   jobs:
+#   - job: Deploy
+#     displayName: KubeDeploy
+#     steps:
+#     - task: KubernetesManifest@1
+#       displayName: 'Create Secret'
+#       inputs:
+#         action: 'createSecret'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         secretType: 'dockerRegistry'
+#         secretName: 'kube-acr'
+#         dockerRegistryEndpoint: 'devops-service-connection'
+
+#     - task: KubernetesManifest@1
+#       inputs:
+#         action: 'deploy'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         manifests: '$(build.sourcesdirectory)/dotnet-sample-project/aks-files/**'
+#         imagePullSecrets: 'kube-acr'
+
+
 - stage: Deployment
-  displayName: Deploy to AKS
+  displayName: Deploy to AKS (Helm + pull secret)
   jobs:
-  - job: Deploy
-    displayName: KubeDeploy
+  - job: HelmDeploy
+    displayName: Helm upgrade/install
     steps:
     - task: KubernetesManifest@1
       displayName: 'Create Secret'
@@ -136,10 +161,16 @@ stages:
         secretName: 'kube-acr'
         dockerRegistryEndpoint: 'devops-service-connection'
 
-    - task: KubernetesManifest@1
+    - task: HelmInstaller@1
+      displayName: Install Helm 3
       inputs:
-        action: 'deploy'
-        connectionType: 'kubernetesServiceConnection'
+        helmVersionToInstall: '3.x'
+
+    - task: HelmDeploy@0
+      displayName: Helm upgrade 
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'AKS-Conn'
-        manifests: '$(build.sourcesdirectory)/dotnet-sample-project/aks-files/**'
-        imagePullSecrets: 'kube-acr'
+        command: 'upgrade'
+        chartType: 'FilePath'
+        chartPath: '$(helmChartPath)'
