@@ -74,8 +74,10 @@ stages:
     - task: SonarQubePrepare@7
       inputs:
         SonarQube: 'sonarqube-project'
-        scannerMode: 'dotnet'
-        projectKey: 'sonarqube-project'
+        scannerMode: 'cli'
+        configMode: 'manual'
+        cliProjectKey: 'sonarqube-project'
+        cliSources: '.'
         extraProperties: |
           sonar.sources=$(SRC_DIR)/source
           sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
