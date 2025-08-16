@@ -14,6 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'devops-service-connection'
   imageRepository: 'dotnet-sample-project'
   tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
+  
   # CD vars
   azureSubscription: 'ARM-Service-Connection'
   aksResourceGroup: 'abb-devops'
@@ -95,8 +96,8 @@ stages:
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
   jobs:
-  - job: docker_build_push
-    displayName: 'Build image and Push'
+  - job: docker_build
+    displayName: 'Build image'
     steps:
     - task: Docker@2
       displayName: 'Build image'
@@ -107,6 +108,10 @@ stages:
         Dockerfile: 'dotnet-sample-project/Dockerfile'
         tags: '$(tag)'
 
+  - job: docker_push
+    displayName: 'Push image'
+    dependsOn: docker_build
+    steps:
     - task: Docker@2
       displayName: 'Push image'
       inputs:
@@ -129,6 +134,7 @@ stages:
         command: 'login'
 
     - task: KubernetesManifest@1
+      displayName: 'Create Secret'
       inputs:
         action: 'createSecret'
         connectionType: 'kubernetesServiceConnection'
@@ -143,3 +149,4 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'AKS-Conn'
         manifests: '$(build.sourcesdirectory)/dotnet-sample-project/aks-files/**'
+        imagePullSecrets: 'kube-acr'
