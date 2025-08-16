@@ -59,6 +59,7 @@ stages:
 
 - stage: CodeAnalysis
   displayName: 'SonarQube Build Scan'
+  trigger: manual
   jobs:
   - job: sonarqube
     displayName: SonarQube Analysis
@@ -93,6 +94,7 @@ stages:
         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
       env:
         PATH: $(PATH):~/.dotnet/tools
+      displayName: 'Sonar scan'
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
