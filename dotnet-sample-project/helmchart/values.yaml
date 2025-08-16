@@ -1,0 +1,10 @@
+replicaCount: 1
+dotnetSampleApp:
+  image:
+    repository: devopscontainerreg.azurecr.io/dotnet-sample-project
+    tag: ci-pipeline-66
+  containerPort: 80
+  
+mssql:
+  image: mcr.microsoft.com/mssql/server:2022-latest
+  containerPort: 1433

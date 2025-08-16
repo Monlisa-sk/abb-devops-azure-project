@@ -1,0 +1,204 @@
+# Test Pipeline
+trigger:
+  branches:
+    include:
+      - main
+      - feature/*
+
+pool:
+  name: AzureVM
+
+variables:
+  # CI vars
+  SRC_DIR: 'dotnet-sample-project'
+  dockerRegistryServiceConnection: 'devops-service-connection'
+  imageRepository: 'dotnet-sample-project'
+  tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
+  
+  # CD vars
+  azureSubscription: 'ARM-Service-Connection'
+  aksResourceGroup: 'abb-devops'
+  aksName: 'abb-aks-cluster'
+  acrName: 'devopscontainerreg'
+  namespace: 'dev'
+  releaseName: 'myapp'
+  helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
+  imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
+  imageTag: 'ci-pipeline-45'
+
+stages:
+- stage: BuildAndTest
+  displayName: 'Build & Test'
+  jobs:
+    - job: build_and_test
+      displayName: 'Build and Test'
+      steps:
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '9.0.x'
+
+        - script: dotnet restore '$(SRC_DIR)/source'
+          displayName: 'Restore NuGet packages'
+
+        - script: dotnet build '$(SRC_DIR)/source' --configuration Release --no-restore
+          displayName: 'Build solution'
+
+        - script: |
+            echo "Discovering test projects in $(SRC_DIR)..."
+            set -e
+            TEST_PROJECTS=$(find "$(SRC_DIR)/tests" -type f -name "*Tests.csproj" -o -name "*.Tests.csproj" || true)
+            if [ -z "$TEST_PROJECTS" ]; then
+              echo "No test projects found."
+              exit 0
+            fi
+            for proj in $TEST_PROJECTS; do
+              echo "Running tests for $proj"
+              dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage"  --logger trx
+              echo "Completed tests for $proj"
+            done
+          displayName: 'Run all tests with coverage and logs'
+
+# - stage: CodeAnalysis
+#   displayName: 'SonarQube Build Scan'
+#   jobs:
+#   - job: sonarqube
+#     displayName: SonarQube
+#     continueOnError: true
+#     steps:
+#     - task: UseDotNet@2
+#       displayName: 'Install .NET SDK'
+#       inputs:
+#         packageType: 'sdk'
+#         version: '9.0.x'
+#     - task: SonarQubePrepare@7
+#       inputs:
+#         SonarQube: 'sonarqube-project'
+#         scannerMode: 'CLI'
+#         configMode: 'manual'
+#         cliProjectKey: 'sonarqube-project'
+#         cliProjectName: 'dotnet-sample-project'
+#         cliProjectVersion: '$(Build.BuildNumber)'
+#         extraProperties: |
+#           sonar.sources=$(SRC_DIR)/source
+#           sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
+#           sonar.exclusions=**/*.md
+
+#     - script: dotnet build '$(SRC_DIR)/source' 
+#       displayName: 'Build for analysis'
+
+#     - task: SonarQubeAnalyze@7
+
+#     - task: SonarQubePublish@7
+#       inputs:
+#         pollingTimeoutSec: '300'
+
+- stage: DockerBuildAndPush
+  displayName: 'Docker Build and Push'
+  jobs:
+  - job: docker_build
+    displayName: 'Build image'
+    steps:
+    - task: Docker@2
+      displayName: 'Build image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: 'dotnet-sample-project/Dockerfile'
+        tags: '$(tag)'
+
+  - job: TrivyScan
+    displayName: 'Run Trivy Vulnerability scan'
+    dependsOn: docker_build
+    steps:
+      -  task: AzureCLI@2
+         displayName: "Login & scan image"
+         inputs:
+          azureSubscription: '$(azureSubscription)'
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+              az acr login --name $(acrName)
+              docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
+              trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL
+
+  - job: docker_push
+    displayName: 'Push image'
+    dependsOn: docker_build
+    steps:
+    - task: Docker@2
+      displayName: 'Push image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
+        tags: '$(tag)'
+
+# - stage: Deployment
+#   displayName: Deploy to AKS
+#   jobs:
+#   - job: Deploy
+#     displayName: KubeDeploy
+#     steps:
+#     - task: KubernetesManifest@1
+#       displayName: 'Create Secret'
+#       inputs:
+#         action: 'createSecret'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         secretType: 'dockerRegistry'
+#         secretName: 'kube-acr'
+#         dockerRegistryEndpoint: 'devops-service-connection'
+
+#     - task: KubernetesManifest@1
+#       inputs:
+#         action: 'deploy'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'AKS-Conn'
+#         manifests: '$(build.sourcesdirectory)/dotnet-sample-project/aks-files/**'
+#         imagePullSecrets: 'kube-acr'
+
+
+- stage: Deployment
+  displayName: Deploy to AKS (Helm + pull secret)
+  jobs:
+  - job: HelmDeploy
+    displayName: Helm upgrade/install
+    steps:
+    # - task: KubernetesManifest@1
+    #   displayName: 'Create Secret'
+    #   inputs:
+    #     action: 'createSecret'
+    #     connectionType: 'kubernetesServiceConnection'
+    #     kubernetesServiceConnection: 'AKS-Conn'
+    #     secretType: 'dockerRegistry'
+    #     secretName: 'kube-acr'
+    #     dockerRegistryEndpoint: 'devops-service-connection'
+
+    - task: HelmInstaller@1
+      displayName: Install Helm
+      inputs:
+        helmVersionToInstall: 'latest'
+
+    # - task: HelmDeploy@0
+    #   displayName: Helm uninstall 
+    #   inputs:
+    #     connectionType: 'Kubernetes Service Connection'
+    #     kubernetesServiceConnection: 'AKS-Conn'
+    #     command: 'uninstall'
+    #     arguments: '20250816.19'
+
+    - task: HelmDeploy@0
+      displayName: Helm upgrade 
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: 'AKS-Conn'
+        command: 'upgrade'
+        install: true
+        chartType: 'FilePath'
+        chartPath: '$(helmChartPath)'
+        releaseName: 'myapp'
+        arguments: >
+          --set dotnetSampleApp.image.tag=$(tag)
+          --set image.pullSecrets[0]=kube-acr
