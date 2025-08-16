@@ -63,8 +63,9 @@ stages:
   displayName: 'SonarQube Build Scan'
   jobs:
   - job: sonarqube
-    displayName: SonarQube
+    displayName: SonarQube Analysis
     continueOnError: true
+
     steps:
     - task: UseDotNet@2
       displayName: 'Install .NET SDK'
@@ -73,27 +74,27 @@ stages:
         version: '9.0.x'
 
     - script: |
-        echo "Cleaning sonar.branch.name from SONARQUBE_SCANNER_PARAMS..."
-        CLEANED=$(echo "$SONARQUBE_SCANNER_PARAMS" | sed 's/"sonar.branch.name":"[^"]*",\?//g')
-        echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$CLEANED"
-      displayName: 'Remove sonar.branch.name (Linux)'
+        echo "Installing dotnet-sonarscanner locally..."
+        dotnet tool install --global dotnet-sonarscanner
 
-    - task: SonarQubePrepare@7
-      inputs:
-        SonarQube: 'sonarqube-project'
-        scannerMode: 'dotnet'
-        projectKey: 'sonarqube-project'
-        extraProperties: |
-          sonar.sources=$(SRC_DIR)/source
+        echo "Starting SonarQube analysis..."
+        dotnet sonarscanner begin \
+          /k:"sonarqube-project" \
+          /n:"My Project" \
+          /v:"1.0" \
+          /d:sonar.host.url="http://<your-sonarqube-server>" \
+          /d:sonar.login="$(SONAR_TOKEN)" \
+          /d:sonar.sources="$(SRC_DIR)/source" \
+          /d:sonar.sourceEncoding="UTF-8"
 
-    - script: dotnet build '$(SRC_DIR)/source' 
-      displayName: 'Build for analysis'
+        echo "Building the project..."
+        dotnet build "$(SRC_DIR)/source" --no-incremental
 
-    - task: SonarQubeAnalyze@7
-
-    - task: SonarQubePublish@7
-      inputs:
-        pollingTimeoutSec: '300'
+        echo "Finishing SonarQube analysis..."
+        dotnet sonarscanner end /d:sonar.login="$(SONAR_TOKEN)"
+      displayName: 'Run SonarQube Analysis CLI'
+      env:
+        PATH: $(PATH):~/.dotnet/tools
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
