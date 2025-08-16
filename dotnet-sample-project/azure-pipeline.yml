@@ -59,39 +59,39 @@ stages:
             done
           displayName: 'Run all tests with coverage and logs'
 
-# - stage: CodeAnalysis
-#   displayName: 'SonarQube Build Scan'
-#   jobs:
-#   - job: sonarqube
-#     displayName: SonarQube
-#     continueOnError: true
-#     steps:
-#     - task: UseDotNet@2
-#       displayName: 'Install .NET SDK'
-#       inputs:
-#         packageType: 'sdk'
-#         version: '9.0.x'
-#     - task: SonarQubePrepare@7
-#       inputs:
-#         SonarQube: 'sonarqube-project'
-#         scannerMode: 'CLI'
-#         configMode: 'manual'
-#         cliProjectKey: 'sonarqube-project'
-#         cliProjectName: 'dotnet-sample-project'
-#         cliProjectVersion: '$(Build.BuildNumber)'
-#         extraProperties: |
-#           sonar.sources=$(SRC_DIR)/source
-#           sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
-#           sonar.exclusions=**/*.md
+- stage: CodeAnalysis
+  displayName: 'SonarQube Build Scan'
+  jobs:
+  - job: sonarqube
+    displayName: SonarQube
+    continueOnError: true
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
+    - task: SonarQubePrepare@7
+      inputs:
+        SonarQube: 'sonarqube-project'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'sonarqube-project'
+        cliProjectName: 'dotnet-sample-project'
+        cliProjectVersion: '$(Build.BuildNumber)'
+        extraProperties: |
+          sonar.sources=$(SRC_DIR)/source
+          sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/$(SRC_DIR)/**/coverage.opencover.xml
+          sonar.exclusions=**/*.md
 
-#     - script: dotnet build '$(SRC_DIR)/source' 
-#       displayName: 'Build for analysis'
+    - script: dotnet build '$(SRC_DIR)/source' 
+      displayName: 'Build for analysis'
 
-#     - task: SonarQubeAnalyze@7
+    - task: SonarQubeAnalyze@7
 
-#     - task: SonarQubePublish@7
-#       inputs:
-#         pollingTimeoutSec: '300'
+    - task: SonarQubePublish@7
+      inputs:
+        pollingTimeoutSec: '300'
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
@@ -166,16 +166,6 @@ stages:
   - job: HelmDeploy
     displayName: Helm upgrade/install
     steps:
-    # - task: KubernetesManifest@1
-    #   displayName: 'Create Secret'
-    #   inputs:
-    #     action: 'createSecret'
-    #     connectionType: 'kubernetesServiceConnection'
-    #     kubernetesServiceConnection: 'AKS-Conn'
-    #     secretType: 'dockerRegistry'
-    #     secretName: 'kube-acr'
-    #     dockerRegistryEndpoint: 'devops-service-connection'
-
     - task: HelmInstaller@1
       displayName: Install Helm
       inputs:
