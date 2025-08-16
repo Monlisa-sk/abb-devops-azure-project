@@ -108,6 +108,21 @@ stages:
         Dockerfile: 'dotnet-sample-project/Dockerfile'
         tags: '$(tag)'
 
+  - job: TrivyScan
+    displayName: 'Run Trivy Vulnerability scan'
+    dependsOn: docker_build
+    steps:
+      -  task: AzureCLI@2
+         displayName: "Login & scan image"
+         inputs:
+          azureSubscription: '$(azureSubscription)'
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+              az acr login --name $(acrName)
+              docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
+              trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL
+
   - job: docker_push
     displayName: 'Push image'
     dependsOn: docker_build
@@ -171,7 +186,7 @@ stages:
       inputs:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'AKS-Conn'
-        namespace: 'helm-install'
+        # namespace: 'helm-install'
         command: 'upgrade'
         chartType: 'FilePath'
         chartPath: '$(helmChartPath)'
