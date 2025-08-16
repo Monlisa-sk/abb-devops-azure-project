@@ -15,7 +15,24 @@ spec:
     spec:
       containers:
         - name: dotnet-sample-app
-          image: devopscontainerreg.azurecr.io/dotnet-sample-project:ci-pipeline-60
-
+          image: devopscontainerreg.azurecr.io/dotnet-sample-project:ci-pipeline-66
           ports:
             - containerPort: 80
+
+        - name: mssql
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              value: "P4ssW0rd!"
+          volumeMounts:
+            - name: database-storage
+              mountPath: /var/opt/mssql
+
+      volumes:
+        - name: database-storage
+          persistentVolumeClaim:
+            claimName: database-pvc
