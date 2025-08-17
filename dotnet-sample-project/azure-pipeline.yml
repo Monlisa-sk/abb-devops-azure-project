@@ -118,11 +118,15 @@ stages:
             PathtoPublish: 'container-scan-report.txt'
             ArtifactName: 'security-scan'
             publishLocation: 'Container'
-      -   task: DownloadPipelineArtifact@2
-          inputs:
-            artifactName: 'security-scan'
-            targetPath: '$(Build.ArtifactStagingDirectory)/container-scan-report.txt'
-
+  - job: DownloadScanReport
+    displayName: 'Download scan report'
+    dependsOn: TrivyScan
+    steps:
+    - task: DownloadPipelineArtifact@2
+      displayName: "Download scan report"
+      inputs:
+        artifactName: 'security-scan'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
 
   - job: docker_push
     displayName: 'Push image'
