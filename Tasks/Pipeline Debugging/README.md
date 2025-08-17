@@ -12,7 +12,7 @@ Debug a failing Azure DevOps pipeline with environment variable configuration er
 ---
 
 ## 📂 Files in this Folder
-- `azure-pipeline.yml` — **Fixed** pipeline definition.
+- [azure-pipeline.yml](../../dotnet-sample-project/azure-pipeline.yml) — **Fixed** pipeline definition.
 - `screenshots/`
   - `cicd-pipeline-success.png` — Successful CI/CD run.
 
