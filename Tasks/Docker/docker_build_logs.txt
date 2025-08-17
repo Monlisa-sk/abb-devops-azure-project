@@ -1,0 +1,188 @@
+2025-08-17T07:52:06.7575920Z ##[section]Starting: Build image
+2025-08-17T07:52:06.7581823Z ==============================================================================
+2025-08-17T07:52:06.7581999Z Task         : Docker
+2025-08-17T07:52:06.7582079Z Description  : Build or push Docker images, login or logout, start or stop containers, or run a Docker command
+2025-08-17T07:52:06.7582243Z Version      : 2.259.0
+2025-08-17T07:52:06.7582345Z Author       : Microsoft Corporation
+2025-08-17T07:52:06.7582438Z Help         : https://aka.ms/azpipes-docker-tsg
+2025-08-17T07:52:06.7582554Z ==============================================================================
+2025-08-17T07:52:13.0117853Z [command]/usr/bin/docker pull mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:13.0118565Z 9.0-alpine: Pulling from dotnet/aspnet
+2025-08-17T07:52:13.0118867Z Digest: sha256:d4bf3d8c8f0236341ddd93d15208152e26bc6dcc9d34c635351a3402c284137f
+2025-08-17T07:52:13.0119183Z Status: Image is up to date for mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:13.0119574Z mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:13.0122154Z [command]/usr/bin/docker inspect mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:13.0122390Z [
+2025-08-17T07:52:13.0122572Z     {
+2025-08-17T07:52:13.0123170Z         "Id": "sha256:fa0f03cf53e714efe1f4968ff4c433ea3cd975ed89d7ab5e6a1b7debc5de6997",
+2025-08-17T07:52:13.0123441Z         "RepoTags": [
+2025-08-17T07:52:13.0123701Z             "mcr.microsoft.com/dotnet/aspnet:9.0-alpine"
+2025-08-17T07:52:13.0123916Z         ],
+2025-08-17T07:52:13.0124106Z         "RepoDigests": [
+2025-08-17T07:52:13.0124421Z             "mcr.microsoft.com/dotnet/aspnet@sha256:d4bf3d8c8f0236341ddd93d15208152e26bc6dcc9d34c635351a3402c284137f"
+2025-08-17T07:52:13.0124696Z         ],
+2025-08-17T07:52:13.0124896Z         "Parent": "",
+2025-08-17T07:52:13.0125113Z         "Comment": "buildkit.dockerfile.v0",
+2025-08-17T07:52:13.0125366Z         "Created": "2025-08-05T20:10:35.799896648Z",
+2025-08-17T07:52:13.0125613Z         "DockerVersion": "",
+2025-08-17T07:52:13.0125830Z         "Author": "",
+2025-08-17T07:52:13.0126040Z         "Config": {
+2025-08-17T07:52:13.0126235Z             "Hostname": "",
+2025-08-17T07:52:13.0126432Z             "Domainname": "",
+2025-08-17T07:52:13.0126644Z             "User": "",
+2025-08-17T07:52:13.0126846Z             "AttachStdin": false,
+2025-08-17T07:52:13.0127053Z             "AttachStdout": false,
+2025-08-17T07:52:13.0127283Z             "AttachStderr": false,
+2025-08-17T07:52:13.0127483Z             "Tty": false,
+2025-08-17T07:52:13.0127699Z             "OpenStdin": false,
+2025-08-17T07:52:13.0127900Z             "StdinOnce": false,
+2025-08-17T07:52:13.0128095Z             "Env": [
+2025-08-17T07:52:13.0128353Z                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+2025-08-17T07:52:13.0128593Z                 "APP_UID=1654",
+2025-08-17T07:52:13.0128811Z                 "ASPNETCORE_HTTP_PORTS=8080",
+2025-08-17T07:52:13.0129062Z                 "DOTNET_RUNNING_IN_CONTAINER=true",
+2025-08-17T07:52:13.0129320Z                 "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true",
+2025-08-17T07:52:13.0129570Z                 "DOTNET_VERSION=9.0.8",
+2025-08-17T07:52:13.0129784Z                 "ASPNET_VERSION=9.0.8"
+2025-08-17T07:52:13.0129976Z             ],
+2025-08-17T07:52:13.0130171Z             "Cmd": [
+2025-08-17T07:52:13.0130393Z                 "/bin/sh"
+2025-08-17T07:52:13.0130590Z             ],
+2025-08-17T07:52:13.0130778Z             "Image": "",
+2025-08-17T07:52:13.0130975Z             "Volumes": null,
+2025-08-17T07:52:13.0131189Z             "WorkingDir": "/",
+2025-08-17T07:52:13.0131388Z             "Entrypoint": null,
+2025-08-17T07:52:13.0131594Z             "OnBuild": null,
+2025-08-17T07:52:13.0131800Z             "Labels": null
+2025-08-17T07:52:13.0131983Z         },
+2025-08-17T07:52:13.0132174Z         "Architecture": "amd64",
+2025-08-17T07:52:13.0132390Z         "Os": "linux",
+2025-08-17T07:52:13.0132585Z         "Size": 113603202,
+2025-08-17T07:52:13.0132799Z         "GraphDriver": {
+2025-08-17T07:52:13.0133524Z             "Data": {
+2025-08-17T07:52:13.0134283Z                 "LowerDir": "/var/lib/docker/overlay2/06df176e60b0038eda81649b93c77379ef5b709ffb7441a0dc1edf41ee583699/diff:/var/lib/docker/overlay2/f432b1ec356eb074cbb774ac308e1be1a140a1c83e7c7c3b64f87af0f7cabfd4/diff:/var/lib/docker/overlay2/bf7afd1ea839c6d5009e4ff12cf6c76b52a156123bbca91fa0343fceeab55146/diff:/var/lib/docker/overlay2/abd0dcd3f54f82d6b1924be140d48e6f7542314d309240d0fa142a05b7492c6c/diff:/var/lib/docker/overlay2/6c1c409a6c5038c64038fe56d75071341d60a6edf789092a4c8caeb568732374/diff",
+2025-08-17T07:52:13.0134989Z                 "MergedDir": "/var/lib/docker/overlay2/752e4f04d436fd269dea0763df35a5642bb6a0f22193d9f2add65955d6d75bc6/merged",
+2025-08-17T07:52:13.0135477Z                 "UpperDir": "/var/lib/docker/overlay2/752e4f04d436fd269dea0763df35a5642bb6a0f22193d9f2add65955d6d75bc6/diff",
+2025-08-17T07:52:13.0135836Z                 "WorkDir": "/var/lib/docker/overlay2/752e4f04d436fd269dea0763df35a5642bb6a0f22193d9f2add65955d6d75bc6/work"
+2025-08-17T07:52:13.0136115Z             },
+2025-08-17T07:52:13.0136308Z             "Name": "overlay2"
+2025-08-17T07:52:13.0136500Z         },
+2025-08-17T07:52:13.0136701Z         "RootFS": {
+2025-08-17T07:52:13.0136895Z             "Type": "layers",
+2025-08-17T07:52:13.0137086Z             "Layers": [
+2025-08-17T07:52:13.0137369Z                 "sha256:7003d23cc2176ec98ba2f8b3b4b9b5f144ef370e39bfcf6275a92b5064bc9261",
+2025-08-17T07:52:13.0137826Z                 "sha256:5df1622e54b5bdb0cb529bc0b840906586d6f89aa9b1a16ee86f645c3c9177d0",
+2025-08-17T07:52:13.0138150Z                 "sha256:9913b70c1abb9debc5010dd50836433bb1289986c93ac50f3d53294099e7fa8a",
+2025-08-17T07:52:13.0138478Z                 "sha256:e57149383b0ae26d7bf2cedc255f72d6e848ff6bc3a166179503c18102927ff0",
+2025-08-17T07:52:13.0138812Z                 "sha256:07c599bb988f16eccb76f4a9b3538a5c58ce1168c6c3b2accf16caf2b2344639",
+2025-08-17T07:52:13.0139131Z                 "sha256:9a672198bada539661c05f0cfd8878f772001be8b28c5101d2c4c2c35a6808ff"
+2025-08-17T07:52:13.0139393Z             ]
+2025-08-17T07:52:13.0139600Z         },
+2025-08-17T07:52:13.0139799Z         "Metadata": {
+2025-08-17T07:52:13.0140041Z             "LastTagTime": "0001-01-01T00:00:00Z"
+2025-08-17T07:52:13.0140251Z         }
+2025-08-17T07:52:13.0140440Z     }
+2025-08-17T07:52:13.0140606Z ]
+2025-08-17T07:52:13.0169489Z [command]/usr/bin/docker build -f /home/azureuser/myagent/_work/1/s/dotnet-sample-project/Dockerfile --label com.azure.dev.image.system.teamfoundationcollectionuri=https://dev.azure.com/monlisask/ --label com.azure.dev.image.system.teamproject=abb-devops-assessment --label com.azure.dev.image.build.repository.name=Monlisa-sk/abb-devops-azure-project --label com.azure.dev.image.build.sourceversion=1f67e2e9068eb012c03ca5320800f42f14e50b8b --label com.azure.dev.image.build.repository.uri=https://github.com/Monlisa-sk/abb-devops-azure-project --label com.azure.dev.image.build.sourcebranchname=main --label com.azure.dev.image.build.definitionname=Monlisa-sk.abb-devops-azure-project --label com.azure.dev.image.build.buildnumber=20250817.34 --label com.azure.dev.image.build.builduri=vstfs:///Build/Build/157 --label image.base.ref.name=mcr.microsoft.com/dotnet/aspnet:9.0-alpine --label image.base.digest=sha256:d4bf3d8c8f0236341ddd93d15208152e26bc6dcc9d34c635351a3402c284137f -t ***/dotnet-sample-project:main-157 /home/azureuser/myagent/_work/1/s/dotnet-sample-project
+2025-08-17T07:52:13.0170846Z DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+2025-08-17T07:52:13.0171140Z             Install the buildx component to build images with BuildKit:
+2025-08-17T07:52:13.0171720Z             https://docs.docker.com/go/buildx/
+2025-08-17T07:52:13.0172046Z 
+2025-08-17T07:52:13.0172291Z Sending build context to Docker daemon  284.7kB
+2025-08-17T07:52:13.0172408Z 
+2025-08-17T07:52:13.0172647Z Step 1/28 : FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS dotnet
+2025-08-17T07:52:13.0173047Z  ---> bcf62c0296a7
+2025-08-17T07:52:13.0173616Z Step 2/28 : COPY source ./source
+2025-08-17T07:52:13.0173847Z  ---> Using cache
+2025-08-17T07:52:13.0174051Z  ---> 827aae48b53b
+2025-08-17T07:52:13.0174350Z Step 3/28 : RUN dotnet publish ./source/Web/Architecture.Web.csproj --configuration Release --output /dist
+2025-08-17T07:52:13.0174624Z  ---> Using cache
+2025-08-17T07:52:13.0174824Z  ---> 2c3e0e125711
+2025-08-17T07:52:13.0175070Z Step 4/28 : FROM node:alpine AS frontend
+2025-08-17T07:52:13.0175291Z  ---> 0b691ce23fac
+2025-08-17T07:52:13.0175502Z Step 5/28 : RUN npm install -g pnpm
+2025-08-17T07:52:13.0175725Z  ---> Using cache
+2025-08-17T07:52:13.0175927Z  ---> 86ce2df5d104
+2025-08-17T07:52:13.0176235Z Step 6/28 : WORKDIR /source/Web/Frontend
+2025-08-17T07:52:13.0176452Z  ---> Using cache
+2025-08-17T07:52:13.0176652Z  ---> e03fb8042574
+2025-08-17T07:52:13.0176894Z Step 7/28 : COPY source/Web/Frontend/package.json .
+2025-08-17T07:52:13.0177120Z  ---> Using cache
+2025-08-17T07:52:13.0177321Z  ---> 871593294cb6
+2025-08-17T07:52:13.0177541Z Step 8/28 : RUN pnpm install
+2025-08-17T07:52:13.0177759Z  ---> Using cache
+2025-08-17T07:52:13.0177965Z  ---> fa2165f03ff7
+2025-08-17T07:52:13.0178177Z Step 9/28 : COPY source/Web/Frontend .
+2025-08-17T07:52:13.0178404Z  ---> Using cache
+2025-08-17T07:52:13.0178602Z  ---> 92cc18bcefd1
+2025-08-17T07:52:13.0178809Z Step 10/28 : RUN npm run build
+2025-08-17T07:52:13.0179030Z  ---> Using cache
+2025-08-17T07:52:13.0179228Z  ---> 0bc122670eba
+2025-08-17T07:52:13.0179481Z Step 11/28 : FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:13.0179717Z  ---> fa0f03cf53e7
+2025-08-17T07:52:13.0179954Z Step 12/28 : RUN apk add --no-cache icu-libs
+2025-08-17T07:52:13.0180174Z  ---> Using cache
+2025-08-17T07:52:13.0180372Z  ---> 8e2b28bcc3c7
+2025-08-17T07:52:13.0180628Z Step 13/28 : ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+2025-08-17T07:52:13.0180861Z  ---> Using cache
+2025-08-17T07:52:13.0181065Z  ---> c124626e491b
+2025-08-17T07:52:13.0181301Z Step 14/28 : WORKDIR /app
+2025-08-17T07:52:13.0181514Z  ---> Using cache
+2025-08-17T07:52:13.0181729Z  ---> 14bec234dbee
+2025-08-17T07:52:13.0181954Z Step 15/28 : COPY --from=dotnet /dist .
+2025-08-17T07:52:13.0182175Z  ---> Using cache
+2025-08-17T07:52:13.0182383Z  ---> 234a64b27c76
+2025-08-17T07:52:13.0182633Z Step 16/28 : COPY --from=frontend /source/Web/Frontend/dist/browser ./wwwroot
+2025-08-17T07:52:13.0182998Z  ---> Using cache
+2025-08-17T07:52:13.0183201Z  ---> 463a4da8a95a
+2025-08-17T07:52:13.0183433Z Step 17/28 : ENTRYPOINT ["dotnet", "Architecture.Web.dll"]
+2025-08-17T07:52:13.0183671Z  ---> Using cache
+2025-08-17T07:52:13.0183888Z  ---> e06cbc90f56c
+2025-08-17T07:52:13.0184137Z Step 18/28 : LABEL com.azure.dev.image.build.buildnumber=20250817.34
+2025-08-17T07:52:13.0184420Z  ---> Running in 8174bc797c07
+2025-08-17T07:52:13.0184660Z  ---> Removed intermediate container 8174bc797c07
+2025-08-17T07:52:13.0184885Z  ---> 5417fc8caea4
+2025-08-17T07:52:13.0185155Z Step 19/28 : LABEL com.azure.dev.image.build.builduri=vstfs:///Build/Build/157
+2025-08-17T07:52:13.0185418Z  ---> Running in 987070ff6093
+2025-08-17T07:52:13.0185658Z  ---> Removed intermediate container 987070ff6093
+2025-08-17T07:52:13.0185896Z  ---> 8abdbfb09f14
+2025-08-17T07:52:13.0186170Z Step 20/28 : LABEL com.azure.dev.image.build.definitionname=Monlisa-sk.abb-devops-azure-project
+2025-08-17T07:52:13.0186463Z  ---> Running in ed46ccba45f3
+2025-08-17T07:52:13.0312720Z  ---> Removed intermediate container ed46ccba45f3
+2025-08-17T07:52:13.0313617Z  ---> 39aab3dd64e7
+2025-08-17T07:52:13.0314284Z Step 21/28 : LABEL com.azure.dev.image.build.repository.name=Monlisa-sk/abb-devops-azure-project
+2025-08-17T07:52:13.1459061Z  ---> Running in 2364bbc7d20e
+2025-08-17T07:52:14.0315028Z  ---> Removed intermediate container 2364bbc7d20e
+2025-08-17T07:52:14.0315910Z  ---> 5928257dbf2a
+2025-08-17T07:52:14.0316629Z Step 22/28 : LABEL com.azure.dev.image.build.repository.uri=https://github.com/Monlisa-sk/abb-devops-azure-project
+2025-08-17T07:52:14.1307006Z  ---> Running in 5dbd733585c4
+2025-08-17T07:52:15.0294339Z  ---> Removed intermediate container 5dbd733585c4
+2025-08-17T07:52:15.0295084Z  ---> 0e386a25d9c0
+2025-08-17T07:52:15.0295341Z Step 23/28 : LABEL com.azure.dev.image.build.sourcebranchname=main
+2025-08-17T07:52:15.1433220Z  ---> Running in ecddfaab7726
+2025-08-17T07:52:16.0314601Z  ---> Removed intermediate container ecddfaab7726
+2025-08-17T07:52:16.0314934Z  ---> 9c35a34d3d92
+2025-08-17T07:52:16.0315279Z Step 24/28 : LABEL com.azure.dev.image.build.sourceversion=1f67e2e9068eb012c03ca5320800f42f14e50b8b
+2025-08-17T07:52:16.1349357Z  ---> Running in 0c1eecf71233
+2025-08-17T07:52:17.0390569Z  ---> Removed intermediate container 0c1eecf71233
+2025-08-17T07:52:17.0390938Z  ---> 230dc06afd39
+2025-08-17T07:52:17.0391619Z Step 25/28 : LABEL com.azure.dev.image.system.teamfoundationcollectionuri=https://dev.azure.com/monlisask/
+2025-08-17T07:52:17.1384481Z  ---> Running in f4bc069b13ba
+2025-08-17T07:52:18.0387467Z  ---> Removed intermediate container f4bc069b13ba
+2025-08-17T07:52:18.0387920Z  ---> 97a61cdf5792
+2025-08-17T07:52:18.0388237Z Step 26/28 : LABEL com.azure.dev.image.system.teamproject=abb-devops-assessment
+2025-08-17T07:52:18.1428945Z  ---> Running in f303043d22bd
+2025-08-17T07:52:19.0349026Z  ---> Removed intermediate container f303043d22bd
+2025-08-17T07:52:19.0349387Z  ---> 066408adc5a0
+2025-08-17T07:52:19.0349750Z Step 27/28 : LABEL image.base.digest=sha256:d4bf3d8c8f0236341ddd93d15208152e26bc6dcc9d34c635351a3402c284137f
+2025-08-17T07:52:19.1274402Z  ---> Running in b7214ef59966
+2025-08-17T07:52:20.0355342Z  ---> Removed intermediate container b7214ef59966
+2025-08-17T07:52:20.0357725Z  ---> 394d30a45a34
+2025-08-17T07:52:20.0358296Z Step 28/28 : LABEL image.base.ref.name=mcr.microsoft.com/dotnet/aspnet:9.0-alpine
+2025-08-17T07:52:20.1331567Z  ---> Running in d2ab7967bbcc
+2025-08-17T07:52:21.0381536Z  ---> Removed intermediate container d2ab7967bbcc
+2025-08-17T07:52:21.0382360Z  ---> bc05e24fb2a4
+2025-08-17T07:52:21.0423428Z Successfully built bc05e24fb2a4
+2025-08-17T07:52:21.0581959Z Successfully tagged ***/dotnet-sample-project:main-157
+2025-08-17T07:52:21.0609396Z 
+2025-08-17T07:52:21.0827426Z ##[section]Finishing: Build image

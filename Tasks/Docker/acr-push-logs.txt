@@ -1,0 +1,166 @@
+2025-08-17T07:53:35.3408217Z ##[section]Starting: Push image
+2025-08-17T07:53:35.3414608Z ==============================================================================
+2025-08-17T07:53:35.3414795Z Task         : Docker
+2025-08-17T07:53:35.3414877Z Description  : Build or push Docker images, login or logout, start or stop containers, or run a Docker command
+2025-08-17T07:53:35.3415042Z Version      : 2.259.0
+2025-08-17T07:53:35.3415160Z Author       : Microsoft Corporation
+2025-08-17T07:53:35.3415302Z Help         : https://aka.ms/azpipes-docker-tsg
+2025-08-17T07:53:35.3415423Z ==============================================================================
+2025-08-17T07:53:39.7369964Z [command]/usr/bin/docker images
+2025-08-17T07:53:39.7375918Z [command]/usr/bin/docker push ***/dotnet-sample-project:main-157
+2025-08-17T07:53:39.7376292Z The push refers to repository [***/dotnet-sample-project]
+2025-08-17T07:53:39.7376593Z 02fc38653170: Preparing
+2025-08-17T07:53:39.7376859Z f8282b95ca31: Preparing
+2025-08-17T07:53:39.7377112Z ccd762f6809d: Preparing
+2025-08-17T07:53:39.7377445Z a9fb278d2b39: Preparing
+2025-08-17T07:53:39.7377683Z 9a672198bada: Preparing
+2025-08-17T07:53:39.7377919Z 07c599bb988f: Preparing
+2025-08-17T07:53:39.7378174Z e57149383b0a: Preparing
+2025-08-17T07:53:39.7378410Z 9913b70c1abb: Preparing
+2025-08-17T07:53:39.7378645Z 5df1622e54b5: Preparing
+2025-08-17T07:53:39.7378896Z 7003d23cc217: Preparing
+2025-08-17T07:53:39.7379134Z 07c599bb988f: Waiting
+2025-08-17T07:53:39.7379801Z e57149383b0a: Waiting
+2025-08-17T07:53:39.7380034Z 9913b70c1abb: Waiting
+2025-08-17T07:53:39.7380270Z 5df1622e54b5: Waiting
+2025-08-17T07:53:39.7380520Z 7003d23cc217: Waiting
+2025-08-17T07:53:39.7380767Z a9fb278d2b39: Layer already exists
+2025-08-17T07:53:39.7381023Z 9a672198bada: Layer already exists
+2025-08-17T07:53:39.7381325Z REPOSITORY                                            TAG                        IMAGE ID       CREATED              SIZE
+2025-08-17T07:53:39.7381714Z ***/dotnet-sample-project   main-157                   bc05e24fb2a4   About a minute ago   142MB
+2025-08-17T07:53:39.7382127Z ***/dotnet-sample-project   multi-env-pipeline-154     9a501ef00792   6 minutes ago        142MB
+2025-08-17T07:53:39.7382525Z ***/dotnet-sample-project   multi-env-pipeline-151     1f44b5daaa27   16 minutes ago       142MB
+2025-08-17T07:53:39.7383075Z ***/dotnet-sample-project   multi-env-pipeline-150     36e026380cb5   21 minutes ago       142MB
+2025-08-17T07:53:39.7383496Z ***/dotnet-sample-project   multi-env-pipeline-149     5f232b10a829   26 minutes ago       142MB
+2025-08-17T07:53:39.7383911Z ***/dotnet-sample-project   multi-env-pipeline-148     5e48632fb034   35 minutes ago       142MB
+2025-08-17T07:53:39.7384309Z ***/dotnet-sample-project   main-147                   47edec102059   45 minutes ago       142MB
+2025-08-17T07:53:39.7384681Z ***/dotnet-sample-project   azure-pipelines-1-145      b3912a3ba9f7   2 hours ago          142MB
+2025-08-17T07:53:39.7385090Z ***/dotnet-sample-project   azure-pipelines-144        9dcc679764c1   2 hours ago          142MB
+2025-08-17T07:53:39.7385530Z ***/dotnet-sample-project   secret-configuration-143   5e0a740da83e   2 hours ago          142MB
+2025-08-17T07:53:39.7385942Z ***/dotnet-sample-project   secret-configuration-142   aeddba00a3c2   2 hours ago          142MB
+2025-08-17T07:53:39.7386379Z ***/dotnet-sample-project   secret-configuration-139   f155563d601e   5 hours ago          142MB
+2025-08-17T07:53:39.7386780Z ***/dotnet-sample-project   main-138                   1e9a9eccefda   5 hours ago          142MB
+2025-08-17T07:53:39.7387194Z ***/dotnet-sample-project   secret-configuration-137   6a65fe981f48   5 hours ago          142MB
+2025-08-17T07:53:39.7387598Z ***/dotnet-sample-project   secret-configuration-135   8934539f7c38   5 hours ago          142MB
+2025-08-17T07:53:39.7387986Z ***/dotnet-sample-project   secret-configuration-130   97086ec82334   6 hours ago          142MB
+2025-08-17T07:53:39.7388404Z ***/dotnet-sample-project   secret-configuration-128   81b192db30e1   6 hours ago          142MB
+2025-08-17T07:53:39.7389027Z ***/dotnet-sample-project   secret-configuration-126   5b0b03de51f4   6 hours ago          142MB
+2025-08-17T07:53:39.7389429Z ***/dotnet-sample-project   secret-configuration-124   20729af2e845   7 hours ago          142MB
+2025-08-17T07:53:39.7389816Z ***/dotnet-sample-project   secret-configuration-122   2f60a1c69df1   8 hours ago          142MB
+2025-08-17T07:53:39.7390207Z ***/dotnet-sample-project   main-121                   042dcced87b0   8 hours ago          142MB
+2025-08-17T07:53:39.7390608Z ***/dotnet-sample-project   multi-env-pipeline-119     fabce805649a   9 hours ago          142MB
+2025-08-17T07:53:39.7391015Z ***/dotnet-sample-project   multi-env-pipeline-118     8c5ad0737a01   9 hours ago          142MB
+2025-08-17T07:53:39.7391403Z ***/dotnet-sample-project   multi-env-pipeline-117     7b8669287135   9 hours ago          142MB
+2025-08-17T07:53:39.7391799Z ***/dotnet-sample-project   multi-env-pipeline-116     bffb3a19d6ca   9 hours ago          142MB
+2025-08-17T07:53:39.7392200Z ***/dotnet-sample-project   multi-env-pipeline-115     ae6df4e2cd11   9 hours ago          142MB
+2025-08-17T07:53:39.7392608Z ***/dotnet-sample-project   multi-env-pipeline-114     89f5ea5478c6   9 hours ago          142MB
+2025-08-17T07:53:39.7393119Z ***/dotnet-sample-project   multi-env-pipeline-113     e61460026b87   9 hours ago          142MB
+2025-08-17T07:53:39.7393525Z ***/dotnet-sample-project   multi-env-pipeline-109     ae0b68575cdf   10 hours ago         142MB
+2025-08-17T07:53:39.7393998Z ***/dotnet-sample-project   fixing-sonarqube-102       93668b349e48   11 hours ago         142MB
+2025-08-17T07:53:39.7394396Z ***/dotnet-sample-project   fixing-sonarqube-95        cc405b133e30   13 hours ago         142MB
+2025-08-17T07:53:39.7394891Z ***/dotnet-sample-project   fixing-sonarqube-94        19b131295f01   13 hours ago         142MB
+2025-08-17T07:53:39.7395283Z ***/dotnet-sample-project   main-93                    6c0bb665f8ff   13 hours ago         142MB
+2025-08-17T07:53:39.7395669Z ***/dotnet-sample-project   main-91                    e736b6207faf   14 hours ago         142MB
+2025-08-17T07:53:39.7396123Z ***/dotnet-sample-project   merge-90                   c22e285d63ff   14 hours ago         142MB
+2025-08-17T07:53:39.7396459Z ***/dotnet-sample-project   ci-pipeline-89             885a38341248   14 hours ago         142MB
+2025-08-17T07:53:39.7396783Z ***/dotnet-sample-project   ci-pipeline-88             18c98ff4c121   14 hours ago         142MB
+2025-08-17T07:53:39.7397141Z ***/dotnet-sample-project   ci-pipeline-86             077cb9232016   14 hours ago         142MB
+2025-08-17T07:53:39.7397501Z ***/dotnet-sample-project   ci-pipeline-85             03c2032f63e7   14 hours ago         142MB
+2025-08-17T07:53:39.7397847Z ***/dotnet-sample-project   ci-pipeline-84             7d4c03c26ee7   15 hours ago         142MB
+2025-08-17T07:53:39.7398173Z ***/dotnet-sample-project   ci-pipeline-83             50eb4ece629a   15 hours ago         142MB
+2025-08-17T07:53:39.7398514Z ***/dotnet-sample-project   ci-pipeline-82             e32ec7ba7e43   15 hours ago         142MB
+2025-08-17T07:53:39.7398842Z ***/dotnet-sample-project   ci-pipeline-81             511654cf28e3   15 hours ago         142MB
+2025-08-17T07:53:39.7399179Z ***/dotnet-sample-project   ci-pipeline-79             8ace0caeb00a   16 hours ago         142MB
+2025-08-17T07:53:39.7399633Z ***/dotnet-sample-project   ci-pipeline-78             aefeaffd282d   16 hours ago         142MB
+2025-08-17T07:53:39.7399960Z ***/dotnet-sample-project   ci-pipeline-75             a4eb18629aca   16 hours ago         142MB
+2025-08-17T07:53:39.7400304Z ***/dotnet-sample-project   ci-pipeline-74             14ce1e48e577   17 hours ago         142MB
+2025-08-17T07:53:39.7400630Z ***/dotnet-sample-project   ci-pipeline-73             96a869b80546   18 hours ago         142MB
+2025-08-17T07:53:39.7400983Z ***/dotnet-sample-project   ci-pipeline-72             84e61b05fb8d   18 hours ago         142MB
+2025-08-17T07:53:39.7401326Z ***/dotnet-sample-project   ci-pipeline-71             cafb276a575d   18 hours ago         142MB
+2025-08-17T07:53:39.7401764Z ***/dotnet-sample-project   ci-pipeline-70             dbea8cd61759   19 hours ago         142MB
+2025-08-17T07:53:39.7402104Z ***/dotnet-sample-project   ci-pipeline-69             e7274d61a4be   19 hours ago         142MB
+2025-08-17T07:53:39.7402430Z ***/dotnet-sample-project   ci-pipeline-68             5dd286a7f360   19 hours ago         142MB
+2025-08-17T07:53:39.7402771Z ***/dotnet-sample-project   ci-pipeline-67             1fd49133de9b   20 hours ago         142MB
+2025-08-17T07:53:39.7403223Z ***/dotnet-sample-project   ci-pipeline-66             97d9ac815138   20 hours ago         142MB
+2025-08-17T07:53:39.7403568Z ***/dotnet-sample-project   ci-pipeline-65             0d20b79a8f76   21 hours ago         142MB
+2025-08-17T07:53:39.7403894Z ***/dotnet-sample-project   ci-pipeline-64             298054d504da   21 hours ago         142MB
+2025-08-17T07:53:39.7404305Z ***/dotnet-sample-project   ci-pipeline-62             a87234df41ea   21 hours ago         142MB
+2025-08-17T07:53:39.7404652Z ***/dotnet-sample-project   ci-pipeline-60             75ff9b426664   32 hours ago         142MB
+2025-08-17T07:53:39.7404980Z ***/dotnet-sample-project   ci-pipeline-58             3252414cad7c   32 hours ago         142MB
+2025-08-17T07:53:39.7405322Z ***/dotnet-sample-project   ci-pipeline-56             988b2f15a5ba   33 hours ago         142MB
+2025-08-17T07:53:39.7405649Z ***/dotnet-sample-project   ci-pipeline-54             a020776998ae   34 hours ago         142MB
+2025-08-17T07:53:39.7406059Z ***/dotnet-sample-project   ci-pipeline-53             f7a9397a44bb   34 hours ago         142MB
+2025-08-17T07:53:39.7406386Z ***/dotnet-sample-project   ci-pipeline-51             ef64d80a120a   35 hours ago         142MB
+2025-08-17T07:53:39.7406723Z ***/dotnet-sample-project   ci-pipeline-49             8f9e32b7555b   35 hours ago         142MB
+2025-08-17T07:53:39.7407048Z ***/dotnet-sample-project   ci-pipeline-45             b8c4624ecdd1   42 hours ago         142MB
+2025-08-17T07:53:39.7407393Z ***/dotnet-sample-project   ci-pipeline-31             119bc7a59c09   2 days ago           142MB
+2025-08-17T07:53:39.7407673Z postgres                                              latest                     ca95f67ffb26   2 days ago           454MB
+2025-08-17T07:53:39.7408004Z ***/dotnet-sample-project   ci-pipeline-30             d0eb64a29cb7   2 days ago           142MB
+2025-08-17T07:53:39.7408286Z <none>                                                <none>                     972c2e532213   2 days ago           142MB
+2025-08-17T07:53:39.7408610Z ***/dotnet-sample-project   ci-pipeline-27             f1448101d17e   2 days ago           142MB
+2025-08-17T07:53:39.7408952Z ***/dotnet-sample-project   ci-pipeline-26             1b16fab581ca   2 days ago           142MB
+2025-08-17T07:53:39.7409275Z ***/dotnet-sample-project   ci-pipeline-25             45ac0595f2ba   2 days ago           142MB
+2025-08-17T07:53:39.7409609Z ***/dotnet-sample-project   ci-pipeline-24             7a17715c9570   2 days ago           142MB
+2025-08-17T07:53:39.7409932Z ***/dotnet-sample-project   ci-pipeline-23             5dab01708bf6   2 days ago           142MB
+2025-08-17T07:53:39.7410265Z ***/dotnet-sample-project   ci-pipeline-22             197b104cdaef   2 days ago           142MB
+2025-08-17T07:53:39.7410588Z ***/dotnet-sample-project   ci-pipeline-21             d3a8b9d329f6   2 days ago           142MB
+2025-08-17T07:53:39.7410932Z ***/dotnet-sample-project   ci-pipeline-20             64e192a81df4   2 days ago           142MB
+2025-08-17T07:53:39.7411256Z ***/dotnet-sample-project   ci-pipeline-14             8b2337e6529c   3 days ago           142MB
+2025-08-17T07:53:39.7411591Z ***/dotnet-sample-project   ci-pipeline-13             766066d3344d   3 days ago           142MB
+2025-08-17T07:53:39.7411925Z ***/dotnet-sample-project   ci-pipeline-11             03c83b1e6f63   3 days ago           142MB
+2025-08-17T07:53:39.7412244Z ***/dotnet-sample-project   ci-pipeline-10             b6e85aa97563   3 days ago           142MB
+2025-08-17T07:53:39.7412642Z ***/dotnet-sample-project   ci-pipeline-9              e6f424c17983   3 days ago           142MB
+2025-08-17T07:53:39.7413125Z ***/dotnet-sample-project   ci-pipeline-8              e1832a314164   3 days ago           142MB
+2025-08-17T07:53:39.7414400Z ***/dotnet-sample-project   ci-pipeline-7              7bf4babd8c84   3 days ago           142MB
+2025-08-17T07:53:39.7415014Z <none>                                                <none>                     0bc122670eba   3 days ago           542MB
+2025-08-17T07:53:39.7415340Z <none>                                                <none>                     2c3e0e125711   3 days ago           1.2GB
+2025-08-17T07:53:39.7415944Z sonarqube                                             community                  906e7fbe4810   10 days ago          1.22GB
+2025-08-17T07:53:39.7416245Z mcr.microsoft.com/dotnet/sdk                          9.0-alpine                 bcf62c0296a7   11 days ago          702MB
+2025-08-17T07:53:39.7417181Z mcr.microsoft.com/dotnet/aspnet                       9.0-alpine                 fa0f03cf53e7   11 days ago          114MB
+2025-08-17T07:53:39.7417523Z node                                                  alpine                     0b691ce23fac   2 weeks ago          168MB
+2025-08-17T07:53:39.7417806Z hello-world                                           latest                     74cc54e27dc4   6 months ago         10.1kB
+2025-08-17T07:53:39.7418340Z mcr.microsoft.com/azure-cli                           2.62.0                     fcc39ed4fd77   13 months ago        758MB
+2025-08-17T07:53:39.7418473Z 
+2025-08-17T07:53:39.7419437Z ccd762f6809d: Layer already exists
+2025-08-17T07:53:39.7419664Z 02fc38653170: Layer already exists
+2025-08-17T07:53:39.7419902Z f8282b95ca31: Layer already exists
+2025-08-17T07:53:39.7420139Z 07c599bb988f: Layer already exists
+2025-08-17T07:53:39.7420363Z 5df1622e54b5: Layer already exists
+2025-08-17T07:53:39.7420583Z 7003d23cc217: Layer already exists
+2025-08-17T07:53:39.7420826Z e57149383b0a: Layer already exists
+2025-08-17T07:53:39.7421049Z 9913b70c1abb: Layer already exists
+2025-08-17T07:53:40.0333763Z main-157: digest: sha256:915a9d3bb59767a57ca552e9117baa44470574a0f2565eb65e3d91d9b1453032 size: 2415
+2025-08-17T07:53:40.0437015Z 
+2025-08-17T07:53:40.0459023Z [command]/usr/bin/docker history --format createdAt:{{.CreatedAt}}; layerSize:{{.Size}}; createdBy:{{.CreatedBy}}; layerId:{{.ID}} --no-trunc ***/dotnet-sample-project:main-157
+2025-08-17T07:53:40.0743140Z createdAt:2025-08-17T07:52:20Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL image.base.ref.name=mcr.microsoft.com/dotnet/aspnet:9.0-alpine; layerId:sha256:bc05e24fb2a4d53275576aca2ec19552baa9757a435ae2d6166973d115d06870
+2025-08-17T07:53:40.0743876Z createdAt:2025-08-17T07:52:19Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL image.base.digest=sha256:d4bf3d8c8f0236341ddd93d15208152e26bc6dcc9d34c635351a3402c284137f; layerId:sha256:394d30a45a3488f86c016616483b24954f89bf39f31fe926ef50754cedf4b151
+2025-08-17T07:53:40.0744646Z createdAt:2025-08-17T07:52:18Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.system.teamproject=abb-devops-assessment; layerId:sha256:066408adc5a0f005817c274ec037f2566463b8e3d7056820e3c89f10b44de363
+2025-08-17T07:53:40.0745278Z createdAt:2025-08-17T07:52:17Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.system.teamfoundationcollectionuri=https://dev.azure.com/monlisask/; layerId:sha256:97a61cdf5792838de8cd6f1ba28c1f4e3cbb665bb108e7c2b24916b4a03aaddb
+2025-08-17T07:53:40.0753300Z createdAt:2025-08-17T07:52:16Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.sourceversion=1f67e2e9068eb012c03ca5320800f42f14e50b8b; layerId:sha256:230dc06afd3996abcbe0cde86f51b7cb85fe659b08bf787dad8419e8e13b28f2
+2025-08-17T07:53:40.0754316Z createdAt:2025-08-17T07:52:15Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.sourcebranchname=main; layerId:sha256:9c35a34d3d92b1df1d59655e2c5d297818b92070fcdec9bb9118b6664546229b
+2025-08-17T07:53:40.0755662Z createdAt:2025-08-17T07:52:14Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.repository.uri=https://github.com/Monlisa-sk/abb-devops-azure-project; layerId:sha256:0e386a25d9c0a35b523e31d157e39108e9764bdafbba1432c7599c92920c5a35
+2025-08-17T07:53:40.0756350Z createdAt:2025-08-17T07:52:13Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.repository.name=Monlisa-sk/abb-devops-azure-project; layerId:sha256:5928257dbf2a540578892463a40f81b772ac41d1c3947ffcc4fd4adbfb55f676
+2025-08-17T07:53:40.0757064Z createdAt:2025-08-17T07:52:12Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.definitionname=Monlisa-sk.abb-devops-azure-project; layerId:sha256:39aab3dd64e7beae550664d78a4c1c1cae8c93cbbcca08832474cac9f34ef4cd
+2025-08-17T07:53:40.0757716Z createdAt:2025-08-17T07:52:11Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.builduri=vstfs:///Build/Build/157; layerId:sha256:8abdbfb09f147b3d990eaf7532061e7cb180c120a22a57da9281465d3501158e
+2025-08-17T07:53:40.0758372Z createdAt:2025-08-17T07:52:11Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  LABEL com.azure.dev.image.build.buildnumber=20250817.34; layerId:sha256:5417fc8caea43186aff607a8713a178aef7fdac17b89aa9f7ea8a5ceddc5050d
+2025-08-17T07:53:40.0759209Z createdAt:2025-08-13T21:30:50Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  ENTRYPOINT ["dotnet" "Architecture.Web.dll"]; layerId:sha256:e06cbc90f56c4c898aec299293a1991fc49f086e19648571d4a981ac6976ef89
+2025-08-17T07:53:40.0760025Z createdAt:2025-08-13T21:30:50Z; layerSize:859kB; createdBy:/bin/sh -c #(nop) COPY dir:82c267f407cfd93397c5c9008999abc00ba227a41753e83dadaf2c017918523a in ./wwwroot ; layerId:sha256:463a4da8a95a1d4326b16340eade39ff24cb82903f1b4fef0f1e0f8ed592c31c
+2025-08-17T07:53:40.0760692Z createdAt:2025-08-13T21:30:49Z; layerSize:19.8MB; createdBy:/bin/sh -c #(nop) COPY dir:05cf6c0da6948f7a827d9446677736d70b9e3606420e3449602e373d96f8b06d in . ; layerId:sha256:234a64b27c760d3c33e7ecad349bcc77adffadb01d135338bddd76b569a009ee
+2025-08-17T07:53:40.0761337Z createdAt:2025-08-13T21:30:47Z; layerSize:0B; createdBy:/bin/sh -c #(nop) WORKDIR /app; layerId:sha256:14bec234dbeea38c91a95ffa87be856d85a76688c706ed113be8e478ed5704a3
+2025-08-17T07:53:40.0762180Z createdAt:2025-08-13T21:30:46Z; layerSize:0B; createdBy:/bin/sh -c #(nop)  ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false; layerId:sha256:c124626e491b765e336ac968368a20bbd00295ef01fe34a6327acecfb920e6d1
+2025-08-17T07:53:40.0762724Z createdAt:2025-08-13T21:30:45Z; layerSize:7.32MB; createdBy:/bin/sh -c apk add --no-cache icu-libs; layerId:sha256:8e2b28bcc3c77ebd1164774976b7273dcb38be0dbcf4e82ac7cb9e533d882a66
+2025-08-17T07:53:40.0763410Z createdAt:2025-08-05T20:10:35Z; layerSize:24.7MB; createdBy:COPY /dotnet /usr/share/dotnet # buildkit; layerId:sha256:fa0f03cf53e714efe1f4968ff4c433ea3cd975ed89d7ab5e6a1b7debc5de6997
+2025-08-17T07:53:40.0763848Z createdAt:2025-08-05T20:10:35Z; layerSize:0B; createdBy:ENV ASPNET_VERSION=9.0.8; layerId:<missing>
+2025-08-17T07:53:40.0764267Z createdAt:2025-08-05T20:10:28Z; layerSize:0B; createdBy:RUN /bin/sh -c ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet # buildkit; layerId:<missing>
+2025-08-17T07:53:40.0764676Z createdAt:2025-08-05T20:10:27Z; layerSize:78.1MB; createdBy:COPY /dotnet /usr/share/dotnet # buildkit; layerId:<missing>
+2025-08-17T07:53:40.0765067Z createdAt:2025-08-05T20:10:27Z; layerSize:0B; createdBy:ENV DOTNET_VERSION=9.0.8; layerId:<missing>
+2025-08-17T07:53:40.0765527Z createdAt:2025-08-05T20:10:14Z; layerSize:3.03kB; createdBy:RUN /bin/sh -c addgroup         --gid=$APP_UID         app     && adduser         --uid=$APP_UID         --ingroup=app         --disabled-password         app # buildkit; layerId:<missing>
+2025-08-17T07:53:40.0766061Z createdAt:2025-08-05T20:10:13Z; layerSize:2.97MB; createdBy:RUN /bin/sh -c apk add --upgrade --no-cache         ca-certificates-bundle                 libgcc         libssl3         libstdc++ # buildkit; layerId:<missing>
+2025-08-17T07:53:40.0766656Z createdAt:2025-08-05T20:10:13Z; layerSize:0B; createdBy:ENV APP_UID=1654 ASPNETCORE_HTTP_PORTS=8080 DOTNET_RUNNING_IN_CONTAINER=true DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true; layerId:<missing>
+2025-08-17T07:53:40.0767086Z createdAt:2025-07-15T11:30:48Z; layerSize:0B; createdBy:CMD ["/bin/sh"]; layerId:<missing>
+2025-08-17T07:53:40.0767499Z createdAt:2025-07-15T11:30:48Z; layerSize:7.82MB; createdBy:ADD alpine-minirootfs-3.21.4-x86_64.tar.gz / # buildkit; layerId:<missing>
+2025-08-17T07:53:40.0767943Z 
+2025-08-17T07:53:40.0787739Z [command]/usr/bin/docker inspect bc05e24fb2a4d53275576aca2ec19552baa9757a435ae2d6166973d115d06870 -f {{.RootFS.Layers}}
+2025-08-17T07:53:40.0951685Z [sha256:7003d23cc2176ec98ba2f8b3b4b9b5f144ef370e39bfcf6275a92b5064bc9261 sha256:5df1622e54b5bdb0cb529bc0b840906586d6f89aa9b1a16ee86f645c3c9177d0 sha256:9913b70c1abb9debc5010dd50836433bb1289986c93ac50f3d53294099e7fa8a sha256:e57149383b0ae26d7bf2cedc255f72d6e848ff6bc3a166179503c18102927ff0 sha256:07c599bb988f16eccb76f4a9b3538a5c58ce1168c6c3b2accf16caf2b2344639 sha256:9a672198bada539661c05f0cfd8878f772001be8b28c5101d2c4c2c35a6808ff sha256:a9fb278d2b39e2fcae53ef2926f0cb773bb47d7dda84312a0e3223f407f1c9bd sha256:ccd762f6809d9474d1632f1122c39715554c7f9536429fc2b8790218f716ce1b sha256:f8282b95ca312104e4580dde01038afae32a6387a3a4c240ff14537881b0172e sha256:02fc3865317015b1f239081f93a07fc5db9c8295a8f19ed416fcc15530cf9cf9]
+2025-08-17T07:53:40.0962615Z 
+2025-08-17T07:53:40.1070947Z ##[section]Finishing: Push image
