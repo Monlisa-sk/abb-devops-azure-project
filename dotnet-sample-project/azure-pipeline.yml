@@ -169,7 +169,7 @@ stages:
                   install: true
                   chartType: 'FilePath'
                   chartPath: '$(helmChartPath)'
-                  namespace: 'deploy-dev'
+                  namespace: 'deploy-staging'
                   releaseName: 'myapp-dev'
                   arguments: >
                     --create-namespace
@@ -187,17 +187,6 @@ stages:
         runOnce:
           deploy:
             steps:
-              - task: KubernetesManifest@1
-                displayName: 'Create Secret'
-                inputs:
-                  action: 'createSecret'
-                  connectionType: 'kubernetesServiceConnection'
-                  kubernetesServiceConnection: 'AKS-Conn'
-                  namespace: 'deploy-staging'
-                  secretType: 'dockerRegistry'
-                  secretName: 'kube-acr'
-                  dockerRegistryEndpoint: 'devops-service-connection'
-                  
               - task: HelmInstaller@1
                 inputs:
                   helmVersionToInstall: 'latest'
@@ -229,17 +218,6 @@ stages:
         runOnce:
           deploy:
             steps:
-              - task: KubernetesManifest@1
-                displayName: 'Create Secret'
-                inputs:
-                  action: 'createSecret'
-                  connectionType: 'kubernetesServiceConnection'
-                  kubernetesServiceConnection: 'AKS-Conn'
-                  namespace: 'deploy-prod'
-                  secretType: 'dockerRegistry'
-                  secretName: 'kube-acr'
-                  dockerRegistryEndpoint: 'devops-service-connection'
-
               - task: HelmInstaller@1
                 inputs:
                   helmVersionToInstall: 'latest'
