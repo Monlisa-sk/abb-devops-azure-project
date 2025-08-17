@@ -14,7 +14,7 @@ spec:
         app: dotnet-sample-app
     spec:
       imagePullSecrets:
-          - name: {{ index .Values.image.pullSecrets 0 }}
+        - name: {{ index .Values.image.pullSecrets 0 }}
       containers:
         - name: dotnet-sample-app
           image: "{{ .Values.dotnetSampleApp.image.repository }}:{{ .Values.dotnetSampleApp.image.tag }}"
@@ -28,6 +28,22 @@ spec:
             - name: Serilog__WriteTo__1__Args__path
               value: /app/logs/
 
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.dotnetSampleApp.containerPort }}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.dotnetSampleApp.containerPort }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
+
         - name: mssql
           image: {{ .Values.mssql.image }}
           ports:
@@ -40,6 +56,23 @@ spec:
           volumeMounts:
             - name: database-storage
               mountPath: /var/opt/mssql
+
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -Q "SELECT 1"
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 5
+
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.mssql.containerPort }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
 
       volumes:
         - name: database-storage
