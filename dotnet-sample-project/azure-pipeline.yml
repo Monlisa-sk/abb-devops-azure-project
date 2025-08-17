@@ -112,22 +112,21 @@ stages:
               az acr login --name $(acrName)
               docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
               trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL
-      -   task: PublishBuildArtifacts@1
-          displayName: "Publish scan report"
-          inputs:
-            PathtoPublish: 'container-scan-report.txt'
-            ArtifactName: 'security-scan'
-            publishLocation: 'Container'
-  - job: DownloadScanReport
-    displayName: 'Download scan report'
-    dependsOn: TrivyScan
-    steps:
-    - task: DownloadPipelineArtifact@2
-      displayName: "Download scan report"
-      inputs:
-        artifactName: 'security-scan'
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-
+      - script: |
+          mv container-scan-report.txt $(Build.ArtifactStagingDirectory)/
+          displayName: "Move report to staging directory"
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish scan report"
+        inputs:
+           PathtoPublish: '$(Build.ArtifactStagingDirectory)/container-scan-report.txt'
+           ArtifactName: 'security-scan'
+           publishLocation: 'Container'
+      - task: DownloadPipelineArtifact@2
+        displayName: "Download scan report"
+        inputs:
+          artifactName: 'security-scan'
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+                
   - job: docker_push
     displayName: 'Push image'
     dependsOn: docker_build
