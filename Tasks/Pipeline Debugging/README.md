@@ -19,6 +19,6 @@ Debug a failing Azure DevOps pipeline with environment variable configuration er
 ---
 
 ## ✅ Proof of Execution
-![Pipeline Success](screenshots/cicd-pipeline-success.png)
+![Pipeline Success](screenshots/cicd_pipeline_success.png)
 
 ---
