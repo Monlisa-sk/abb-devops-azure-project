@@ -30,4 +30,4 @@ Set up a Continuous Integration (CI) pipeline in Azure DevOps for a sample appli
   - `build_logs.txt` shows successful compilation & build output.  
   - `test_reports.txt` shows executed and passed unit tests.  
 - **Screenshot:**  
-  ![CICD Pipeline Success](screenshots/cicd-pipeline-success.png)
+  ![CICD Pipeline Success](screenshots/cicd_pipeline_success.png)
