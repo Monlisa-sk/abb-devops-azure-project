@@ -15,7 +15,7 @@ Create a multi-stage pipeline in Azure DevOps that handles deployments across mu
 ---
 
 ## 📂 Files in this Folder
-- `azure-pipeline.yml` — Multi-stage pipeline (Dev, QA, Prod) with embedded env variables and approvals.
+- [azure-pipeline.yml](../../dotnet-sample-project/azure-pipeline.yml) — Multi-stage pipeline (Dev, QA, Prod) with embedded env variables and approvals.
 - `screenshots/`
   - `multi-stage-success.png` — Successful multi-stage execution across all environments.
 # Multi-Stage Pipeline (Dev → QA → Prod)
