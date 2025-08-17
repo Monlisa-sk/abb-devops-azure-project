@@ -14,7 +14,7 @@ Containerize the application, build the Docker image, and push it to Azure Conta
 ---
 
 ## 📂 Files in this Folder
-- `Dockerfile` → Containerization specification for the application.  
+- [Dockerfile](../../dotnet-sample-project/Dockerfile) → Containerization specification for the application.  
 - `docker-build-logs.txt` → Output logs from the Docker build process.  
 - `acr-push-logs.txt` → Output logs from pushing image to ACR.  
 
