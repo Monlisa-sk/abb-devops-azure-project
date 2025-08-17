@@ -39,5 +39,5 @@ Extend the CI pipeline to deploy the application to **Azure App Service or AKS**
   Found in `deployment.logs.zip` showing successful `kubectl apply` 
 
 - **Pipeline Success:**  
-  ![CICD Pipeline Success](screenshots/cd-pipeline-success.png)
+  ![CICD Pipeline Success](screenshots/cicd_pipeline_success.png)
 
