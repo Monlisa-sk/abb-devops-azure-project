@@ -39,7 +39,7 @@ The repo is structured task-wise for clarity, and each folder includes:
 ## ⚙️ Technologies & Tools Used
 
 * **Cloud:** Azure (Terraform, AKS, ACR)
-* **CI/CD:** Azure DevOps Pipelines, GitHub Actions
+* **CI/CD:** Azure DevOps Pipelines
 * **IaC:** Terraform, Helm
 * **Security:** SonarQube, Trivy, Azure Security Center
 * **Monitoring:** Azure Monitor, Alerts, Logs
@@ -49,12 +49,14 @@ The repo is structured task-wise for clarity, and each folder includes:
 
 ## 📷 Key Screenshots
 
+### Pipeline Success
 <p align="center">
-  <img src="docs/pipeline-success.png" width="600" alt="Pipeline Success Screenshot">
+  <img src="pipeline-success.png" width="600" alt="Pipeline Success Screenshot">
 </p>  
 
+### AKS Cluster
 <p align="center">
-  <img src="docs/aks-cluster.png" width="600" alt="AKS Cluster Screenshot">
+  <img src="aks-cluster.png" width="600" alt="AKS Cluster Screenshot">
 </p>  
 
 ---
