@@ -44,7 +44,6 @@ stages:
               echo "Completed tests for $proj"
             done
           displayName: 'Run all tests with coverage and logs'
-
         - task: AzureKeyVault@2
           displayName: "Fetch secrets from Key Vault"
           inputs:
@@ -52,7 +51,6 @@ stages:
             KeyVaultName: '$(keyVaultName)'
             SecretsFilter: '*'
             RunAsPreJob: true
-
 
 - stage: CodeAnalysis
   displayName: 'SonarQube Build Scan'
