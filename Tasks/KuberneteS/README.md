@@ -14,7 +14,7 @@ Deploy the containerized application to Azure Kubernetes Service (AKS) using Kub
 ---
 
 ## 📂 Files in this Folder
-- `deployment.yml` — Kubernetes Deployment manifest for the app.
+- [deployment.yml](../../dotnet-sample-project/helmchart/templates/deployment.yml) — Kubernetes Deployment manifest for the app.
 - `screenshots/`
   - `kubernetes_pods.png` — Pods running and Ready.
   - `kubernetes_describe.png` — Describe output showing conditions/events.
