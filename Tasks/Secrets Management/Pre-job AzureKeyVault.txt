@@ -1,0 +1,18 @@
+2025-08-17T09:02:32.9300463Z ##[section]Starting: AzureKeyVault
+2025-08-17T09:02:32.9398748Z ==============================================================================
+2025-08-17T09:02:32.9399774Z Task         : Azure Key Vault
+2025-08-17T09:02:32.9400071Z Description  : Download Azure Key Vault secrets
+2025-08-17T09:02:32.9400354Z Version      : 2.259.2
+2025-08-17T09:02:32.9400596Z Author       : Microsoft Corporation
+2025-08-17T09:02:32.9400842Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/deploy/azure-key-vault
+2025-08-17T09:02:32.9401287Z ==============================================================================
+2025-08-17T09:02:36.8840652Z SubscriptionId: 6b4c6964-00b1-443b-b777-d2bfc4833a31.
+2025-08-17T09:02:36.8841272Z Key vault name: dotnet-app-vault.
+2025-08-17T09:02:36.8851829Z Downloading secrets using: https://dotnet-app-vault.vault.azure.net/secrets?maxresults=25&api-version=2016-10-01.
+2025-08-17T09:02:38.6544795Z Number of secrets found in dotnet-app-vault: 4
+2025-08-17T09:02:38.6545271Z Number of enabled and unexpired secrets found in dotnet-app-vault: 4
+2025-08-17T09:02:38.6549238Z Downloading secret value for: smoke-test.
+2025-08-17T09:02:38.6550966Z Downloading secret value for: sonarhosturl.
+2025-08-17T09:02:38.6552627Z Downloading secret value for: sonarlogin.
+2025-08-17T09:02:38.6556039Z Downloading secret value for: uitest.
+2025-08-17T09:02:39.5548357Z ##[section]Finishing: AzureKeyVault

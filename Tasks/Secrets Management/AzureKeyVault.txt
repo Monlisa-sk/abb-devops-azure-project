@@ -1,0 +1,9 @@
+2025-08-17T09:02:44.8522365Z ##[section]Starting: AzureKeyVault
+2025-08-17T09:02:44.8528469Z ==============================================================================
+2025-08-17T09:02:44.8528643Z Task         : Azure Key Vault
+2025-08-17T09:02:44.8528745Z Description  : Download Azure Key Vault secrets
+2025-08-17T09:02:44.8528851Z Version      : 2.259.2
+2025-08-17T09:02:44.8528958Z Author       : Microsoft Corporation
+2025-08-17T09:02:44.8529053Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/deploy/azure-key-vault
+2025-08-17T09:02:44.8529205Z ==============================================================================
+2025-08-17T09:02:47.2274989Z ##[section]Finishing: AzureKeyVault

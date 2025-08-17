@@ -12,7 +12,7 @@ Retrieve secrets from Azure Key Vault within a CI/CD pipeline and use them secur
 ---
 
 ## 📂 Files in this Folder
-- `azure-pipeline.yml` — Pipeline with Key Vault integration and secret consumption.
+- [azure_pipeline.yml](../../dotnet-sample-project/azure-pipeline.yml) — Pipeline with Key Vault integration and secretconsumption.
 - `Pre-job AzureKeyVault.txt` — Pre-job logs confirming Key Vault task initialization.
 - `AzureKeyVault.txt` — Logs showing secrets retrieved and used in deployment steps.
 
