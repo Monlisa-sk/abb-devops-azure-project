@@ -17,7 +17,7 @@ Design and demonstrate a branching workflow strategy in Git that supports featur
 ---
 
 ## 📂 Files in this Folder
-- `branching-strategy.md` → Document describing the branching workflow.
+- [branching-strategy.md](branching-strategy.md) → Document describing the branching workflow.
 - `screenshots/`  
   - `pull_request.png` → Example PR raised from feature → main.  
   - `code_review.png` → Code review/approval stage.  

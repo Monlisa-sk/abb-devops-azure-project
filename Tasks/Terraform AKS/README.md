@@ -4,8 +4,8 @@ Provision an AKS cluster integrated with Log Analytics via Terraform, and prove 
 ---
 
 ## 📂 Files in this Folder
-- `terraform-script.tf` — Single-file Terraform config (provider, variables, resources, and outputs combined).
-- `deployment_logs.txt` — Raw output captured from `terraform apply`.
+- [terraform-script.tf](../../Terraform/terraform-script/) — Single-file Terraform config (provider, variables, resources, and outputs combined).
+- [deployment_logs.txt](../../Terraform/deployment_logs.txt) — Raw output captured from `terraform apply`.
 
 ---
 

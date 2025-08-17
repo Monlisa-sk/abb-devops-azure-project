@@ -17,7 +17,7 @@ Set up a Continuous Integration (CI) pipeline in Azure DevOps for a sample appli
 ---
 
 ## 📂 Files in this Folder
-- `azure_pipeline.yml` → CI pipeline definition.  
+- [azure_pipeline.yml](../../dotnet-sample-project/azure-pipeline.yml) → CI pipeline definition.  
 - `build_logs.txt` → Captured logs from Azure DevOps build run.  
 - `test_reports.txt` → Unit test execution results.  
 - `screenshots/`  

@@ -1,0 +1,8 @@
+ContainerLog
+| where TimeGenerated > ago (20m)
+| where ContainerID in ('c24a00d9849c0f07aac8cf1f5c3ba3572140d07be7a86f86d15c920525539411', 'efee5cd5aa4b07896f32248a4c6f5355a9c307c3210cc3f404ae6975275c2319')
+| union (ContainerLogV2
+    | project-rename ContainerID = ContainerId
+    | where TimeGenerated > ago (20m)
+    | where ContainerID in ('c24a00d9849c0f07aac8cf1f5c3ba3572140d07be7a86f86d15c920525539411', 'efee5cd5aa4b07896f32248a4c6f5355a9c307c3210cc3f404ae6975275c2319'))
+| order by TimeGenerated desc

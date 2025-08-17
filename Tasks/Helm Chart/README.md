@@ -13,15 +13,13 @@ Provide the Helm chart, values file, and deployment logs/screenshots as proof.
 ---
 
 ## 📂 Files in this Folder
-- `dotnet-sample-project/helmchart/` → Helm chart (Chart.yaml, templates, helpers).  
-- `dotnet-sample-project/helmchart/values.yaml` → Custom values for image, replicas, ports, env, probes.  
 - `helm-deployment.logs.txt` → Logs from Helm deployment/upgrade.  
 
 ---
 
 ## ✅ Proof of Execution
-- **Helm Chart:** `dotnet-sample-project/helmchart/` shows the chart source (Chart.yaml, templates, helpers).  
-- **Values File:** `dotnet-sample-project/helmchart/values.yaml` contains runtime parameters used during deployment.  
+- **Helm Chart:** [dotnet-sample-project/helmchart/](../../dotnet-sample-project/helmchart/Chart.yaml) shows the chart source (Chart.yaml, templates, helpers).  
+- **Values File:** [dotnet-sample-project/helmchart/values.yaml](../../dotnet-sample-project/helmchart/values.yaml) contains runtime parameters used during deployment.  
 - **Log File:** `helm-deployment.logs.txt` shows Helm upgrade/install execution.  
 
 ---

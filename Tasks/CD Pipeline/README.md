@@ -22,7 +22,7 @@ Extend the CI pipeline to deploy the application to **Azure App Service or AKS**
 ---
 
 ## 📂 Files in this Folder
-- `azure_pipeline.yml` → CI definition (build + test) + CD pipeline extension (deploy to AKS). 
+- [azure_pipeline.yml](../../dotnet-sample-project/azure-pipeline.yml) → CI definition (build + test) + CD pipeline extension (deploy to AKS). 
 - `deployment_logs.zip` → Archived deployment logs from Azure DevOps.  
 - `screenshots/`  
   - `approval_config.png` → Proof of approval step before prod deploy.

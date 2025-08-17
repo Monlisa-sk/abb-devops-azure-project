@@ -1,0 +1,634 @@
+2025-08-17T09:02:53.8604932Z ##[section]Starting: Sonar scan
+2025-08-17T09:02:53.8610044Z ==============================================================================
+2025-08-17T09:02:53.8610202Z Task         : Command line
+2025-08-17T09:02:53.8610305Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-17T09:02:53.8610442Z Version      : 2.250.1
+2025-08-17T09:02:53.8610540Z Author       : Microsoft Corporation
+2025-08-17T09:02:53.8610672Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-17T09:02:53.8610816Z ==============================================================================
+2025-08-17T09:02:57.1845440Z Generating script.
+2025-08-17T09:02:57.1859124Z ========================== Starting Command Output ===========================
+2025-08-17T09:02:57.1879248Z [command]/usr/bin/bash --noprofile --norc /home/azureuser/myagent/_work/_temp/4b79852f-cf00-4277-be2b-f607c8ce4bd9.sh
+2025-08-17T09:02:57.7162229Z Tool 'dotnet-sonarscanner' is already installed.
+2025-08-17T09:02:57.9197154Z SonarScanner for MSBuild 10.3
+2025-08-17T09:02:57.9199722Z Using the .NET Core version of the Scanner for MSBuild
+2025-08-17T09:02:57.9950647Z Pre-processing started.
+2025-08-17T09:02:58.0104833Z Preparing working directories...
+2025-08-17T09:02:58.0937836Z 09:02:58.084  WARNING: The sonar.sources and sonar.tests properties are not supported by the Scanner for .NET and are ignored. They are automatically computed based on your repository. You can fine-tune the analysis and exclude some files by using the sonar.exclusions, sonar.inclusions, sonar.test.exclusions, and sonar.test.inclusions properties.
+2025-08-17T09:02:58.0943927Z 09:02:58.094  Updating build integration targets...
+2025-08-17T09:02:58.3195872Z 09:02:58.318  Using SonarQube v25.8.0.112029.
+2025-08-17T09:02:58.4868297Z 09:02:58.486  Fetching analysis configuration settings...
+2025-08-17T09:03:00.5107777Z 09:03:00.507  Provisioning analyzer assemblies for cs...
+2025-08-17T09:03:00.5108456Z 09:03:00.508  Installing required Roslyn analyzers...
+2025-08-17T09:03:00.5108881Z 09:03:00.509  Processing plugin: csharp version 10.15.0.120848
+2025-08-17T09:03:01.1135902Z 09:03:01.112  Provisioning analyzer assemblies for vbnet...
+2025-08-17T09:03:01.1136614Z 09:03:01.113  Installing required Roslyn analyzers...
+2025-08-17T09:03:01.1137124Z 09:03:01.113  Processing plugin: vbnet version 10.15.0.120848
+2025-08-17T09:03:01.1589315Z 09:03:01.158  Incremental PR analysis: Base branch parameter was not provided.
+2025-08-17T09:03:01.1594332Z 09:03:01.158  Cache data is empty. A full analysis will be performed.
+2025-08-17T09:03:01.2020848Z 09:03:01.201  Pre-processing succeeded.
+2025-08-17T09:03:02.3275811Z   Determining projects to restore...
+2025-08-17T09:03:10.4161067Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj (in 7.52 sec).
+2025-08-17T09:03:16.0569788Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Architecture.Web.csproj (in 5.63 sec).
+2025-08-17T09:03:16.0613228Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Model/Architecture.Model.csproj (in 2 ms).
+2025-08-17T09:03:16.0651710Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Domain/Architecture.Domain.csproj (in 1 ms).
+2025-08-17T09:03:16.0701758Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj (in 13.19 sec).
+2025-08-17T09:03:22.4795856Z   Architecture.Domain -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Domain/bin/Debug/net9.0/Architecture.Domain.dll
+2025-08-17T09:03:22.5142815Z   Sonar: (Architecture.Domain.csproj) Project processed successfully
+2025-08-17T09:03:23.2658383Z   Architecture.Model -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Model/bin/Debug/net9.0/Architecture.Model.dll
+2025-08-17T09:03:23.2710321Z   Sonar: (Architecture.Model.csproj) Project processed successfully
+2025-08-17T09:03:25.8457503Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Migrations/00000000000000_Initial.cs(18,23): warning S1192: Define a constant instead of using this literal 'Example' 5 times. (https://rules.sonarsource.com/csharp/RSPEC-1192) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:25.8459740Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Migrations/00000000000000_Initial.cs(28,51): warning S1192: Define a constant instead of using this literal 'bigint' 4 times. (https://rules.sonarsource.com/csharp/RSPEC-1192) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:25.8461613Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Context/Context.cs(5,58): warning S927: Rename parameter 'builder' to 'modelBuilder' to match the base class declaration. (https://rules.sonarsource.com/csharp/RSPEC-927) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:25.9970492Z   Architecture.Database -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/bin/Debug/net9.0/Architecture.Database.dll
+2025-08-17T09:03:26.0245477Z   Sonar: (Architecture.Database.csproj) Project processed successfully
+2025-08-17T09:03:27.5952823Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Example/Grid/GridExampleRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:27.5964482Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Example/List/ListExampleRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:27.5966282Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/User/Grid/GridUserRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:27.5967928Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/User/List/ListUserRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:27.6260893Z   Architecture.Application -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/bin/Debug/net9.0/Architecture.Application.dll
+2025-08-17T09:03:27.6329510Z   Sonar: (Architecture.Application.csproj) Project processed successfully
+2025-08-17T09:03:29.5757724Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Controllers/FileController.cs(7,6): warning S5693: Make sure the content length limit is safe here. (https://rules.sonarsource.com/csharp/RSPEC-5693) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Architecture.Web.csproj]
+2025-08-17T09:03:29.5761706Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Program.cs(33,1): warning S6966: Await RunAsync instead. (https://rules.sonarsource.com/csharp/RSPEC-6966) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Architecture.Web.csproj]
+2025-08-17T09:03:29.8102502Z   Architecture.Web -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/bin/Debug/net9.0/Architecture.Web.dll
+2025-08-17T09:03:29.8196013Z   Sonar: (Architecture.Web.csproj) Project processed successfully
+2025-08-17T09:03:29.8367944Z 
+2025-08-17T09:03:29.8368920Z Build succeeded.
+2025-08-17T09:03:29.8374735Z 
+2025-08-17T09:03:29.8375504Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Migrations/00000000000000_Initial.cs(18,23): warning S1192: Define a constant instead of using this literal 'Example' 5 times. (https://rules.sonarsource.com/csharp/RSPEC-1192) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:29.8376294Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Migrations/00000000000000_Initial.cs(28,51): warning S1192: Define a constant instead of using this literal 'bigint' 4 times. (https://rules.sonarsource.com/csharp/RSPEC-1192) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:29.8377042Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Context/Context.cs(5,58): warning S927: Rename parameter 'builder' to 'modelBuilder' to match the base class declaration. (https://rules.sonarsource.com/csharp/RSPEC-927) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/Architecture.Database.csproj]
+2025-08-17T09:03:29.8377800Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Example/Grid/GridExampleRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:29.8378546Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Example/List/ListExampleRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:29.8379288Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/User/Grid/GridUserRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:29.8380035Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/User/List/ListUserRequest.cs(3,22): warning S2094: Remove this empty record, write its code or make it an "interface". (https://rules.sonarsource.com/csharp/RSPEC-2094) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/Architecture.Application.csproj]
+2025-08-17T09:03:29.8380733Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Controllers/FileController.cs(7,6): warning S5693: Make sure the content length limit is safe here. (https://rules.sonarsource.com/csharp/RSPEC-5693) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Architecture.Web.csproj]
+2025-08-17T09:03:29.8381455Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Program.cs(33,1): warning S6966: Await RunAsync instead. (https://rules.sonarsource.com/csharp/RSPEC-6966) [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Architecture.Web.csproj]
+2025-08-17T09:03:29.8381845Z     9 Warning(s)
+2025-08-17T09:03:29.8382056Z     0 Error(s)
+2025-08-17T09:03:29.8382351Z 
+2025-08-17T09:03:29.8382596Z Time Elapsed 00:00:28.34
+2025-08-17T09:03:30.1615589Z SonarScanner for MSBuild 10.3
+2025-08-17T09:03:30.1630111Z Using the .NET Core version of the Scanner for MSBuild
+2025-08-17T09:03:30.2904769Z Post-processing started.
+2025-08-17T09:03:30.7584890Z Using the supplied value for SONAR_SCANNER_OPTS. Value: -Xmx1024m -Xms256m
+2025-08-17T09:03:30.7615458Z Calling the SonarScanner CLI...
+2025-08-17T09:03:31.4702855Z INFO: Scanner configuration file: /home/azureuser/.dotnet/tools/.store/dotnet-sonarscanner/10.3.0/dotnet-sonarscanner/10.3.0/tools/netcoreapp3.1/any/sonar-scanner-5.0.2.4997/conf/sonar-scanner.properties
+2025-08-17T09:03:31.4731164Z INFO: Project root configuration file: /home/azureuser/myagent/_work/1/.sonarqube/out/sonar-project.properties
+2025-08-17T09:03:31.6007659Z INFO: SonarScanner 5.0.2.4997
+2025-08-17T09:03:31.6009236Z INFO: Java 17.0.13 Eclipse Adoptium (64-bit)
+2025-08-17T09:03:31.6010766Z INFO: Linux 6.11.0-1018-azure amd64
+2025-08-17T09:03:31.6055956Z INFO: SONAR_SCANNER_OPTS=-Xmx1024m -Xms256m -D<sensitive data removed>
+2025-08-17T09:03:32.4969116Z INFO: User cache: /home/azureuser/.sonar/cache
+2025-08-17T09:03:32.7188962Z INFO: Analyzing on SonarQube server 25.8.0.112029
+2025-08-17T09:03:32.7191998Z INFO: Default locale: "en", source code encoding: "UTF-8"
+2025-08-17T09:03:34.9672373Z INFO: Load global settings
+2025-08-17T09:03:35.2091250Z INFO: Load global settings (done) | time=243ms
+2025-08-17T09:03:35.2434085Z INFO: Server id: A37AC1AE-AZitfPmvYB2gIspkEAuN
+2025-08-17T09:03:35.2669637Z INFO: Loading required plugins
+2025-08-17T09:03:35.2682179Z INFO: Load plugins index
+2025-08-17T09:03:35.3696137Z INFO: Load plugins index (done) | time=98ms
+2025-08-17T09:03:35.3696907Z INFO: Load/download plugins
+2025-08-17T09:03:35.5133656Z INFO: Load/download plugins (done) | time=147ms
+2025-08-17T09:03:36.3697370Z INFO: Process project properties
+2025-08-17T09:03:36.4452663Z INFO: Process project properties (done) | time=76ms
+2025-08-17T09:03:36.4690547Z INFO: Project key: sonarqube-project
+2025-08-17T09:03:36.4698944Z INFO: Base dir: /home/azureuser/myagent/_work/1/s
+2025-08-17T09:03:36.4762284Z INFO: Working dir: /home/azureuser/myagent/_work/1/.sonarqube/out/.sonar
+2025-08-17T09:03:36.4936635Z INFO: Load project settings for component key: 'sonarqube-project'
+2025-08-17T09:03:36.5434444Z INFO: Load project settings for component key: 'sonarqube-project' (done) | time=48ms
+2025-08-17T09:03:36.6356721Z INFO: Load quality profiles
+2025-08-17T09:03:36.7219514Z INFO: Load quality profiles (done) | time=89ms
+2025-08-17T09:03:36.7397063Z INFO: Auto-configuring with CI 'Azure DevOps'
+2025-08-17T09:03:36.7814315Z INFO: Load active rules
+2025-08-17T09:03:37.4166395Z INFO: Load active rules (done) | time=635ms
+2025-08-17T09:03:37.4244043Z INFO: Load analysis cache
+2025-08-17T09:03:37.4917906Z INFO: Load analysis cache | time=69ms
+2025-08-17T09:03:37.5542338Z WARN: The property '<sensitive data removed>
+2025-08-17T09:03:37.5753271Z INFO: Preprocessing files...
+2025-08-17T09:03:38.0374898Z INFO: 7 languages detected in 165 preprocessed files (done) | time=460ms
+2025-08-17T09:03:38.0410101Z INFO: 0 files ignored because of inclusion/exclusion patterns
+2025-08-17T09:03:38.0410440Z INFO: 42 files ignored because of scm ignore settings
+2025-08-17T09:03:38.0419767Z INFO: Loading plugins for detected languages
+2025-08-17T09:03:38.0420186Z INFO: Load/download plugins
+2025-08-17T09:03:38.1134461Z INFO: Load/download plugins (done) | time=72ms
+2025-08-17T09:03:38.4827059Z INFO: Executing phase 2 project builders
+2025-08-17T09:03:38.5549103Z INFO: Executing phase 2 project builders (done) | time=74ms
+2025-08-17T09:03:38.5647212Z INFO: Load project repositories
+2025-08-17T09:03:38.7586513Z INFO: Load project repositories (done) | time=194ms
+2025-08-17T09:03:38.7839439Z INFO: Indexing files...
+2025-08-17T09:03:38.7841157Z INFO: Project configuration:
+2025-08-17T09:03:38.7842630Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:38.7843908Z INFO: Indexing files of module 'Architecture.Web'
+2025-08-17T09:03:38.7844460Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web
+2025-08-17T09:03:38.7879939Z INFO:   Source paths: Controllers/AuthController.cs, Controllers/BaseController.cs,...
+2025-08-17T09:03:38.7883803Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:38.9213609Z INFO: Indexing files of module 'Architecture.Domain'
+2025-08-17T09:03:38.9220150Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Domain
+2025-08-17T09:03:38.9234652Z INFO:   Source paths: obj/Architecture.Domain.csproj.nuget.dgspec.json, obj/project...
+2025-08-17T09:03:38.9235185Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:38.9319027Z INFO: Indexing files of module 'Architecture.Application'
+2025-08-17T09:03:38.9319538Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application
+2025-08-17T09:03:38.9319975Z INFO:   Source paths: obj/project.assets.json, obj/Architecture.Application.csproj....
+2025-08-17T09:03:38.9320436Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:38.9694236Z INFO: Indexing files of module 'Architecture.Model'
+2025-08-17T09:03:38.9694628Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Model
+2025-08-17T09:03:38.9694980Z INFO:   Source paths: obj/Architecture.Model.csproj.nuget.dgspec.json, obj/project....
+2025-08-17T09:03:38.9695340Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:38.9727499Z INFO: Indexing files of module 'Architecture.Database'
+2025-08-17T09:03:38.9758240Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database
+2025-08-17T09:03:38.9758760Z INFO:   Source paths: obj/Architecture.Database.csproj.nuget.dgspec.json, obj/proje...
+2025-08-17T09:03:38.9759222Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:39.0057663Z INFO: Indexing files of module 'My Project'
+2025-08-17T09:03:39.0065868Z INFO:   Base dir: /home/azureuser/myagent/_work/1/s
+2025-08-17T09:03:39.0066236Z INFO:   Source paths: dotnet-sample-project/Dockerfile, dotnet-sample-project/postm...
+2025-08-17T09:03:39.0066815Z INFO:   Excluded sources: **/node_modules/**, **/dist/**, **/build/**, **/.next/**, **/*.min.js, **/*.bundle.js, **/*.spec.ts, **/*.test.ts
+2025-08-17T09:03:39.0067242Z INFO: 163 files indexed (done) | time=222ms
+2025-08-17T09:03:39.0136269Z INFO: Quality profile for cs: Sonar way
+2025-08-17T09:03:39.0136726Z INFO: Quality profile for css: Sonar way
+2025-08-17T09:03:39.0137117Z INFO: Quality profile for docker: Sonar way
+2025-08-17T09:03:39.0137447Z INFO: Quality profile for json: Sonar way
+2025-08-17T09:03:39.0137778Z INFO: Quality profile for ts: Sonar way
+2025-08-17T09:03:39.0138096Z INFO: Quality profile for web: Sonar way
+2025-08-17T09:03:39.0138432Z INFO: Quality profile for yaml: Sonar way
+2025-08-17T09:03:39.0138814Z INFO: ------------- Run sensors on module Architecture.Model
+2025-08-17T09:03:39.0662596Z INFO: Load metrics repository
+2025-08-17T09:03:39.1794205Z INFO: Load metrics repository (done) | time=110ms
+2025-08-17T09:03:39.8666217Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:03:39.8702433Z INFO: Sensor C# Project Type Information [csharp] (done) | time=4ms
+2025-08-17T09:03:39.8707185Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:03:39.8788783Z INFO: Roslyn version: 4.14.0.0
+2025-08-17T09:03:39.8789444Z INFO: Language version: CSharp13
+2025-08-17T09:03:39.8789889Z INFO: Concurrent execution: enabled
+2025-08-17T09:03:39.8795886Z INFO: Sensor C# Analysis Log [csharp] (done) | time=10ms
+2025-08-17T09:03:39.8798421Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:03:39.8834779Z INFO: Sensor C# Method Declarations [csharp] (done) | time=1ms
+2025-08-17T09:03:39.8844409Z INFO: Sensor C# Telemetry [csharp]
+2025-08-17T09:03:39.8889657Z INFO: Sensor C# Telemetry [csharp] (done) | time=8ms
+2025-08-17T09:03:39.8890841Z INFO: Sensor C# Telemetry Json [csharp]
+2025-08-17T09:03:39.9124561Z INFO: Sensor C# Telemetry Json [csharp] (done) | time=21ms
+2025-08-17T09:03:39.9125967Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:03:39.9126241Z INFO: Sensor C# Properties [csharp] (done) | time=1ms
+2025-08-17T09:03:39.9126477Z INFO: Sensor HTML [web]
+2025-08-17T09:03:39.9181216Z INFO: Sensor HTML [web] (done) | time=7ms
+2025-08-17T09:03:39.9184363Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:03:39.9200116Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:03:39.9252137Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:03:39.9252661Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=6ms
+2025-08-17T09:03:39.9253935Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:03:40.0530031Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.0605742Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.0645999Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=140ms
+2025-08-17T09:03:40.0647122Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:03:40.1059915Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.1066758Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.1077027Z INFO: Sensor Java Config Sensor [iac] (done) | time=42ms
+2025-08-17T09:03:40.1079566Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:03:40.1080262Z INFO: No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+2025-08-17T09:03:40.1080686Z INFO: Sensor CSS Rules [javascript] (done) | time=1ms
+2025-08-17T09:03:40.1154495Z INFO: ------------- Run sensors on module Architecture.Domain
+2025-08-17T09:03:40.1706687Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:03:40.1707055Z INFO: Sensor C# Project Type Information [csharp] (done) | time=1ms
+2025-08-17T09:03:40.1707315Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:03:40.1712622Z INFO: Roslyn version: 4.14.0.0
+2025-08-17T09:03:40.1716984Z INFO: Language version: CSharp13
+2025-08-17T09:03:40.1723400Z INFO: Concurrent execution: enabled
+2025-08-17T09:03:40.1723704Z INFO: Sensor C# Analysis Log [csharp] (done) | time=1ms
+2025-08-17T09:03:40.1723966Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:03:40.1727603Z INFO: Sensor C# Method Declarations [csharp] (done) | time=1ms
+2025-08-17T09:03:40.1727882Z INFO: Sensor C# Telemetry [csharp]
+2025-08-17T09:03:40.1733691Z INFO: Sensor C# Telemetry [csharp] (done) | time=0ms
+2025-08-17T09:03:40.1744495Z INFO: Sensor C# Telemetry Json [csharp]
+2025-08-17T09:03:40.1745057Z INFO: Sensor C# Telemetry Json [csharp] (done) | time=1ms
+2025-08-17T09:03:40.1745405Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:03:40.1747442Z INFO: Sensor C# Properties [csharp] (done) | time=0ms
+2025-08-17T09:03:40.1753795Z INFO: Sensor HTML [web]
+2025-08-17T09:03:40.1754347Z INFO: Sensor HTML [web] (done) | time=0ms
+2025-08-17T09:03:40.1754856Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:03:40.1755519Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:03:40.1756171Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:03:40.1756993Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
+2025-08-17T09:03:40.1757497Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:03:40.1907334Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.1908216Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.1908643Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=15ms
+2025-08-17T09:03:40.1909411Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:03:40.1914688Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.1915230Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.1918850Z INFO: Sensor Java Config Sensor [iac] (done) | time=2ms
+2025-08-17T09:03:40.1939651Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:03:40.1940303Z INFO: No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+2025-08-17T09:03:40.1941071Z INFO: Sensor CSS Rules [javascript] (done) | time=0ms
+2025-08-17T09:03:40.1941663Z INFO: ------------- Run sensors on module Architecture.Application
+2025-08-17T09:03:40.2526494Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:03:40.2543799Z INFO: Sensor C# Project Type Information [csharp] (done) | time=1ms
+2025-08-17T09:03:40.2549098Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:03:40.2550184Z INFO: Roslyn version: 4.14.0.0
+2025-08-17T09:03:40.2591413Z INFO: Language version: CSharp13
+2025-08-17T09:03:40.2591680Z INFO: Concurrent execution: enabled
+2025-08-17T09:03:40.2591943Z INFO: Sensor C# Analysis Log [csharp] (done) | time=2ms
+2025-08-17T09:03:40.2592201Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:03:40.2592466Z INFO: Sensor C# Method Declarations [csharp] (done) | time=0ms
+2025-08-17T09:03:40.2592751Z INFO: Sensor C# Telemetry [csharp]
+2025-08-17T09:03:40.2593127Z INFO: Sensor C# Telemetry [csharp] (done) | time=0ms
+2025-08-17T09:03:40.2593388Z INFO: Sensor C# Telemetry Json [csharp]
+2025-08-17T09:03:40.2593637Z INFO: Sensor C# Telemetry Json [csharp] (done) | time=1ms
+2025-08-17T09:03:40.2593898Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:03:40.2594141Z INFO: Sensor C# Properties [csharp] (done) | time=0ms
+2025-08-17T09:03:40.2594385Z INFO: Sensor HTML [web]
+2025-08-17T09:03:40.2594620Z INFO: Sensor HTML [web] (done) | time=0ms
+2025-08-17T09:03:40.2594867Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:03:40.2595257Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:03:40.2595667Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:03:40.2595984Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=0ms
+2025-08-17T09:03:40.2596237Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:03:40.2730651Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.2731060Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.2731370Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=14ms
+2025-08-17T09:03:40.2731638Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:03:40.2753597Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.2753886Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.2791996Z INFO: Sensor Java Config Sensor [iac] (done) | time=4ms
+2025-08-17T09:03:40.2815510Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:03:40.2815856Z INFO: No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+2025-08-17T09:03:40.2816162Z INFO: Sensor CSS Rules [javascript] (done) | time=0ms
+2025-08-17T09:03:40.2816433Z INFO: ------------- Run sensors on module Architecture.Database
+2025-08-17T09:03:40.3324138Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:03:40.3324735Z INFO: Sensor C# Project Type Information [csharp] (done) | time=1ms
+2025-08-17T09:03:40.3325048Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:03:40.3325307Z INFO: Roslyn version: 4.14.0.0
+2025-08-17T09:03:40.3326261Z INFO: Language version: CSharp13
+2025-08-17T09:03:40.3328514Z INFO: Concurrent execution: enabled
+2025-08-17T09:03:40.3331180Z INFO: Sensor C# Analysis Log [csharp] (done) | time=1ms
+2025-08-17T09:03:40.3340680Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:03:40.3341014Z INFO: Sensor C# Method Declarations [csharp] (done) | time=0ms
+2025-08-17T09:03:40.3341265Z INFO: Sensor C# Telemetry [csharp]
+2025-08-17T09:03:40.3341520Z INFO: Sensor C# Telemetry [csharp] (done) | time=0ms
+2025-08-17T09:03:40.3342714Z INFO: Sensor C# Telemetry Json [csharp]
+2025-08-17T09:03:40.3347835Z INFO: Sensor C# Telemetry Json [csharp] (done) | time=0ms
+2025-08-17T09:03:40.3350390Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:03:40.3355982Z INFO: Sensor C# Properties [csharp] (done) | time=1ms
+2025-08-17T09:03:40.3362015Z INFO: Sensor HTML [web]
+2025-08-17T09:03:40.3366605Z INFO: Sensor HTML [web] (done) | time=0ms
+2025-08-17T09:03:40.3369700Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:03:40.3371871Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:03:40.3375126Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:03:40.3391447Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
+2025-08-17T09:03:40.3392580Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:03:40.3516497Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.3517034Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.3518361Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=13ms
+2025-08-17T09:03:40.3518634Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:03:40.3531246Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.3532716Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.3565222Z INFO: Sensor Java Config Sensor [iac] (done) | time=3ms
+2025-08-17T09:03:40.3566300Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:03:40.3567321Z INFO: No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+2025-08-17T09:03:40.3568522Z INFO: Sensor CSS Rules [javascript] (done) | time=0ms
+2025-08-17T09:03:40.3569942Z INFO: ------------- Run sensors on module Architecture.Web
+2025-08-17T09:03:40.4024951Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:03:40.4061156Z INFO: Sensor C# Project Type Information [csharp] (done) | time=3ms
+2025-08-17T09:03:40.4061528Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:03:40.4061760Z INFO: Roslyn version: 4.14.0.0
+2025-08-17T09:03:40.4062006Z INFO: Language version: CSharp13
+2025-08-17T09:03:40.4062260Z INFO: Concurrent execution: enabled
+2025-08-17T09:03:40.4062521Z INFO: Sensor C# Analysis Log [csharp] (done) | time=1ms
+2025-08-17T09:03:40.4062776Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:03:40.4063211Z INFO: Sensor C# Method Declarations [csharp] (done) | time=0ms
+2025-08-17T09:03:40.4063458Z INFO: Sensor C# Telemetry [csharp]
+2025-08-17T09:03:40.4063702Z INFO: Sensor C# Telemetry [csharp] (done) | time=0ms
+2025-08-17T09:03:40.4063975Z INFO: Sensor C# Telemetry Json [csharp]
+2025-08-17T09:03:40.4064225Z INFO: Sensor C# Telemetry Json [csharp] (done) | time=1ms
+2025-08-17T09:03:40.4064479Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:03:40.4064718Z INFO: Sensor C# Properties [csharp] (done) | time=0ms
+2025-08-17T09:03:40.4073673Z INFO: Sensor HTML [web]
+2025-08-17T09:03:40.6527765Z INFO: Sensor HTML [web] (done) | time=244ms
+2025-08-17T09:03:40.6532147Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:03:40.6532869Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:03:40.6534178Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:03:40.6534594Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=0ms
+2025-08-17T09:03:40.6534864Z INFO: Sensor IaC CloudFormation Sensor [iac]
+2025-08-17T09:03:40.6642565Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.6647526Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.6649861Z INFO: Sensor IaC CloudFormation Sensor [iac] (done) | time=14ms
+2025-08-17T09:03:40.6654557Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:03:40.6807327Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.6807914Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.6809002Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=12ms
+2025-08-17T09:03:40.6811192Z INFO: Sensor IaC AzureResourceManager Sensor [iac]
+2025-08-17T09:03:40.7404700Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.7425374Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.7426921Z INFO: Sensor IaC AzureResourceManager Sensor [iac] (done) | time=64ms
+2025-08-17T09:03:40.7429371Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:03:40.7456261Z INFO: 0 source files to be analyzed
+2025-08-17T09:03:40.7464145Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:03:40.7465202Z INFO: Sensor Java Config Sensor [iac] (done) | time=3ms
+2025-08-17T09:03:40.7466220Z INFO: Sensor JavaScript/TypeScript analysis [javascript]
+2025-08-17T09:03:41.0412813Z INFO: Detected os: Linux arch: amd64 alpine: false. Platform: LINUX_X64
+2025-08-17T09:03:41.0426136Z INFO: Deploy location /home/azureuser/.sonar/js/node-runtime, tagetRuntime: /home/azureuser/.sonar/js/node-runtime/node,  version: /home/azureuser/.sonar/js/node-runtime/version.txt
+2025-08-17T09:03:41.6091134Z INFO: Using embedded Node.js runtime.
+2025-08-17T09:03:41.6094963Z INFO: Using Node.js executable: '/home/azureuser/.sonar/js/node-runtime/node'.
+2025-08-17T09:03:44.2612745Z INFO: Memory configuration: OS (3867 MB), Node.js (1981 MB).
+2025-08-17T09:03:44.4988531Z INFO: WebSocket client connected on /ws
+2025-08-17T09:03:48.0674192Z INFO: Found 2 tsconfig.json file(s): [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Frontend/tsconfig.json, /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/bin/Debug/net9.0/Frontend/tsconfig.json]
+2025-08-17T09:03:48.0675221Z INFO: Creating TypeScript program
+2025-08-17T09:03:48.0676168Z INFO: 48 source files to be analyzed
+2025-08-17T09:03:48.0676753Z INFO: TypeScript configuration file /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/Frontend/tsconfig.json
+2025-08-17T09:03:48.7266623Z INFO: Starting analysis with current program
+2025-08-17T09:03:48.7304374Z INFO: Plugin version: [10.25.0.33900]
+2025-08-17T09:03:49.8473694Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:51.6120416Z INFO: Analyzed 48 file(s) with current program
+2025-08-17T09:03:51.6120941Z INFO: Creating TypeScript program
+2025-08-17T09:03:51.6121289Z INFO: TypeScript configuration file /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Web/bin/Debug/net9.0/Frontend/tsconfig.json
+2025-08-17T09:03:52.4031968Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:52.8104593Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:52.8111291Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:52.9846636Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:53.1580719Z INFO: Starting analysis with current program
+2025-08-17T09:03:53.1581777Z INFO: Analyzed 0 file(s) with current program
+2025-08-17T09:03:53.9161126Z ##[warning]Free memory is lower than 5%; Currently used: 97.52%
+2025-08-17T09:03:56.3680287Z INFO: 48/48 source files have been analyzed
+2025-08-17T09:03:56.3680819Z INFO: Hit the cache for 0 out of 48
+2025-08-17T09:03:56.3681195Z INFO: Miss the cache for 48 out of 48: ANALYSIS_MODE_INELIGIBLE [48/48]
+2025-08-17T09:03:56.3681535Z INFO: Sensor JavaScript/TypeScript analysis [javascript] (done) | time=15261ms
+2025-08-17T09:03:56.3681877Z INFO: Sensor JavaScript inside HTML analysis [javascript]
+2025-08-17T09:03:58.3592144Z INFO: 19 source files to be analyzed
+2025-08-17T09:04:03.5595493Z INFO: 19/19 source files have been analyzed
+2025-08-17T09:04:03.5596078Z INFO: Hit the cache for 0 out of 19
+2025-08-17T09:04:03.5596384Z INFO: Miss the cache for 19 out of 19: ANALYSIS_MODE_INELIGIBLE [19/19]
+2025-08-17T09:04:03.5596748Z INFO: Sensor JavaScript inside HTML analysis [javascript] (done) | time=7422ms
+2025-08-17T09:04:03.5597054Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:04:03.6555706Z INFO: 20 source files to be analyzed
+2025-08-17T09:04:03.9644538Z INFO: 20/20 source files have been analyzed
+2025-08-17T09:04:03.9644841Z INFO: Hit the cache for 0 out of 0
+2025-08-17T09:04:03.9664236Z INFO: Miss the cache for 0 out of 0
+2025-08-17T09:04:03.9664553Z INFO: Sensor CSS Rules [javascript] (done) | time=534ms
+2025-08-17T09:04:03.9664808Z INFO: Sensor CSS Metrics [javascript]
+2025-08-17T09:04:04.0245074Z INFO: Sensor CSS Metrics [javascript] (done) | time=59ms
+2025-08-17T09:04:04.0245719Z INFO: ------------- Run sensors on module My Project
+2025-08-17T09:04:04.1077707Z INFO: Sensor C# Project Type Information [csharp]
+2025-08-17T09:04:04.1079969Z INFO: Sensor C# Project Type Information [csharp] (done) | time=1ms
+2025-08-17T09:04:04.1080242Z INFO: Sensor C# Analysis Log [csharp]
+2025-08-17T09:04:04.1084405Z INFO: Sensor C# Analysis Log [csharp] (done) | time=0ms
+2025-08-17T09:04:04.1084677Z INFO: Sensor C# Method Declarations [csharp]
+2025-08-17T09:04:04.1084961Z INFO: Sensor C# Method Declarations [csharp] (done) | time=0ms
+2025-08-17T09:04:04.1085207Z INFO: Sensor C# Properties [csharp]
+2025-08-17T09:04:04.1592814Z INFO: Sensor C# Properties [csharp] (done) | time=0ms
+2025-08-17T09:04:04.1593686Z INFO: Sensor HTML [web]
+2025-08-17T09:04:04.1593990Z INFO: Sensor HTML [web] (done) | time=0ms
+2025-08-17T09:04:04.1594465Z INFO: Sensor JaCoCo XML Report Importer [jacoco]
+2025-08-17T09:04:04.1625446Z INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+2025-08-17T09:04:04.1626121Z INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+2025-08-17T09:04:04.1626534Z INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=2ms
+2025-08-17T09:04:04.1626894Z INFO: Sensor IaC CloudFormation Sensor [iac]
+2025-08-17T09:04:04.4594835Z INFO: 0 source files to be analyzed
+2025-08-17T09:04:04.4595729Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:04:04.4596359Z INFO: Sensor IaC CloudFormation Sensor [iac] (done) | time=351ms
+2025-08-17T09:04:04.4596872Z INFO: Sensor IaC Kubernetes Sensor [iac]
+2025-08-17T09:04:06.4613563Z INFO: 4 source files to be parsed
+2025-08-17T09:04:08.9576701Z WARN: Failed to evaluate Helm file dotnet-sample-project/helmchart/templates/deployment.yml: Template evaluation failed
+2025-08-17T09:04:11.4088197Z INFO: 4/4 source files have been parsed
+2025-08-17T09:04:15.4053648Z INFO: 4 source files to be analyzed
+2025-08-17T09:04:30.9676061Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:04:44.2136389Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:04:56.1575841Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:05.1615864Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:15.0025260Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:22.7162353Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:31.2091527Z INFO: 0/4 files analyzed, current file: dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:33.1085097Z INFO: 4/4 source files have been analyzed
+2025-08-17T09:05:33.1112513Z INFO: 4 source files to be checked
+2025-08-17T09:05:33.3486448Z INFO: 4/4 source files have been checked
+2025-08-17T09:05:33.3490825Z INFO: Sensor IaC Kubernetes Sensor [iac] (done) | time=88891ms
+2025-08-17T09:05:33.3503723Z INFO: Sensor IaC Docker Sensor [iac]
+2025-08-17T09:05:33.3565654Z INFO: 1 source file to be analyzed
+2025-08-17T09:05:33.4476720Z INFO: 1/1 source file has been analyzed
+2025-08-17T09:05:33.4477060Z INFO: Sensor IaC Docker Sensor [iac] (done) | time=97ms
+2025-08-17T09:05:33.4477342Z INFO: Sensor IaC AzureResourceManager Sensor [iac]
+2025-08-17T09:05:33.4522071Z INFO: 0 source files to be analyzed
+2025-08-17T09:05:33.4532764Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:05:33.4535807Z INFO: Sensor IaC AzureResourceManager Sensor [iac] (done) | time=5ms
+2025-08-17T09:05:33.4562874Z INFO: Sensor Java Config Sensor [iac]
+2025-08-17T09:05:33.4564001Z INFO: 0 source files to be analyzed
+2025-08-17T09:05:33.4564259Z INFO: 0/0 source files have been analyzed
+2025-08-17T09:05:33.4564513Z INFO: Sensor Java Config Sensor [iac] (done) | time=2ms
+2025-08-17T09:05:33.4725466Z INFO: Sensor JavaScript inside YAML analysis [javascript]
+2025-08-17T09:05:33.4725833Z INFO: No input files found for analysis
+2025-08-17T09:05:33.4748315Z INFO: Hit the cache for 0 out of 0
+2025-08-17T09:05:33.4748993Z INFO: Miss the cache for 0 out of 0
+2025-08-17T09:05:33.4750019Z INFO: Sensor JavaScript inside YAML analysis [javascript] (done) | time=21ms
+2025-08-17T09:05:33.4750390Z INFO: Sensor CSS Rules [javascript]
+2025-08-17T09:05:33.4750776Z INFO: No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+2025-08-17T09:05:33.4751155Z INFO: Sensor CSS Rules [javascript] (done) | time=0ms
+2025-08-17T09:05:33.4751513Z INFO: Sensor TextAndSecretsSensor [text]
+2025-08-17T09:05:33.5352816Z INFO: Available processors: 2
+2025-08-17T09:05:33.5354802Z INFO: Using 2 threads for analysis.
+2025-08-17T09:05:33.5483563Z INFO: The property "sonar.tests" is not set. To improve the analysis accuracy, we categorize a file as a test file if any of the following is true:
+2025-08-17T09:05:33.5484249Z   * The filename starts with "test"
+2025-08-17T09:05:33.5484576Z   * The filename contains "test." or "tests."
+2025-08-17T09:05:33.5484990Z   * Any directory in the file path is named: "doc", "docs", "test" or "tests"
+2025-08-17T09:05:33.5485381Z   * Any directory in the file path has a name ending in "test" or "tests"
+2025-08-17T09:05:33.5485589Z 
+2025-08-17T09:05:34.2619048Z INFO: Start fetching files for the text and secrets analysis
+2025-08-17T09:05:34.2837876Z INFO: Using Git CLI to retrieve untracked files
+2025-08-17T09:05:34.3228854Z INFO: Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+2025-08-17T09:05:34.3243920Z INFO: Starting the text and secrets analysis
+2025-08-17T09:05:34.3270944Z INFO: 161 source files to be analyzed for the text and secrets analysis
+2025-08-17T09:05:34.6819885Z INFO: 161/161 source files have been analyzed for the text and secrets analysis
+2025-08-17T09:05:34.6831205Z INFO: Sensor TextAndSecretsSensor [text] (done) | time=1208ms
+2025-08-17T09:05:34.6836186Z INFO: ------------- Run sensors on project
+2025-08-17T09:05:34.9558382Z INFO: Sensor C# Telemetry processor [csharp]
+2025-08-17T09:05:34.9594055Z INFO: Sensor C# Telemetry processor [csharp] (done) | time=3ms
+2025-08-17T09:05:34.9595373Z INFO: Sensor C# Telemetry Json processor [csharp]
+2025-08-17T09:05:34.9675138Z INFO: Sensor C# Telemetry Json processor [csharp] (done) | time=8ms
+2025-08-17T09:05:34.9676267Z INFO: Sensor C# [csharp]
+2025-08-17T09:05:34.9817164Z INFO: Importing results from 8 proto files in '/home/azureuser/myagent/_work/1/.sonarqube/out/1/output-cs'
+2025-08-17T09:05:35.1674242Z INFO: Importing results from 8 proto files in '/home/azureuser/myagent/_work/1/.sonarqube/out/0/output-cs'
+2025-08-17T09:05:35.1799269Z INFO: Importing results from 8 proto files in '/home/azureuser/myagent/_work/1/.sonarqube/out/3/output-cs'
+2025-08-17T09:05:35.2318560Z INFO: Importing results from 8 proto files in '/home/azureuser/myagent/_work/1/.sonarqube/out/2/output-cs'
+2025-08-17T09:05:35.2508910Z INFO: Importing results from 8 proto files in '/home/azureuser/myagent/_work/1/.sonarqube/out/4/output-cs'
+2025-08-17T09:05:35.2823223Z INFO: Importing 5 Roslyn reports
+2025-08-17T09:05:35.3228868Z INFO: Found 5 MSBuild C# projects: 5 MAIN projects.
+2025-08-17T09:05:35.3236103Z INFO: Sensor C# [csharp] (done) | time=356ms
+2025-08-17T09:05:35.3241083Z INFO: Sensor Analysis Warnings import [csharp]
+2025-08-17T09:05:35.3279021Z INFO: Sensor Analysis Warnings import [csharp] (done) | time=4ms
+2025-08-17T09:05:35.3291002Z INFO: Sensor C# File Caching Sensor [csharp]
+2025-08-17T09:05:35.3481749Z INFO: Sensor C# File Caching Sensor [csharp] (done) | time=19ms
+2025-08-17T09:05:35.3486778Z INFO: Sensor Zero Coverage Sensor
+2025-08-17T09:05:35.3647400Z INFO: Sensor Zero Coverage Sensor (done) | time=14ms
+2025-08-17T09:05:35.3648031Z INFO: ------------- Gather SCA dependencies on project
+2025-08-17T09:05:35.3664481Z INFO: Dependency analysis skipped
+2025-08-17T09:05:35.3684357Z INFO: SCM Publisher SCM provider for this project is: git
+2025-08-17T09:05:35.3704289Z INFO: SCM Publisher 147 source files to be analyzed
+2025-08-17T09:05:35.3760884Z WARN: Shallow clone detected, no blame information will be provided. You can convert to non-shallow with 'git fetch --unshallow'.
+2025-08-17T09:05:35.3780125Z INFO: SCM Publisher 0/147 source files have been analyzed (done) | time=7ms
+2025-08-17T09:05:35.3780728Z WARN: Missing blame information for the following files:
+2025-08-17T09:05:35.3782268Z WARN:   * dotnet-sample-project/source/Application/Example/Add/AddExampleHandler.cs
+2025-08-17T09:05:35.3783097Z WARN:   * dotnet-sample-project/source/Application/Example/Add/AddExampleRequestValidator.cs
+2025-08-17T09:05:35.3784028Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/models/auth.ts
+2025-08-17T09:05:35.3814403Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/auth/auth.component.html
+2025-08-17T09:05:35.3814894Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/index.html
+2025-08-17T09:05:35.3815196Z WARN:   * dotnet-sample-project/source/Application/Auth/AuthRequest.cs
+2025-08-17T09:05:35.3818281Z WARN:   * dotnet-sample-project/source/Application/File/Get/GetFileRequest.cs
+2025-08-17T09:05:35.3818657Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/footer/footer.component.ts
+2025-08-17T09:05:35.3818978Z WARN:   * dotnet-sample-project/source/Application/User/Grid/GridUserHandler.cs
+2025-08-17T09:05:35.3819285Z WARN:   * dotnet-sample-project/source/Application/Validators.cs
+2025-08-17T09:05:35.3819601Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/layout-nav/layout-nav.component.ts
+2025-08-17T09:05:35.3819928Z WARN:   * dotnet-sample-project/Dockerfile
+2025-08-17T09:05:35.3820223Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/comment.select.component.ts
+2025-08-17T09:05:35.3820573Z WARN:   * dotnet-sample-project/source/Application/Example/Delete/DeleteExampleHandler.cs
+2025-08-17T09:05:35.3820893Z WARN:   * dotnet-sample-project/source/Application/File/Add/AddFileRequestValidator.cs
+2025-08-17T09:05:35.3821232Z WARN:   * dotnet-sample-project/source/Application/User/Grid/GridUserRequestValidator.cs
+2025-08-17T09:05:35.3821536Z WARN:   * dotnet-sample-project/source/Database/Auth/AuthRepository.cs
+2025-08-17T09:05:35.3821812Z WARN:   * dotnet-sample-project/source/Domain/User.cs
+2025-08-17T09:05:35.3841587Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/services/auth.service.ts
+2025-08-17T09:05:35.3841995Z WARN:   * dotnet-sample-project/source/Application/Auth/AuthHandler.cs
+2025-08-17T09:05:35.3842331Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/input/text.input.component.ts
+2025-08-17T09:05:35.3842677Z WARN:   * dotnet-sample-project/source/Database/Migrations/00000000000000_Initial.cs
+2025-08-17T09:05:35.3843114Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/settings/settings.ts
+2025-08-17T09:05:35.3843438Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/label/label.component.html
+2025-08-17T09:05:35.3845288Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/files/files.component.ts
+2025-08-17T09:05:35.3845607Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.http.interceptor.ts
+2025-08-17T09:05:35.3845952Z WARN:   * dotnet-sample-project/source/Application/User/Inactivate/InactivateUserRequestValidator.cs
+2025-08-17T09:05:35.3846278Z WARN:   * dotnet-sample-project/source/Application/Example/Get/GetExampleHandler.cs
+2025-08-17T09:05:35.3846615Z WARN:   * dotnet-sample-project/source/Application/Example/Update/UpdateExampleHandler.cs
+2025-08-17T09:05:35.3847034Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.component.ts
+2025-08-17T09:05:35.3847338Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/option.ts
+2025-08-17T09:05:35.3847651Z WARN:   * dotnet-sample-project/source/Database/Context/Context.cs
+2025-08-17T09:05:35.3847937Z WARN:   * dotnet-sample-project/source/Web/Controllers/UserController.cs
+2025-08-17T09:05:35.3848247Z WARN:   * dotnet-sample-project/source/Application/User/Grid/GridUserRequest.cs
+2025-08-17T09:05:35.3848562Z WARN:   * dotnet-sample-project/source/Application/File/Get/GetFileRequestValidator.cs
+2025-08-17T09:05:35.3848900Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/select.component.html
+2025-08-17T09:05:35.3849212Z WARN:   * dotnet-sample-project/source/Web/Controllers/ExampleController.cs
+2025-08-17T09:05:35.3849534Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/select.component.ts
+2025-08-17T09:05:35.3849907Z WARN:   * dotnet-sample-project/source/Domain/Roles.cs
+2025-08-17T09:05:35.3850216Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/nav/nav.component.html
+2025-08-17T09:05:35.3850523Z WARN:   * dotnet-sample-project/source/Application/User/Get/GetUserHandler.cs
+2025-08-17T09:05:35.3850817Z WARN:   * dotnet-sample-project/helmchart/Chart.yaml
+2025-08-17T09:05:35.3851093Z WARN:   * dotnet-sample-project/source/Web/Controllers/FileController.cs
+2025-08-17T09:05:35.3851422Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/order/order.component.html
+2025-08-17T09:05:35.3851754Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/page/page.component.ts
+2025-08-17T09:05:35.3852089Z WARN:   * dotnet-sample-project/source/Application/Example/Grid/GridExampleRequest.cs
+2025-08-17T09:05:35.3852403Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/form/form.component.html
+2025-08-17T09:05:35.3852740Z WARN:   * dotnet-sample-project/source/Application/User/Delete/DeleteUserRequestValidator.cs
+2025-08-17T09:05:35.3861071Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/component.ts
+2025-08-17T09:05:35.3861440Z WARN:   * dotnet-sample-project/source/Web/Controllers/BaseController.cs
+2025-08-17T09:05:35.3861873Z WARN:   * dotnet-sample-project/source/Database/Context/ContextSeed.cs
+2025-08-17T09:05:35.3862182Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/files/files.component.html
+2025-08-17T09:05:35.3862514Z WARN:   * dotnet-sample-project/source/Database/User/UserRepository.cs
+2025-08-17T09:05:35.3862788Z WARN:   * dotnet-sample-project/helmchart/values.yaml
+2025-08-17T09:05:35.3868227Z WARN:   * dotnet-sample-project/source/Application/Example/Update/UpdateExampleRequestValidator.cs
+2025-08-17T09:05:35.3868573Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/file/file.service.ts
+2025-08-17T09:05:35.3868897Z WARN:   * dotnet-sample-project/source/Database/Auth/AuthConfiguration.cs
+2025-08-17T09:05:35.3869212Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/settings/settings.service.ts
+2025-08-17T09:05:35.3869551Z WARN:   * dotnet-sample-project/source/Application/Example/Delete/DeleteExampleRequestValidator.cs
+2025-08-17T09:05:35.3869874Z WARN:   * dotnet-sample-project/source/Application/User/Delete/DeleteUserHandler.cs
+2025-08-17T09:05:35.3870211Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/post.select.component.ts
+2025-08-17T09:05:35.3870696Z WARN:   * dotnet-sample-project/source/Domain/Auth.cs
+2025-08-17T09:05:35.3870985Z WARN:   * dotnet-sample-project/helmchart/templates/deployment.yml
+2025-08-17T09:05:35.3871278Z WARN:   * dotnet-sample-project/source/Application/User/List/ListUserHandler.cs
+2025-08-17T09:05:35.3871584Z WARN:   * dotnet-sample-project/source/Application/Example/Add/AddExampleRequest.cs
+2025-08-17T09:05:35.3871904Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/file/file.ts
+2025-08-17T09:05:35.3872267Z WARN:   * dotnet-sample-project/source/Application/File/Add/AddFileHandler.cs
+2025-08-17T09:05:35.3872573Z WARN:   * dotnet-sample-project/source/Database/Context/ContextFactory.cs
+2025-08-17T09:05:35.3872879Z WARN:   * dotnet-sample-project/source/Application/Example/Delete/DeleteExampleRequest.cs
+2025-08-17T09:05:35.3873350Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/home/home.component.html
+2025-08-17T09:05:35.3873676Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/label/label.component.ts
+2025-08-17T09:05:35.3874005Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/services/modal.service.ts
+2025-08-17T09:05:35.3874328Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/select/user.select.component.ts
+2025-08-17T09:05:35.3874663Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.can.activate.ts
+2025-08-17T09:05:35.3875022Z WARN:   * dotnet-sample-project/source/Application/User/Get/GetUserRequestValidator.cs
+2025-08-17T09:05:35.3875343Z WARN:   * dotnet-sample-project/source/Database/Example/IExampleRepository.cs
+2025-08-17T09:05:35.3875648Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/page/page.ts
+2025-08-17T09:05:35.3875956Z WARN:   * dotnet-sample-project/source/Application/Auth/AuthRequestValidator.cs
+2025-08-17T09:05:35.3876279Z WARN:   * dotnet-sample-project/source/Application/Example/List/ListExampleHandler.cs
+2025-08-17T09:05:35.3876587Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.configuration.ts
+2025-08-17T09:05:35.3876922Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/order/order.component.ts
+2025-08-17T09:05:35.3877255Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/button/button.component.html
+2025-08-17T09:05:35.3877583Z WARN:   * dotnet-sample-project/source/Application/User/Add/AddUserHandler.cs
+2025-08-17T09:05:35.3877896Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/layout/layout.component.html
+2025-08-17T09:05:35.3878241Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/page/page.component.html
+2025-08-17T09:05:35.3878570Z WARN:   * dotnet-sample-project/source/Application/User/Update/UpdateUserRequestValidator.cs
+2025-08-17T09:05:35.3878877Z WARN:   * dotnet-sample-project/source/Web/Program.cs
+2025-08-17T09:05:35.3879173Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/footer/footer.component.html
+2025-08-17T09:05:35.3879505Z WARN:   * dotnet-sample-project/source/Application/User/Delete/DeleteUserRequest.cs
+2025-08-17T09:05:35.3879814Z WARN:   * dotnet-sample-project/source/Application/Example/List/ListExampleRequest.cs
+2025-08-17T09:05:35.3880128Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/list/grid/grid.component.ts
+2025-08-17T09:05:35.3880466Z WARN:   * dotnet-sample-project/source/Application/Example/Grid/GridExampleRequestValidator.cs
+2025-08-17T09:05:35.3880790Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/filter/filter.ts
+2025-08-17T09:05:35.3881126Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/layout/layout.component.ts
+2025-08-17T09:05:35.3881458Z WARN:   * dotnet-sample-project/source/Application/User/Add/AddUserRequestValidator.cs
+2025-08-17T09:05:35.3881787Z WARN:   * dotnet-sample-project/source/Application/User/Inactivate/InactivateUserRequest.cs
+2025-08-17T09:05:35.3882141Z WARN:   * dotnet-sample-project/source/Domain/Status.cs
+2025-08-17T09:05:35.3882437Z WARN:   * dotnet-sample-project/source/Application/User/Add/AddUserRequest.cs
+2025-08-17T09:05:35.3882747Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/list/grid/grid.component.html
+2025-08-17T09:05:35.3917466Z WARN:   * dotnet-sample-project/source/Application/Auth/AuthResponse.cs
+2025-08-17T09:05:35.3917800Z WARN:   * dotnet-sample-project/source/Database/User/UserConfiguration.cs
+2025-08-17T09:05:35.3918133Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/header/header.component.ts
+2025-08-17T09:05:35.3918858Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.routes.ts
+2025-08-17T09:05:35.3919171Z WARN:   * dotnet-sample-project/source/Application/User/Inactivate/InactivateUserHandler.cs
+2025-08-17T09:05:35.3919507Z WARN:   * dotnet-sample-project/source/Application/File/Add/AddFileRequest.cs
+2025-08-17T09:05:35.3919829Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/layout-nav/layout-nav.component.html
+2025-08-17T09:05:35.3920172Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/models/user.ts
+2025-08-17T09:05:35.3920453Z WARN:   * dotnet-sample-project/aks-files/deployment.yml
+2025-08-17T09:05:35.3920764Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/filter/filters.ts
+2025-08-17T09:05:35.3921101Z WARN:   * dotnet-sample-project/source/Model/UserModel.cs
+2025-08-17T09:05:35.3921396Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/form/form.component.ts
+2025-08-17T09:05:35.3921736Z WARN:   * dotnet-sample-project/source/Application/Example/Update/UpdateExampleRequest.cs
+2025-08-17T09:05:35.3922062Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/grid-parameters.ts
+2025-08-17T09:05:35.3922405Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/input/input.component.html
+2025-08-17T09:05:35.3922730Z WARN:   * dotnet-sample-project/source/Application/User/Update/UpdateUserRequest.cs
+2025-08-17T09:05:35.3923241Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/input/input.component.ts
+2025-08-17T09:05:35.3923571Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/header/header.component.html
+2025-08-17T09:05:35.3923882Z WARN:   * dotnet-sample-project/source/Database/User/IUserRepository.cs
+2025-08-17T09:05:35.3924214Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/input/password.input.component.ts
+2025-08-17T09:05:35.3924543Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/home/home.component.ts
+2025-08-17T09:05:35.3924869Z WARN:   * dotnet-sample-project/source/Database/Example/ExampleRepository.cs
+2025-08-17T09:05:35.3925180Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/list/list.component.ts
+2025-08-17T09:05:35.3925511Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/file/file.component.html
+2025-08-17T09:05:35.3925825Z WARN:   * dotnet-sample-project/source/Application/User/Get/GetUserRequest.cs
+2025-08-17T09:05:35.3926141Z WARN:   * dotnet-sample-project/source/Application/User/List/ListUserRequest.cs
+2025-08-17T09:05:35.3926446Z WARN:   * dotnet-sample-project/source/Application/User/Update/UpdateUserHandler.cs
+2025-08-17T09:05:35.3926773Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/list/list.component.html
+2025-08-17T09:05:35.3927084Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/grid.ts
+2025-08-17T09:05:35.3927405Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/layouts/nav/nav.component.ts
+2025-08-17T09:05:35.3927727Z WARN:   * dotnet-sample-project/source/Application/Example/Get/GetExampleRequestValidator.cs
+2025-08-17T09:05:35.3928052Z WARN:   * dotnet-sample-project/source/Web/Controllers/AuthController.cs
+2025-08-17T09:05:35.3928333Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/main.ts
+2025-08-17T09:05:35.3928622Z WARN:   * dotnet-sample-project/source/Database/Example/ExampleConfiguration.cs
+2025-08-17T09:05:35.3929022Z WARN:   * dotnet-sample-project/source/Domain/Example.cs
+2025-08-17T09:05:35.3929314Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/order/order.ts
+2025-08-17T09:05:35.3929645Z WARN:   * dotnet-sample-project/source/Application/Example/Get/GetExampleRequest.cs
+2025-08-17T09:05:35.3929952Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/app.error.handler.ts
+2025-08-17T09:05:35.3930273Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/pages/auth/auth.component.ts
+2025-08-17T09:05:35.3959289Z WARN:   * dotnet-sample-project/source/Model/ExampleModel.cs
+2025-08-17T09:05:35.3959608Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/services/user.service.ts
+2025-08-17T09:05:35.3959927Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/grid/grid.service.ts
+2025-08-17T09:05:35.3960270Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/button/button.component.ts
+2025-08-17T09:05:35.3960600Z WARN:   * dotnet-sample-project/source/Application/File/Get/GetFileHandler.cs
+2025-08-17T09:05:35.3960993Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/app/components/file/file.component.ts
+2025-08-17T09:05:35.3961312Z WARN:   * dotnet-sample-project/source/Database/Auth/IAuthRepository.cs
+2025-08-17T09:05:35.3961715Z WARN:   * dotnet-sample-project/source/Web/Frontend/src/styles/style.scss
+2025-08-17T09:05:35.3962037Z WARN:   * dotnet-sample-project/source/Application/Example/Grid/GridExampleHandler.cs
+2025-08-17T09:05:35.3962330Z WARN: This may lead to missing/broken features in SonarQube
+2025-08-17T09:05:35.3995080Z INFO: CPD Executor 84 files had no CPD blocks
+2025-08-17T09:05:35.4000565Z INFO: CPD Executor Calculating CPD for 57 files
+2025-08-17T09:05:35.4264327Z INFO: CPD Executor CPD calculation finished (done) | time=25ms
+2025-08-17T09:05:35.4363158Z INFO: SCM revision ID '5931ff26b52eaa3c88c30cd1b3996d8a09e6ac37'
+2025-08-17T09:05:35.6387678Z INFO: Analysis report generated in 180ms, dir size=470.7 kB
+2025-08-17T09:05:35.8579243Z INFO: Analysis report compressed in 219ms, zip size=266.8 kB
+2025-08-17T09:05:35.9713023Z INFO: Analysis report uploaded in 113ms
+2025-08-17T09:05:35.9756804Z INFO: ANALYSIS SUCCESSFUL, you can find the results at: ***/dashboard?id=sonarqube-project
+2025-08-17T09:05:35.9757376Z INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+2025-08-17T09:05:35.9767567Z INFO: More about the report processing at ***/api/ce/task?id=e4bf915e-d4e9-4f50-92d4-e56634442830
+2025-08-17T09:05:36.1415630Z INFO: Analysis total time: 2:00.516 s
+2025-08-17T09:05:36.1428953Z INFO: ------------------------------------------------------------------------
+2025-08-17T09:05:36.1434713Z INFO: EXECUTION SUCCESS
+2025-08-17T09:05:36.1435035Z INFO: ------------------------------------------------------------------------
+2025-08-17T09:05:36.1435319Z INFO: Total time: 2:04.691s
+2025-08-17T09:05:36.2134468Z INFO: Final Memory: 16M/256M
+2025-08-17T09:05:36.2141404Z INFO: ------------------------------------------------------------------------
+2025-08-17T09:05:36.6023194Z The SonarScanner CLI has finished
+2025-08-17T09:05:36.6061783Z 09:05:36.603  Post-processing succeeded.
+2025-08-17T09:05:36.7479944Z 
+2025-08-17T09:05:36.8639038Z ##[section]Finishing: Sonar scan

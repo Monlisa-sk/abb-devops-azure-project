@@ -1,0 +1,37 @@
+2025-08-17T14:55:19.5050208Z ##[section]Starting: Run all tests with coverage and logs
+2025-08-17T14:55:19.5055615Z ==============================================================================
+2025-08-17T14:55:19.5055796Z Task         : Command line
+2025-08-17T14:55:19.5055901Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-17T14:55:19.5056030Z Version      : 2.250.1
+2025-08-17T14:55:19.5056285Z Author       : Microsoft Corporation
+2025-08-17T14:55:19.5056371Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-17T14:55:19.5056492Z ==============================================================================
+2025-08-17T14:55:25.2047870Z Generating script.
+2025-08-17T14:55:25.2059699Z ========================== Starting Command Output ===========================
+2025-08-17T14:55:25.2080142Z [command]/usr/bin/bash --noprofile --norc /home/azureuser/myagent/_work/_temp/f10b3785-702d-4286-b0f8-fc33343e6b3e.sh
+2025-08-17T14:55:25.2142867Z Discovering test projects in dotnet-sample-project...
+2025-08-17T14:55:25.2174706Z Running tests for dotnet-sample-project/tests/Sample.Tests/Sample.Tests.csproj
+2025-08-17T14:55:25.8960292Z   Determining projects to restore...
+2025-08-17T14:55:28.8606564Z   Restored /home/azureuser/myagent/_work/1/s/dotnet-sample-project/tests/Sample.Tests/Sample.Tests.csproj (in 1.81 sec).
+2025-08-17T14:55:28.8652267Z   4 of 5 projects are up-to-date for restore.
+2025-08-17T14:55:29.6245297Z   Sonar: (Architecture.Domain.csproj) The analysis targets file not found: /home/azureuser/myagent/_work/1/.sonarqube/bin/targets/SonarQube.Integration.targets
+2025-08-17T14:55:29.6451527Z   Sonar: (Architecture.Model.csproj) The analysis targets file not found: /home/azureuser/myagent/_work/1/.sonarqube/bin/targets/SonarQube.Integration.targets
+2025-08-17T14:55:29.7860420Z   Architecture.Model -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Model/bin/Debug/net9.0/Architecture.Model.dll
+2025-08-17T14:55:29.7869390Z   Architecture.Domain -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Domain/bin/Debug/net9.0/Architecture.Domain.dll
+2025-08-17T14:55:29.9617815Z   Sonar: (Architecture.Database.csproj) The analysis targets file not found: /home/azureuser/myagent/_work/1/.sonarqube/bin/targets/SonarQube.Integration.targets
+2025-08-17T14:55:30.3186468Z   Architecture.Database -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Database/bin/Debug/net9.0/Architecture.Database.dll
+2025-08-17T14:55:30.4664701Z   Sonar: (Architecture.Application.csproj) The analysis targets file not found: /home/azureuser/myagent/_work/1/.sonarqube/bin/targets/SonarQube.Integration.targets
+2025-08-17T14:55:30.8966559Z   Architecture.Application -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/source/Application/bin/Debug/net9.0/Architecture.Application.dll
+2025-08-17T14:55:31.1011827Z   Sonar: (Sample.Tests.csproj) The analysis targets file not found: /home/azureuser/myagent/_work/1/.sonarqube/bin/targets/SonarQube.Integration.targets
+2025-08-17T14:55:31.6227075Z /home/azureuser/myagent/_work/1/s/dotnet-sample-project/tests/Sample.Tests/AuthHandlerSingleTest.cs(27,91): warning CS8600: Converting null literal or possible null value to non-nullable type. [/home/azureuser/myagent/_work/1/s/dotnet-sample-project/tests/Sample.Tests/Sample.Tests.csproj]
+2025-08-17T14:55:31.9626042Z   Sample.Tests -> /home/azureuser/myagent/_work/1/s/dotnet-sample-project/tests/Sample.Tests/bin/Debug/net9.0/Sample.Tests.dll
+2025-08-17T14:55:31.9981238Z Test run for /home/azureuser/myagent/_work/1/s/dotnet-sample-project/tests/Sample.Tests/bin/Debug/net9.0/Sample.Tests.dll (.NETCoreApp,Version=v9.0)
+2025-08-17T14:55:32.0695026Z VSTest version 17.14.1 (x64)
+2025-08-17T14:55:32.0743984Z 
+2025-08-17T14:55:32.2862253Z Starting test execution, please wait...
+2025-08-17T14:55:32.3551325Z A total of 1 test files matched the specified pattern.
+2025-08-17T14:55:34.3711762Z 
+2025-08-17T14:55:34.3833860Z Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 279 ms - Sample.Tests.dll (net9.0)
+2025-08-17T14:55:34.4723032Z Completed tests for dotnet-sample-project/tests/Sample.Tests/Sample.Tests.csproj
+2025-08-17T14:55:34.4743658Z 
+2025-08-17T14:55:34.4819729Z ##[section]Finishing: Run all tests with coverage and logs
