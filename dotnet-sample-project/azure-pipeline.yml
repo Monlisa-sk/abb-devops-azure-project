@@ -120,11 +120,21 @@ stages:
           scriptLocation: inlineScript
           inlineScript: |
               az acr login --name $(acrName)
-              docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
+
               mkdir -p "$(Build.ArtifactStagingDirectory)"
+
+              docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
               trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL \
               --format table \
               --output "$(Build.ArtifactStagingDirectory)/container-scan-report.txt"
+
+              ls -la "$(Build.ArtifactStagingDirectory)"
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)'
+            artifactName: 'security-scan'
+        displayName: "Publish scan report"
 
   - job: docker_push
     displayName: 'Push image'
