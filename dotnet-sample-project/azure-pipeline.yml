@@ -19,16 +19,6 @@ stages:
     - job: build_and_test
       displayName: 'Build and Test'
       steps:
-        - task: AzureKeyVault@2
-          inputs:
-            azureSubscription: 'ARM-Service-Connection'
-            KeyVaultName: 'dotnet-app-vault'
-            SecretsFilter: '*'
-            RunAsPreJob: true
-        - script: |
-            echo "The value of mySecret is: $(sonarlogin)"
-          displayName: 'Use the secret'
-
         - task: UseDotNet@2
           inputs:
             packageType: 'sdk'
@@ -62,6 +52,12 @@ stages:
     displayName: SonarQube Analysis
     continueOnError: true
     steps:
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'ARM-Service-Connection'
+        KeyVaultName: 'dotnet-app-vault'
+        SecretsFilter: '*'
+        RunAsPreJob: true
     - task: UseDotNet@2
       displayName: 'Install .NET SDK'
       inputs:
