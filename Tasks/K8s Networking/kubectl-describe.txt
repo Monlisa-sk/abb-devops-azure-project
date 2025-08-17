@@ -1,0 +1,52 @@
+Name:                   helm-deploy
+Namespace:              deploy-dev
+CreationTimestamp:      Sun, 17 Aug 2025 04:18:15 +0530
+Labels:                 app.kubernetes.io/managed-by=Helm
+Annotations:            deployment.kubernetes.io/revision: 25
+                        meta.helm.sh/release-name: myapp-dev
+                        meta.helm.sh/release-namespace: deploy-dev
+Selector:               app=dotnet-sample-app
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=dotnet-sample-app
+  Containers:
+   dotnet-sample-app:
+    Image:      devopscontainerreg.azurecr.io/dotnet-sample-project:refactor-217
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Environment:
+      SigningKey:                       58a97cd766d741e8a21b8d3c4279652469801dc8da844fa5bf80afeea85aa472
+      ConnectionStrings__Context:       Server=localhost,1433;Database=Database;User Id=sa;Password=P4ssW0rd!;TrustServerCertificate=true;
+      Serilog__WriteTo__1__Args__path:  /app/logs/
+    Mounts:                             <none>
+   mssql:
+    Image:      mcr.microsoft.com/mssql/server:2022-latest
+    Port:       1433/TCP
+    Host Port:  0/TCP
+    Environment:
+      ACCEPT_EULA:  Y
+      SA_PASSWORD:  P4ssW0rd!
+    Mounts:
+      /var/opt/mssql from database-storage (rw)
+  Volumes:
+   database-storage:
+    Type:          EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:        
+    SizeLimit:     <unset>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  helm-deploy-6c9ff988c4 (0/0 replicas created), helm-deploy-5b5d4dc79c (0/0 replicas created), helm-deploy-9fb58db66 (0/0 replicas created), helm-deploy-6b5c8b9cf4 (0/0 replicas created), helm-deploy-fd7967c9c (0/0 replicas created), helm-deploy-977b94bd5 (0/0 replicas created), helm-deploy-7cf79df654 (0/0 replicas created), helm-deploy-74cd78d6bc (0/0 replicas created), helm-deploy-58b5bbcd88 (0/0 replicas created), helm-deploy-795b97bf7b (0/0 replicas created)
+NewReplicaSet:   helm-deploy-7bf78449b7 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  46m   deployment-controller  Scaled up replica set helm-deploy-7bf78449b7 from 0 to 1
+  Normal  ScalingReplicaSet  46m   deployment-controller  Scaled down replica set helm-deploy-795b97bf7b from 1 to 0

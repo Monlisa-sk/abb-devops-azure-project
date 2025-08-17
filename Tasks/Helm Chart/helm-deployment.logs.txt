@@ -1,0 +1,23 @@
+2025-08-17T08:00:37.9660248Z ##[section]Starting: Deploy to Staging
+2025-08-17T08:00:37.9668427Z ==============================================================================
+2025-08-17T08:00:37.9668614Z Task         : Package and deploy Helm charts
+2025-08-17T08:00:37.9668720Z Description  : Deploy, configure, update a Kubernetes cluster in Azure Container Service by running helm commands
+2025-08-17T08:00:37.9668899Z Version      : 0.259.3
+2025-08-17T08:00:37.9668999Z Author       : Microsoft Corporation
+2025-08-17T08:00:37.9669115Z Help         : https://aka.ms/azpipes-helm-tsg
+2025-08-17T08:00:37.9669229Z ==============================================================================
+2025-08-17T08:00:43.3192646Z [command]/home/azureuser/myagent/_work/_tool/helm/3.18.5/x64/linux-amd64/helm upgrade --namespace deploy-staging --install --wait --create-namespace --set dotnetSampleApp.image.repository=devopscontainerreg.azurecr.io/dotnet-sample-project --set dotnetSampleApp.image.tag=main-157 --set image.pullSecrets[0]=kube-acr myapp-staging /home/azureuser/myagent/_work/1/s/dotnet-sample-project/helmchart
+2025-08-17T08:00:45.7342160Z Release "myapp-staging" does not exist. Installing it now.
+2025-08-17T08:00:45.7343096Z NAME: myapp-staging
+2025-08-17T08:00:45.7343646Z LAST DEPLOYED: Sun Aug 17 08:00:41 2025
+2025-08-17T08:00:45.7344105Z NAMESPACE: deploy-staging
+2025-08-17T08:00:45.7344838Z STATUS: deployed
+2025-08-17T08:00:45.7345498Z REVISION: 1
+2025-08-17T08:00:45.7346251Z TEST SUITE: None
+2025-08-17T08:00:45.9694915Z [command]/usr/local/bin/kubectl cluster-info
+2025-08-17T08:00:46.0750913Z Kubernetes control plane is running at https://abb-aks-cluster-9976zup9.hcp.eastus.azmk8s.io/
+2025-08-17T08:00:46.0751784Z CoreDNS is running at https://abb-aks-cluster-9976zup9.hcp.eastus.azmk8s.io//api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+2025-08-17T08:00:46.0752869Z Metrics-server is running at https://abb-aks-cluster-9976zup9.hcp.eastus.azmk8s.io//api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+2025-08-17T08:00:46.0753238Z 
+2025-08-17T08:00:46.0753510Z To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+2025-08-17T08:00:46.0968576Z ##[section]Finishing: Deploy to Staging
