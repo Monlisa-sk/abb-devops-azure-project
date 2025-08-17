@@ -45,53 +45,53 @@ stages:
             done
           displayName: 'Run all tests with coverage and logs'
 
-# - stage: CodeAnalysis
-#   displayName: 'SonarQube Build Scan'
-#   jobs:
-#   - job: sonarqube
-#     displayName: SonarQube Analysis
-#     continueOnError: true
-#     steps:
-#     - task: AzureKeyVault@2
-#       inputs:
-#         azureSubscription: 'ARM-Service-Connection'
-#         KeyVaultName: 'dotnet-app-vault'
-#         SecretsFilter: '*'
-#         RunAsPreJob: true
-#     - task: UseDotNet@2
-#       displayName: 'Install .NET SDK'
-#       inputs:
-#         packageType: 'sdk'
-#         version: '9.0.x'
+- stage: CodeAnalysis
+  displayName: 'SonarQube Build Scan'
+  jobs:
+  - job: sonarqube
+    displayName: SonarQube Analysis
+    continueOnError: true
+    steps:
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'ARM-Service-Connection'
+        KeyVaultName: 'dotnet-app-vault'
+        SecretsFilter: '*'
+        RunAsPreJob: true
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
 
-#     - script: |
-#         dotnet nuget locals all --clear || true
-#         echo "Before scan memory:"; free -h || true
-#       displayName: 'Pre-clean'
+    - script: |
+        dotnet nuget locals all --clear || true
+        echo "Before scan memory:"; free -h || true
+      displayName: 'Pre-clean'
 
-#     - script: |
-#         export SONAR_SCANNER_OPTS="-Xmx1024m -Xms256m"
+    - script: |
+        export SONAR_SCANNER_OPTS="-Xmx1024m -Xms256m"
         
-#         dotnet tool install --global dotnet-sonarscanner
-#         export PATH="$PATH:$HOME/.dotnet/tools"
+        dotnet tool install --global dotnet-sonarscanner
+        export PATH="$PATH:$HOME/.dotnet/tools"
 
-#         dotnet sonarscanner begin \
-#           /k:"sonarqube-project" \
-#           /n:"My Project" \
-#           /v:"1.0" \
-#           /d:sonar.host.url=$SONAR_HOST \
-#           /d:sonar.login=$SONAR_LOGIN \
-#           /d:sonar.sources="$(SRC_DIR)/source" \
-#           /d:sonar.sourceEncoding="UTF-8" \
-#           /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
+        dotnet sonarscanner begin \
+          /k:"sonarqube-project" \
+          /n:"My Project" \
+          /v:"1.0" \
+          /d:sonar.host.url=$SONAR_HOST \
+          /d:sonar.login=$SONAR_LOGIN \
+          /d:sonar.sources="$(SRC_DIR)/source" \
+          /d:sonar.sourceEncoding="UTF-8" \
+          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
 
-#         dotnet build "$(SRC_DIR)/source" --no-incremental
+        dotnet build "$(SRC_DIR)/source" --no-incremental
 
-#         dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
-#       env:
-#         SONAR_LOGIN: $(sonarlogin)
-#         SONAR_HOST: $(sonarhosturl)
-#       displayName: 'Sonar scan'
+        dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
+      env:
+        SONAR_LOGIN: $(sonarlogin)
+        SONAR_HOST: $(sonarhosturl)
+      displayName: 'Sonar scan'
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
