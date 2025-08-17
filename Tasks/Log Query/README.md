@@ -1,27 +1,29 @@
 ## 📌 Problem Statement  
-Write a KQL (Kusto Query Language) query in Log Analytics to analyze AKS logs and provide results as proof.  
+Write a KQL (Kusto Query Language) query in Log Analytics to analyze AKS logs and provide results as proof.
 
 ---
 
 ## ⚙️ Solution Approach  
-- Connected the AKS cluster to **Log Analytics Workspace**.  
-- Authored KQL queries to analyze container logs, pod restarts, and error events.  
-- Ran queries in the Azure Portal Log Analytics interface to retrieve data.  
-- Exported the query and saved it as `.kql` for submission.  
-- Captured screenshots of the query execution and results as proof.  
+- AKS is connected to a **Log Analytics Workspace**.
+- Authored a single KQL to surface:
+  - **Error logs** (by namespace/pod/container, with sample message).
+  - **Container restarts** (joins restart counts).
+- Executed the query in Azure Portal → **Logs**.
+- Exported the results to **CSV** and captured a **results screenshot**.
 
 ---
 
 ## 📂 Files in this Folder  
-- `log-analytics-query.kql` → The KQL query used for log analysis.  
-- **screenshots/** →  
-  - `query-execution.png` → KQL query entered in Log Analytics.  
-  - `query-results.png` → Results returned from the query.  
+- `log-analytics-query.kql` — The KQL query used for analysis.  
+- `query_results.csv` — Exported results from the Log Analytics query.  
+- **screenshots/**  
+  - `query_results_screenshot.png` — Screenshot of the query and results in Log Analytics.
 
 ---
 
 ## ✅ Proof of Execution  
-- **File:** `log-analytics-query.kql` → Contains the log query definition.  
-- **Screenshot:** `screenshots/query-execution.png` → Shows query execution in Log Analytics.  
-- **Screenshot:** `screenshots/query-results.png` → Displays the query results table/graph output.  
+- **File:** `log-analytics-query.kql` shows the exact query used.  
+- **Screenshot:** `screenshots/query_results_screenshot.png` displays the query execution and returned rows.  
+- **Data:** `query_results.csv` contains the exported tabular results from the run.
 
+---
