@@ -1,0 +1,49 @@
+data.azurerm_resource_group.aks-rg: Reading...
+data.azurerm_resource_group.aks-rg: Read complete after 0s [id=/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops]
+azurerm_log_analytics_workspace.law: Refreshing state... [id=/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.OperationalInsights/workspaces/log-aks-demo]
+azurerm_kubernetes_cluster.aks: Refreshing state... [id=/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.ContainerService/managedClusters/abb-aks-cluster]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # azurerm_kubernetes_cluster.aks will be updated in-place
+  ~ resource "azurerm_kubernetes_cluster" "aks" {
+        id                                  = "/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.ContainerService/managedClusters/abb-aks-cluster"
+        name                                = "abb-aks-cluster"
+        tags                                = {}
+        # (36 unchanged attributes hidden)
+
+      ~ default_node_pool {
+            name                          = "system"
+            tags                          = {}
+            # (31 unchanged attributes hidden)
+
+          - upgrade_settings {
+              - drain_timeout_in_minutes      = 0 -> null
+              - max_surge                     = "10%" -> null
+              - node_soak_duration_in_minutes = 0 -> null
+            }
+        }
+
+        # (4 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+azurerm_kubernetes_cluster.aks: Modifying... [id=/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.ContainerService/managedClusters/abb-aks-cluster]
+azurerm_kubernetes_cluster.aks: Still modifying... [id=/subscriptions/6b4c6964-00b1-443b-b777-...ervice/managedClusters/abb-aks-cluster, 00m10s elapsed]
+azurerm_kubernetes_cluster.aks: Still modifying... [id=/subscriptions/6b4c6964-00b1-443b-b777-...ervice/managedClusters/abb-aks-cluster, 00m20s elapsed]
+azurerm_kubernetes_cluster.aks: Still modifying... [id=/subscriptions/6b4c6964-00b1-443b-b777-...ervice/managedClusters/abb-aks-cluster, 00m30s elapsed]
+azurerm_kubernetes_cluster.aks: Modifications complete after 39s [id=/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.ContainerService/managedClusters/abb-aks-cluster]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+Outputs:
+
+aks_cluster_id = "/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.ContainerService/managedClusters/abb-aks-cluster"
+aks_cluster_name = "abb-aks-cluster"
+log_analytics_workspace_id = "/subscriptions/6b4c6964-00b1-443b-b777-d2bfc4833a31/resourceGroups/abb-devops/providers/Microsoft.OperationalInsights/workspaces/log-aks-demo"
+log_analytics_workspace_name = "log-aks-demo"
+resource_group_name = "abb-devops"
