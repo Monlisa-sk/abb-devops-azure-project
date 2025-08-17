@@ -16,7 +16,7 @@ The repo is structured task-wise for clarity, and each folder includes:
 
 | Task                        | Folder Link                                                      | What I Completed                                                                                                               |
 | --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Branching and Workflow      | [Branching & Workflow](tasks/01-branching-workflow/README.md)    | Defined a branching strategy (`branching-strategy.md`) and demonstrated feature → PR → merge flow with screenshots             |
+| Branching and Workflow      | [Branching & Workflow](tasks/Tasks/Branching%20%26%20Workflow)    | Defined a branching strategy (`branching-strategy.md`) and demonstrated feature → PR → merge flow with screenshots             |
 | CI Pipeline                 | [CI Pipeline](tasks/02-ci-pipeline/README.md)                    | Created an Azure DevOps CI pipeline (`azure-devops-pipeline.yml`) with automated build + unit tests; added build logs as proof |
 | CD Pipeline                 | [CD Pipeline](tasks/03-cd-pipeline/README.md)                    | Extended the CI pipeline into CD (`cd-pipeline.yml`) for application deployment, with logs + release screenshots               |
 | Multi-Stage Pipeline        | [Multi-Stage Pipeline](tasks/04-multi-stage-pipeline/README.md)  | Implemented a multi-stage pipeline (`multi-stage-pipeline.yml`) covering Dev → QA → Prod with environment variables            |
