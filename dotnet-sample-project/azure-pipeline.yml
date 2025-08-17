@@ -121,7 +121,8 @@ stages:
       -   task: DownloadPipelineArtifact@2
           inputs:
             artifactName: 'security-scan'
-            targetPath: '$(Pipeline.Workspace)'
+            targetPath: '$(Build.ArtifactStagingDirectory)/container-scan-report.txt'
+
 
   - job: docker_push
     displayName: 'Push image'
