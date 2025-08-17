@@ -17,3 +17,5 @@ dist
 node_modules
 package-lock.json
 *.DS_Store
+*.terraform
+*.terraform.lock.hcl
