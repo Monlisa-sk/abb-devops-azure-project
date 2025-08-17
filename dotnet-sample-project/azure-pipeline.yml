@@ -77,7 +77,7 @@ stages:
           /n:"My Project" \
           /v:"1.0" \
           /d:sonar.host.url= 'http://20.55.232.207:9000/' \
-          /d:sonar.login= 'sqa_6c951f8cd1584175961cbc357a8011565ead668e' \
+          /d:sonar.login= '$SONAR_LOGIN' \
           /d:sonar.sources="$(SRC_DIR)/source" \
           /d:sonar.sourceEncoding="UTF-8"
           /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
@@ -87,6 +87,7 @@ stages:
         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
       env:
         PATH: $(PATH):~/.dotnet/tools
+        SONAR_LOGIN: $(sonarlogin)
       displayName: 'Sonar scan'
 
 - stage: DockerBuildAndPush
