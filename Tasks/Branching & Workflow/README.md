@@ -1,5 +1,3 @@
-# Task 1 – Branching and Workflow  
-
 ## 📌 Problem Statement  
 Design and demonstrate a branching workflow strategy in Git that supports feature development, pull requests, and controlled merges to the main branch.
 
