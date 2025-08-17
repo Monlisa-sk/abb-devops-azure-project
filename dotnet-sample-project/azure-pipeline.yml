@@ -112,6 +112,12 @@ stages:
               az acr login --name $(acrName)
               docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
               trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL
+      -   task: PublishBuildArtifacts@1
+          displayName: "Publish scan report"
+          inputs:
+            PathtoPublish: 'container-scan-report.txt'
+            ArtifactName: 'security-scan'
+            publishLocation: 'Container'
 
   - job: docker_push
     displayName: 'Push image'
