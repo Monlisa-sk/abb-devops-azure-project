@@ -1,33 +1,29 @@
-## 📌 Problem Statement  
-Investigate and resolve an AKS issue where pods cannot communicate with external services. Provide description of the issue, resolution steps, and logs/screenshots as proof.  
+## 📌 Problem Statement
+Investigate and resolve an AKS issue where pods cannot communicate with external services. Provide description of the issue, resolution steps, and logs/screenshots as proof.
 
 ---
 
-## ⚙️ Solution Approach  
-- Analyzed AKS pod networking and found that pods were unable to reach external services.  
-- Used `kubectl describe pod` and `kubectl logs` to review pod events and error messages.  
-- Identified root cause as a **network policy / DNS resolution issue**.  
-- Applied resolution by updating network configuration (e.g., CoreDNS settings, NetworkPolicy rules).  
-- Re-tested pod connectivity to external endpoints and confirmed success.  
+## ⚙️ Solution Approach
+- Collected pod details/events via **kubectl describe**.
+- Reviewed logs/events for DNS timeouts and egress failures.
+- Identified the root cause 
+- Applied fixes .
+- Re-tested connectivity and confirmed success.
 
 ---
 
-## 📂 Files in this Folder  
-- `network-issue-resolved.md` → Document describing the issue and resolution steps.  
-- `kubectl-describe.txt` → Captured output from `kubectl describe pod`.  
-- `kubectl-logs.txt` → Relevant logs showing networking errors.  
-- **screenshots/** →  
-  - `pod-error.png` → Initial failure showing pods unable to connect externally.  
-  - `network-fix-applied.png` → Proof of configuration changes applied.  
-  - `pod-success.png` → Proof of successful external connectivity after fix.  
+## 📂 Files in this Folder
+- `network-issue-resolved.md` — Root cause, resolution steps, and validation.
+- `kubectl-describe.txt` — Output captured from `kubectl describe pod <pod> -n <ns>`.
+- **screenshots/**
+  - `kubectl_log_events.png` — Pod events/logs showing DNS/egress failures.
+  - `kubectl_network_issue.png` — Symptom view (failing readiness/requests).
 
 ---
 
-## ✅ Proof of Execution  
-- **File:** `network-issue-resolved.md` → Contains detailed description of problem + fix.  
-- **Log File:** `kubectl-describe.txt` → Shows pod event logs before fix.  
-- **Log File:** `kubectl-logs.txt` → Error logs confirming networking failure.  
-- **Screenshot:** `screenshots/pod-error.png` → Pods failing external communication.  
-- **Screenshot:** `screenshots/network-fix-applied.png` → Resolution applied.  
-- **Screenshot:** `screenshots/pod-success.png` → Pods successfully connecting after fix.  
-
+## ✅ Proof of Execution
+- **File:** `network-issue-resolved.md` documents the issue and the applied fix.
+- **Log File:** `kubectl-describe.txt` shows pre-fix events (ImagePull/BackOff, DNS, egress).
+- **Screenshots:** 
+  - `screenshots/kubectl_log_events.png` (errors before fix),
+  - `screenshots/kubectl_network_issue.png` (symptom and post-fix confirmation).
