@@ -153,7 +153,7 @@ stages:
                   action: 'createSecret'
                   connectionType: 'kubernetesServiceConnection'
                   kubernetesServiceConnection: 'AKS-Conn'
-                  namespace: 'deploy-staging'
+                  namespace: 'deploy-prod'
                   secretType: 'dockerRegistry'
                   secretName: 'kube-acr'
                   dockerRegistryEndpoint: 'devops-service-connection'
@@ -169,7 +169,7 @@ stages:
                   install: true
                   chartType: 'FilePath'
                   chartPath: '$(helmChartPath)'
-                  namespace: 'deploy-prod'
+                  namespace: 'deploy-dev'
                   releaseName: 'myapp-dev'
                   arguments: >
                     --create-namespace
