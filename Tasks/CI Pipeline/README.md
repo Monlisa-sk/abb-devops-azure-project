@@ -1,5 +1,3 @@
-# Task 2 – CI Pipeline  
-
 ## 📌 Problem Statement  
 Set up a Continuous Integration (CI) pipeline in Azure DevOps for a sample application to ensure code is built and tested automatically after each commit.  
 
