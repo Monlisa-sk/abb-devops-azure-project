@@ -10,19 +10,7 @@ pool:
   name: AzureVM
 
 variables:
-  # CI vars
-  SRC_DIR: 'dotnet-sample-project'
-  dockerRegistryServiceConnection: 'devops-service-connection'
-  imageRepository: 'dotnet-sample-project'
-  tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
-
-  # CD vars
-  azureSubscription: 'ARM-Service-Connection'
-  aksResourceGroup: 'abb-devops'
-  aksName: 'abb-aks-cluster'
-  acrName: 'devopscontainerreg'
-  helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
-  imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
+  - group: Variables
 
 stages:
 - stage: BuildAndTest
