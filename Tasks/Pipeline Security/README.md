@@ -1,29 +1,26 @@
-## 📌 Problem Statement  
-Integrate a security scanner (e.g., SonarQube or similar) into the CI/CD pipeline to enforce code quality and security checks. Provide the pipeline definition and logs showing scan results.  
+## 📌 Problem Statement
+Integrate a security scanner (SonarQube) into the CI/CD pipeline to enforce code quality and security checks. Provide the pipeline evidence and logs showing scan results.
 
 ---
 
-## ⚙️ Solution Approach  
-- Enhanced the pipeline with a **SonarQube integration** step.  
-- Configured `sonar-scanner` in the pipeline YAML to analyze source code for bugs, vulnerabilities, and code smells.  
-- Set up a **quality gate** in SonarQube so that builds fail if thresholds are not met.  
-- Ran the pipeline and confirmed the scan results in both pipeline logs and the SonarQube dashboard.  
+## ⚙️ Solution Approach
+- Added **SonarQube analysis** to the pipeline (begin → analyze → end).
+- Enforced **Quality Gate** so the pipeline fails if thresholds aren’t met.
+- Executed a pipeline run and captured:
+  - Raw **scan logs** from the job.
+  - **Dashboard** screenshot showing analysis summary & Quality Gate status.
 
 ---
 
-## 📂 Files in this Folder  
-- `security-pipeline.yml` → Updated pipeline definition with SonarQube scanning stage.  
-- `sonarqube-project-properties.txt` → (Optional) Config used for SonarQube project key, name, and settings.  
-- `security-scan-logs.txt` → Captured pipeline logs showing scan execution and results.  
-- **screenshots/** →  
-  - `sonarqube-dashboard.png` → SonarQube dashboard showing analysis results.  
-  - `pipeline-security-success.png` → Pipeline run including SonarQube scan step.  
+## 📂 Files in this Folder
+- `sonarqube_scan_logs.txt` — Captured console logs from the pipeline SonarQube step(s).
+- `screenshots/`
+  - `sonarqube_dashboard.png` — SonarQube project dashboard after the run.
 
 ---
 
-## ✅ Proof of Execution  
-- **File:** `security-pipeline.yml` → Pipeline includes SonarQube integration.  
-- **Log File:** `security-scan-logs.txt` → Shows the SonarQube scan execution during pipeline run.  
-- **Screenshot:** `screenshots/pipeline-security-success.png` → Pipeline successfully executed with scan step.  
-- **Screenshot:** `screenshots/sonarqube-dashboard.png` → SonarQube dashboard displaying code analysis and quality gate status.  
+## ✅ Proof of Execution
+- **Logs:** See `sonarqube_scan_logs.txt` for scanner start, uploaded report, and Quality Gate result.
+- **Screenshot:** See `screenshots/sonarqube_dashboard.png` for analysis metrics and overall status.
 
+---
