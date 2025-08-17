@@ -17,9 +17,9 @@ The repo is structured task-wise for clarity, and each folder includes:
 | Task                        | Folder Link                                                      | What I Completed                                                                                                               |
 | --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Branching and Workflow      | [Branching & Workflow](Tasks/Branching%20%26%20Workflow)    | Defined a branching strategy (`branching-strategy.md`) and demonstrated feature → PR → merge flow with screenshots             |
-| CI Pipeline                 | [CI Pipeline](Tasks/CI%20Pipeline)                    | Created an Azure DevOps CI pipeline (`azure-devops-pipeline.yml`) with automated build + unit tests; added build logs as proof |
-| CD Pipeline                 | [CD Pipeline](Tasks/CD%20Pipeline)                    | Extended the CI pipeline into CD (`cd-pipeline.yml`) for application deployment, with logs + release screenshots               |
-| Multi-Stage Pipeline        | [Multi-Stage Pipeline](Tasks/Multi-Stage%20Pipeline)  | Implemented a multi-stage pipeline (`multi-stage-pipeline.yml`) covering Dev → QA → Prod with environment variables            |
+| CI Pipeline                 | [CI Pipeline](Tasks/CI%20Pipeline)                    | Created an Azure DevOps CI pipeline (`azure_pipeline.yml`) with automated build + unit tests; added build logs as proof |
+| CD Pipeline                 | [CD Pipeline](Tasks/CD%20Pipeline)                    | Extended the CI pipeline into CD for application deployment, with logs + release screenshots               |
+| Multi-Stage Pipeline        | [Multi-Stage Pipeline](Tasks/Multi-Stage%20Pipeline)  | Implemented a multi-stage pipeline covering Dev → QA → Prod with environment variables            |
 | Terraform AKS Deployment    | [Terraform AKS](Tasks/Terraform%20AKS)     | Wrote modular Terraform (`main.tf`, `variables.tf`, `outputs.tf`) to provision AKS; included deployment logs & state outputs   |
 | Secrets Management          | [Secrets Management](Tasks/Secrets%20Management)      | Integrated Azure Key Vault into pipeline; retrieved secrets securely during deployment (logs + updated YAML included)          |
 | Dockerizing Applications    | [Docker](Tasks/Docker)            | Wrote optimized `Dockerfile`, built & tested image, pushed to ACR; attached build logs & push confirmation                     |
@@ -31,7 +31,7 @@ The repo is structured task-wise for clarity, and each folder includes:
 | Secure Container Images     | [Image Scanning](Tasks/Image%20Scanning)     | Added Trivy container scan; generated `container-scan-report.txt`, analyzed results, and documented mitigations                |
 | Pipeline Debugging          | [Pipeline Debugging](Tasks/Pipeline%20Debugging)      | Fixed failing Azure DevOps pipeline by correcting env variables; re-ran successfully with logs + success screenshot            |
 | Kubernetes Networking Issue | [K8s Networking](Tasks/K8s%20Networking) | Diagnosed pod external connectivity issue; documented root cause + fix in `network-issue-resolved.md` with kubectl logs        |
-| Cost Optimization           | [Cost Optimization](Tasks/Cost%20Optimization)        | Reviewed Azure resource usage and suggested cost-saving measures; documented findings in `cost-optimization.md`                |
+| Cost Optimization           | [Cost Optimization](Tasks/Cost%20Optimization)        | Reviewed Azure resource usage and suggested cost-saving measures                |
 
 
 ---
