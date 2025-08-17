@@ -21,7 +21,7 @@ stages:
       steps:
         - task: AzureKeyVault@2
           inputs:
-            azureSubscription: 'Azure subscription 1 (6b4c6964-00b1-443b-b777-d2bfc4833a31)'
+            azureSubscription: 'ARM-Service-Connection'
             KeyVaultName: 'dotnet-app-vault'
             SecretsFilter: '*'
             RunAsPreJob: true
