@@ -10,19 +10,7 @@ pool:
   name: AzureVM
 
 variables:
-  # CI vars
-  SRC_DIR: 'dotnet-sample-project'
-  dockerRegistryServiceConnection: 'devops-service-connection'
-  imageRepository: 'dotnet-sample-project'
-  tag: '$(Build.SourceBranchName)-$(Build.BuildId)'
-
-  # CD vars
-  azureSubscription: 'ARM-Service-Connection'
-  aksResourceGroup: 'abb-devops'
-  aksName: 'abb-aks-cluster'
-  acrName: 'devopscontainerreg'
-  helmChartPath: '$(Build.SourcesDirectory)/dotnet-sample-project/helmchart'
-  imageRepositoryCD: 'devopscontainerreg.azurecr.io/dotnet-sample-project'
+  - group: Variables
 
 stages:
 - stage: BuildAndTest
@@ -52,48 +40,58 @@ stages:
             fi
             for proj in $TEST_PROJECTS; do
               echo "Running tests for $proj"
-              dotnet test "$proj" --configuration Release --no-build --collect:"XPlat Code Coverage"  --logger trx
+              dotnet test "$proj"
               echo "Completed tests for $proj"
             done
           displayName: 'Run all tests with coverage and logs'
 
-# - stage: CodeAnalysis
-#   displayName: 'SonarQube Build Scan'
-#   jobs:
-#   - job: sonarqube
-#     displayName: SonarQube Analysis
-#     continueOnError: true
-#     steps:
-#     - task: UseDotNet@2
-#       displayName: 'Install .NET SDK'
-#       inputs:
-#         packageType: 'sdk'
-#         version: '9.0.x'
+- stage: CodeAnalysis
+  displayName: 'SonarQube Build Scan'
+  jobs:
+  - job: sonarqube
+    displayName: SonarQube Analysis
+    continueOnError: true
+    steps:
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'ARM-Service-Connection'
+        KeyVaultName: 'dotnet-app-vault'
+        SecretsFilter: '*'
+        RunAsPreJob: true
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
 
-#     - script: |
-#         dotnet nuget locals all --clear || true
-#         echo "Before scan memory:"; free -h || true
-#       displayName: 'Pre-clean'
+    - script: |
+        dotnet nuget locals all --clear || true
+        echo "Before scan memory:"; free -h || true
+      displayName: 'Pre-clean'
 
-#     - script: |
-#         export SONAR_SCANNER_OPTS="-Xmx1024m -Xms256m"
-#         dotnet tool install --global dotnet-sonarscanner
-#         dotnet sonarscanner begin \
-#           /k:"sonarqube-project" \
-#           /n:"My Project" \
-#           /v:"1.0" \
-#           /d:sonar.host.url="http://20.55.232.207:9000" \
-#           /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e" \
-#           /d:sonar.sources="$(SRC_DIR)/source" \
-#           /d:sonar.sourceEncoding="UTF-8"
-#           /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
+    - script: |
+        export SONAR_SCANNER_OPTS="-Xmx1024m -Xms256m"
+        
+        dotnet tool install --global dotnet-sonarscanner
+        export PATH="$PATH:$HOME/.dotnet/tools"
 
-#         dotnet build "$(SRC_DIR)/source" --no-incremental
+        dotnet sonarscanner begin \
+          /k:"sonarqube-project" \
+          /n:"My Project" \
+          /v:"1.0" \
+          /d:sonar.host.url=$SONAR_HOST \
+          /d:sonar.login=$SONAR_LOGIN \
+          /d:sonar.sources="$(SRC_DIR)/source" \
+          /d:sonar.sourceEncoding="UTF-8" \
+          /d:sonar.exclusions="**/node_modules/**,**/dist/**,**/build/**,**/.next/**,**/*.min.js,**/*.bundle.js,**/*.spec.ts,**/*.test.ts"
 
-#         dotnet sonarscanner end /d:sonar.login="sqa_6c951f8cd1584175961cbc357a8011565ead668e"
-#       env:
-#         PATH: $(PATH):~/.dotnet/tools
-#       displayName: 'Sonar scan'
+        dotnet build "$(SRC_DIR)/source" --no-incremental
+
+        dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
+      env:
+        SONAR_LOGIN: $(sonarlogin)
+        SONAR_HOST: $(sonarhosturl)
+      displayName: 'Sonar scan'
 
 - stage: DockerBuildAndPush
   displayName: 'Docker Build and Push'
@@ -122,8 +120,21 @@ stages:
           scriptLocation: inlineScript
           inlineScript: |
               az acr login --name $(acrName)
+
+              mkdir -p "$(Build.ArtifactStagingDirectory)"
+
               docker pull $(acrName).azurecr.io/$(imageRepository):$(tag)
-              trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL
+              trivy image $(acrName).azurecr.io/$(imageRepository):$(tag) --severity HIGH,CRITICAL \
+              --format table \
+              --output "$(Build.ArtifactStagingDirectory)/container-scan-report.txt"
+
+              ls -la "$(Build.ArtifactStagingDirectory)"
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)'
+            artifactName: 'security-scan'
+        displayName: "Publish scan report"
 
   - job: docker_push
     displayName: 'Push image'
